@@ -1,3 +1,5 @@
+@import "_variables";
+
 body, div, dl, dt, dd, ul, ol, li,
 pre, form, p, blockquote, th, td, label,
 input[type="text"],
@@ -11,89 +13,40 @@ input[type="tel"],
 input[type="time"],
 input[type="url"],
 textarea {
-  font-family: "News Cycle", sans-serif;
-  font-size: 16px; }
+  font-family: $titleFont;
+  font-size: 16px;
+}
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: "Merriweather", serif; }
+  font-family: $textFont;
+}
 
 body {
-  background-color: #f0f2f2; }
+  background-color: $lightGray; }
 
 a {
-  color: #cc6152; }
+  color: lighten($primary, 20%);
+}
 
 a:hover {
-  color: #b54536; }
+  color: $primary;
+}
 
 .top-bar, .contain-to-grid {
-  background-color: #b54536; }
-
-.top-bar h1 {
-  font-family: "Lato", sans-serif; }
-.top-bar ul > li:hover:not(.name) a,
-.top-bar ul > li.active:not(.name) a,
-.top-bar ul > li:focus:not(.name) a {
-  color: #FFF; }
-.top-bar ul > li:hover:not(.name),
-.top-bar ul > li.active:not(.name),
-.top-bar ul > li:focus:not(.name) {
-  background-color: #66271f; }
-
-.card {
-  background-color: white;
-  float: left;
-  margin-bottom: 15px; }
-  .card h1, .card h2, .card h3, .card h4, .card h5, .card h6 {
-    color: #b54536;
-    font-weight: normal; }
-  .card .title {
-    margin-top: 5px;
-    margin-bottom: 10px; }
-  .card .image {
-    padding: 15px; }
-  .card .info {
-    padding: 15px;
-    padding-left: 0px; }
-  .card .detail-row {
-    padding-bottom: 10px;
-    display: inline-block;
-    width: 100%; }
-  .card .detail-item {
-    border-top: 1px solid #f0f2f2;
-    border-bottom: 1px solid #f0f2f2;
-    padding: 10px; }
-  .card :last-child {
-    margin-bottom: 0px; }
-
-.cal iframe {
-  margin-top: 30px;
-  border: 0px;
-  width: 100%;
-  height: 400px; }
-
-.feed .date {
-  padding-top: 10px;
-  padding-bottom: 10px; }
-
-.sidebar {
-  background-color: #8596ab;
-  color: white; }
-  .sidebar hr {
-    border: none;
-    border-bottom: 1px solid #f0f2f2; }
-  .sidebar h1, .sidebar h2, .sidebar h3, .sidebar h4, .sidebar h5, .sidebar h6 {
-    color: white;
-    font-family: "News Cycle", sans-serif; }
-  .sidebar label {
-    color: white; }
-  .sidebar .label {
-    display: inline-block; }
-
-@media only screen and (max-width: 767px) {
-  .card .image {
-    display: none; }
-  .card .info {
-    padding: 15px; }
-  .card .detail-item:not(:first-child) {
-    border-top: none; } }
+  background-color: $primary;
+}
+.top-bar {
+  h1 {
+    font-family: "Lato", sans-serif;
+  }
+  ul > li:hover:not(.name) a,
+  ul > li.active:not(.name) a,
+  ul > li:focus:not(.name) a {
+    color: #FFF;
+  }
+  ul > li:hover:not(.name),
+  ul > li.active:not(.name),
+  ul > li:focus:not(.name) {
+    background-color: #66271f;
+  }
+}
