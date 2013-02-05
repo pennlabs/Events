@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8" />
+
+  <!-- Set the viewport width to device width for mobile -->
+  <meta name="viewport" content="width=device-width" />
+
+  <title>Events At Penn</title>
+	<meta name="description" content="Bored? Discover fun events at Penn!" />
+	<meta name="keywords" content="events, penn, upenn, calendar" />
+	<meta name="author" content="PennApps Labs">
+  
+  <!-- Included CSS Files -->
+  <link rel="stylesheet" href="styles/foundation/foundation.css">
+  <link rel="stylesheet" href="styles/css/app.css">
+	<link rel="stylesheet" href="icomoon1971/style.css">
+	
+	<!-- Google Web Fonts -->	
+	<link href='http://fonts.googleapis.com/css?family=Merriweather:400,700' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=News+Cycle:400,700' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+
+  <script src="javascripts/modernizr.foundation.js"></script>
+</head>
+<body>
+  
+<!-- Navigation Bar -->
+
+<div class="contain-to-grid">
+	<nav class="top-bar">
+		<ul>
+			<li class="name"><h1><a href="#">events@penn</a></h1></li>
+			<li class="toggle-topbar"><a href="#"></a></li>
+		</ul>
+
+		<section>
+			<ul class="left">
+				<li><a href="#">Link 1</a></li>
+				<li><a href="#">Link 2</a></li>
+			</ul>
+
+			<ul class="right">
+			<li class="search">
+				<form>
+					<input type="search">
+				</form>
+			</li>
+				<li class="has-button">
+				<a class="small button" href="#">Search</a>
+			</li>
+			</ul>
+		</section>
+	</nav>
+</div>
+
+<div class="row">
+	
+	<!-- Sidebar Filters -->
+	
+	<div class="three columns mobile-four"><div class="twelve columns sidebar">
+		<form>
+			<h5>Filters</h5>
+			<input type="text" placeholder="Groups" />
+			<div>
+				<span class="radius label">upenn</span>
+				<span class="radius label">spec</span>
+				<span class="radius label">philo</span>
+				<span class="radius label">dp</span>
+				<span class="radius label">starred</span>
+			</div>
+			<hr/>
+			<label for="checkbox1"><input type="checkbox" id="checkbox1">Lecture</label>
+			<label for="checkbox2"><input type="checkbox" id="checkbox2">Recitation</label>
+			<label for="checkbox3"><input type="checkbox" id="checkbox3">Studio</label>
+			<label for="checkbox4"><input type="checkbox" id="checkbox4">Recommended</label>
+		</form>
+	</div></div>
+	
+	
+	<!-- Main Feed -->
+	
+	<div class="nine columns cal" style="display:none;">
+		<iframe src="gcal.html"></iframe>
+	</div>
+	
+	<div class="nine columns feed">
+		
+		<div class="row">
+			<div class="twelve columns date">
+				<h3>Tuesday, January 29, 2013</h3>
+			</div>
+		</div>
+		
+		<div class="row"><div class="twelve columns"><div class="card">
+			<div class="three columns mobile-four image">
+				<img src="http://placehold.it/240x240&amp;text=img">
+			</div>
+			<div class="nine columns info">
+				<h4 class="title"><a href="#">Pastrami Galore</a></h4>
+				
+				<div class="detail-row">
+					<div class="six columns detail-item">
+						<span class="icon-clock"></span>&nbsp;Tuesday, January 29
+					</div>
+					<div class="six columns detail-item">
+						<span class="icon-location"></span>&nbsp;Wu & Chen Auditorium
+					</div>
+				</div>
+					
+				<p>Bacon ipsum dolor sit amet nulla ham qui sint exercitation eiusmod commodo, chuck duis velit. Aute in reprehenderit, dolore aliqua non est magna in labore pig pork biltong.</p>
+			</div>
+		</div></div></div>
+		
+		<div class="row"><div class="twelve columns"><div class="card">
+			<div class="three columns mobile-four image">
+				<img src="http://placehold.it/240x240&amp;text=img">
+			</div>
+			<div class="nine columns info">
+				<h4 class="title"><a href="#">Pastrami Galore</a></h4>
+				
+				<div class="detail-row">
+					<div class="six columns detail-item">
+						<span class="icon-clock"></span>&nbsp;Tuesday, January 29
+					</div>
+					<div class="six columns detail-item">
+						<span class="icon-location"></span>&nbsp;Wu & Chen Auditorium
+					</div>
+				</div>
+					
+				<p>Bacon ipsum dolor sit amet nulla ham qui sint exercitation eiusmod commodo, chuck duis velit. Aute in reprehenderit, dolore aliqua non est magna in labore pig pork biltong.</p>				
+			</div>
+		</div></div></div>
+		
+		<div class="row">
+			<div class="twelve columns date">
+				<h3>Wednesday, January 30, 2013</h3>
+			</div>
+		</div>
+		
+		<div class="row"><div class="twelve columns"><div class="card">
+			<div class="three columns mobile-four image">
+				<img src="http://placehold.it/240x240&amp;text=img">
+			</div>
+			<div class="nine columns info">
+				<h4 class="title"><a href="#">Pastrami Galore</a></h4>
+				
+				<div class="detail-row">
+					<div class="six columns detail-item">
+						<span class="icon-clock"></span>&nbsp;Tuesday, January 29
+					</div>
+					<div class="six columns detail-item">
+						<span class="icon-location"></span>&nbsp;Wu & Chen Auditorium
+					</div>
+				</div>
+					
+				<p>Bacon ipsum dolor sit amet nulla ham qui sint exercitation eiusmod commodo, chuck duis velit. Aute in reprehenderit, dolore aliqua non est magna in labore pig pork biltong.</p>				
+			</div>
+		</div></div></div>
+		
+	</div>
+</div>
+
+</body>
+
+<!-- Included JS Files (Compressed) -->
+<script src="javascripts/jquery.js"></script>
+<script src="javascripts/foundation.min.js"></script>
+
+<!-- Initialize JS Plugins -->
+<script src="javascripts/app.js"></script>  
+<script>
+$(window).load(function(){
+	$("#featured").orbit();
+});
+</script> 
+
+</html>
