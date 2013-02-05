@@ -27,8 +27,8 @@
     width: 100%;
   }
   .detail-item {
-    border-top: 1px solid $lightGray;
-    border-bottom: 1px solid $lightGray;
+    border-top: $solidBorder $lightGray;
+    border-bottom: $solidBorder $lightGray;
     padding: 10px;
   }
   :last-child {
@@ -54,17 +54,19 @@
   
   hr {
     border: none;
-    border-bottom: $borderStyle $lightGray;
+    border-bottom: $dottedBorder $lightGray;
   }
   h1, h2, h3, h4, h5, h6 {
     color: white;
     font-family: "News Cycle", sans-serif;
+    font-weight: normal;
   }
   label {
     color: white;
   }
   .label {
-    display: inline-block;
+    color: black;
+    background-color: $third;
   }
 }
 

@@ -25,11 +25,18 @@ body {
   background-color: $lightGray; }
 
 a {
-  color: lighten($primary, 20%);
+  color: $primary;
 }
 
 a:hover {
-  color: $primary;
+  color: darken($primary, 20%);
+}
+
+.label {
+  display: inline-block;
+  padding: 2px 4px 2px 4px;
+  margin-right: 5px;
+  margin-bottom: 5px;
 }
 
 .top-bar, .contain-to-grid {
