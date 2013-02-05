@@ -56,4 +56,7 @@ a:hover {
   ul > li:focus:not(.name) {
     background-color: #66271f;
   }
+  ul > li a:not(.button) {
+    font-size: 14px;
+  }
 }

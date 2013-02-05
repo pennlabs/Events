@@ -1,41 +1,5 @@
 @import "_variables";
 
-.card {
-  background-color: white;
-  float: left;
-  margin-bottom: 15px;
-  
-  h1, h2, h3, h4, h5, h6 {
-    color: $primary;
-    font-weight: normal;
-  }
-  
-  .title {
-    margin-top: 5px;
-    margin-bottom: 10px;
-  }
-  .image {
-    padding: 15px;
-  }
-  .info {
-    padding: 15px;
-    padding-left: 0px;
-  }
-  .detail-row {
-    padding-bottom: 10px;
-    display: inline-block;
-    width: 100%;
-  }
-  .detail-item {
-    border-top: $solidBorder $lightGray;
-    border-bottom: $solidBorder $lightGray;
-    padding: 10px;
-  }
-  :last-child {
-    margin-bottom: 0px;
-  }
-}
-
 .cal iframe {
   margin-top: 30px;
   border: 0px;
@@ -48,13 +12,68 @@
   padding-bottom: 10px;
 }
 
+.card {
+  background-color: white;
+  float: left;
+  margin-bottom: 15px;
+  
+  h1, h2, h3, h4, h5, h6 {
+    color: $primary;
+    font-weight: normal;
+  }
+    
+  :last-child {
+    margin-bottom: 0px;
+  }
+  
+  .image {
+    padding: 15px;
+  }
+  .info {
+    padding: 15px;
+    padding-left: 0px;
+  }
+  
+  .title {
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+  .subtitle {
+    display:inline-block;
+    margin-bottom: 15px;    
+  }
+  
+  .detail-row {
+    padding-bottom: 10px;
+    display: inline-block;
+    width: 100%;
+        
+    .item {
+      border-top: $solidBorder $lightGray;
+      border-bottom: $solidBorder $lightGray;
+      padding: 10px;
+      
+      .icon {
+        margin-right: 5px;
+        color: #999999;
+      }
+    }
+    
+    :last-child {
+      border-top: none;
+    }
+  }
+}
+
 .sidebar {
   background-color: $secondary;
   color: white;
+  margin-bottom: 15px;
   
   hr {
     border: none;
     border-bottom: $dottedBorder $lightGray;
+    margin: 15px 0 15px 0;
   }
   h1, h2, h3, h4, h5, h6 {
     color: white;
@@ -65,7 +84,7 @@
     color: white;
   }
   .label {
-    color: black;
+    color: $secondary;
     background-color: $third;
   }
 }
@@ -78,7 +97,7 @@
     .info {
       padding: 15px;
     }
-    .detail-item:not(:first-child) {
+    .item:not(:first-child) {
       border-top: none;
     }
   }
