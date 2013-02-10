@@ -1,3 +1,5 @@
 # front-end stuff
 .sass-cache
 css/
+
+*.pyc
