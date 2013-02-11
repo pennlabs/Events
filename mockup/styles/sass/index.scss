@@ -66,9 +66,52 @@
 }
 
 .sidebar {
-  background-color: $secondary;
-  color: white;
   margin-bottom: 15px;
+  z-index: 100;
+  
+  .sidebar-content {    
+    background-color: $secondary;
+    color: white;
+  }
+  
+  .sidebar-fold {
+    background-color: darken($secondary, 20%);
+    cursor: pointer;
+    
+    &:hover {
+      background-color: darken($secondary, 30%);
+    }
+    
+    .arrow {
+      position: absolute;
+      border: solid 8px;
+      border-color: transparent transparent white transparent;
+      top: auto;      
+      right: 22.5px;
+      bottom: 50%;
+      margin-bottom: -4px;
+    }
+  }
+  
+  &.folded {
+    .sidebar-content {
+      display: none;
+    }
+    
+    .sidebar-fold {
+      background-color: $secondary;
+      
+      &:hover {
+        background-color: darken($secondary, 10%);
+      }
+      
+      .arrow {
+        top: 50%;
+        margin-top: -4px;
+        border-color: white transparent transparent transparent;
+      }
+    }
+  }
   
   hr {
     border: none;
@@ -79,6 +122,7 @@
     color: white;
     font-family: "News Cycle", sans-serif;
     font-weight: normal;
+    margin: 15px 0 15px 0;
   }
   label {
     color: white;
