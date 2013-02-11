@@ -1,0 +1,62 @@
+@import "_variables";
+
+body, div, dl, dt, dd, ul, ol, li,
+pre, form, p, blockquote, th, td, label,
+input[type="text"],
+input[type="password"],
+input[type="date"],
+input[type="datetime"],
+input[type="email"],
+input[type="number"],
+input[type="search"],
+input[type="tel"],
+input[type="time"],
+input[type="url"],
+textarea {
+  font-family: $titleFont;
+  font-size: 16px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: $textFont;
+}
+
+body {
+  background-color: $lightGray; }
+
+a {
+  color: $primary;
+}
+
+a:hover {
+  color: darken($primary, 20%);
+}
+
+.label {
+  display: inline-block;
+  padding: 2px 4px 2px 4px;
+  margin-right: 5px;
+  margin-bottom: 5px;
+}
+
+.top-bar, .contain-to-grid {
+  background-color: $primary;
+}
+.top-bar {
+  h1 {
+    font-family: "Lato", sans-serif;
+  }
+  ul > li:hover:not(.name) a,
+  ul > li.active:not(.name) a,
+  ul > li:focus:not(.name) a {
+    color: #FFF;
+  }
+  ul > li:hover:not(.name),
+  ul > li.active:not(.name),
+  ul > li:focus:not(.name) {
+    background-color: #66271f;
+  }
+  ul > li a:not(.button) {
+    font-size: 14px;
+  }
+}
