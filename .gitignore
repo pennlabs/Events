@@ -6,3 +6,4 @@ css/
 
 build/
 newenv/
+app/static/stylesheets/*.css
