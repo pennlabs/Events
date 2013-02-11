@@ -133,6 +133,16 @@
   }
 }
 
+// large screen
+@media only screen and (min-width: 768px) {
+  .sidebar.stick {
+    position: fixed;
+    top: 0;
+    width: 235px;
+  }
+}
+
+// small screen
 @media only screen and (max-width: 767px) {
   .card {
     .image {

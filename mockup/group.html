@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8" />
+
+  <!-- Set the viewport width to device width for mobile -->
+  <meta name="viewport" content="width=device-width" />
+
+  <title>Events At Penn</title>
+  <meta name="description" content="Bored? Discover fun events at Penn!" />
+  <meta name="keywords" content="events, penn, upenn, calendar" />
+  <meta name="author" content="PennApps Labs">
+  
+  <!-- CSS Files -->
+  <link rel="stylesheet" href="styles/foundation/foundation.css">
+  <link rel="stylesheet" href="styles/css/app.css">
+  <link rel="stylesheet" href="styles/css/index.css">
+  <link rel="stylesheet" href="icomoon1971/style.css">
+  
+  <!-- Google Web Fonts --> 
+  <link href='http://fonts.googleapis.com/css?family=Merriweather:400,700' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=News+Cycle:400,700' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+
+  <script src="javascripts/modernizr.foundation.js"></script>
+</head>
+<body>
+  
+<!-- Navigation Bar -->
+
+<div class="contain-to-grid">
+  <nav class="top-bar">
+    <ul>
+      <li class="name"><h1><a href="#">events@penn</a></h1></li>
+      <li class="toggle-topbar"><a href="#"></a></li>
+    </ul>
+    
+    <section>
+      <ul class="left">
+      </ul>
+
+      <ul class="right">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">FAQ</a></li>
+        <li><a href="#">Feedback</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </section>
+  </nav>
+</div>
+
+<div class="row">
+  
+  <!-- Main Feed -->
+  
+  <div class="nine columns cal" style="display:none;">
+    <iframe src="gcal.html"></iframe>
+  </div>
+  
+  <div class="twelve columns feed">
+    
+    <div class="row">
+      <div class="twelve columns date">
+        <h4>Tuesday, January 29, 2013</h4>
+      </div>
+    </div>
+    
+    <div class="row"><div class="twelve columns"><div class="card">
+      <div class="three columns mobile-four image">
+        <img src="http://placehold.it/240x240&amp;text=img">
+      </div>
+      <div class="nine columns info">
+        <h4 class="title"><a href="#">Semi-Annual Pastrami Feast</a></h4>
+        <span class="subtitle">by <a href="#">M.E.A.T. Club</a></span>
+        
+        <div class="detail-row">
+          <div class="six columns item">
+            <span class="icon icon-calendar"></span>Tuesday, January 29
+          </div>
+          <div class="six columns item">
+            <span class="icon icon-clock"></span>8:00 - 9:00pm  
+          </div>
+          <div class="twelve columns item">
+            <span class="icon icon-location"></span><a href="http://maps.google.com/?q=Kings Court English House"  target="_blank">Kings Court English House</a>
+          </div>
+        </div>
+          
+        <p>Bacon ipsum dolor sit amet nulla ham qui sint exercitation eiusmod commodo, chuck duis velit. Aute in reprehenderit, dolore aliqua non est magna in labore pig pork biltong.</p>
+      </div>
+    </div></div></div>
+    
+    <div class="row">
+      <div class="twelve columns date">
+        <h4>Wednesday, January 30, 2013</h4>
+      </div>
+    </div>
+    
+    <div class="row"><div class="twelve columns"><div class="card">
+      <div class="three columns mobile-four image">
+        <img src="http://placehold.it/240x240&amp;text=img">
+      </div>
+      <div class="nine columns info">
+        <h4 class="title"><a href="#">CG Shorts Screening</a></h4>
+        <span class="subtitle">by <a href="#">UPenn SIGGRAPH</a></span>
+        
+        <div class="detail-row">
+          <div class="six columns item">
+            <span class="icon icon-calendar"></span>Wednesday, January 30
+          </div>
+          <div class="six columns item">
+            <span class="icon icon-clock"></span>8:00 - 9:00pm  
+          </div>
+          <div class="twelve columns item">
+            <span class="icon icon-location"></span><a href="http://maps.google.com/?q=Wu & Chen Auditorium" target="_blank">Wu & Chen Auditorium</a>
+          </div>
+        </div>
+          
+        <p>Bacon ipsum dolor sit amet nulla ham qui sint exercitation eiusmod commodo, chuck duis velit. Aute in reprehenderit, dolore aliqua non est magna in labore pig pork biltong.</p>
+      </div>
+    </div></div></div>
+    
+  </div>
+</div>
+
+</body>
+
+<!-- Included JS Files (Compressed) -->
+<script src="javascripts/jquery.js"></script>
+<script src="javascripts/foundation.min.js"></script>
+
+<!-- Initialize JS Plugins -->
+<script src="javascripts/app.js"></script>  
+<script>
+$(window).load(function(){
+  $("#featured").orbit();
+});
+</script>
+
+<script src="javascripts/index.js"></script>  
+
+</html>
