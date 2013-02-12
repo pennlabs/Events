@@ -1,13 +1,18 @@
 @import "_variables";
 
-.card {
-  margin-top: 15px;
+.view-event {
+  .card {
+    margin-top: 15px;
+  }
 }
 
+
 @media only screen and (max-width: 767px) {
-  .card {
-    .image {
-      display: block;
+  .view-event {
+    .card {
+      .image {
+        display: block;
+      }
     }
   }
 }

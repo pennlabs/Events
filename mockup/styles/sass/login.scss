@@ -1,43 +1,47 @@
 @import "_variables";
 
-.row.prompt {
-  margin-top: 30px;
-  margin-bottom: 15px;
-  p {
-    margin: 0;
-  }
-}
+.view-login {
 
-.login {
-  background-color: $secondary;
-  color: white;
-  padding: 15px;
-  
-  h1, h2, h3, h4, h5, h6 {
-    color: white;
-    font-family: $textFont;
-    font-weight: normal;
-    margin: 0 0 15px 0;
-  }
-  
-  .button {
-    width: 100%;
-    
-    background: darken($secondary, 20%);
-    border: 1px solid darken($secondary, 40%);
-    
-    &:hover {
-      background: darken($secondary, 30%);
+  .row.prompt {
+    margin-top: 30px;
+    margin-bottom: 15px;
+    p {
+      margin: 0;
     }
   }
-}
-
-.signup {
-  background-color: white;
-  padding: 15px;
   
-  h1, h2, h3, h4, h5, h6 {
-    color: $primary;
-    margin: 0 0 15px 0;
+  .login {
+    background-color: $secondary;
+    color: white;
+    padding: 15px;
+    
+    h1, h2, h3, h4, h5, h6 {
+      color: white;
+      font-family: $textFont;
+      font-weight: normal;
+      margin: 0 0 15px 0;
+    }
+    
+    .button {
+      width: 100%;
+      
+      background: darken($secondary, 20%);
+      border: 1px solid darken($secondary, 40%);
+      
+      &:hover {
+        background: darken($secondary, 30%);
+      }
+    }
   }
+  
+  .signup {
+    background-color: white;
+    padding: 15px;
+    
+    h1, h2, h3, h4, h5, h6 {
+      color: $primary;
+      margin: 0 0 15px 0;
+    }
+  }
+  
 }
