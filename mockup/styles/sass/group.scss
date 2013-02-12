@@ -1,8 +1,12 @@
 @import "_variables";
 
 .profile {
+  float: left;
+  width: 100%;
+  
   margin-top: 15px;
   margin-bottom: 15px;
+  padding: 15px 0 15px 0;
   
   :last-child {
     margin-bottom: 0px;
@@ -33,9 +37,6 @@
       width: 100%;
     }
   }
-  .info, .actions {
-    padding: 15px;
-  }
   
   .actions {    
     .item {      
@@ -60,10 +61,7 @@
 @media only screen and (max-width: 767px) {
   .profile {
     .info {
-      padding: 15px;
-    }
-    .item:not(:first-child) {
-      border-top: none;
+      padding-bottom: 15px;
     }
   }
 }
