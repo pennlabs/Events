@@ -45,6 +45,7 @@
         <li><a href="#">FAQ</a></li>
         <li><a href="#">Feedback</a></li>
         <li><a href="#">Contact</a></li>
+        <li><a href="#">Login / Register</a><li>
       </ul>
       </section>
       </nav>
@@ -65,16 +66,17 @@
             </div>
             <hr/>
             <h5>Type</h5>
-            <label for="checkbox1"><input type="checkbox" id="checkbox1">Lecture</label>
-            <label for="checkbox2"><input type="checkbox" id="checkbox2">Recitation</label>
-            <label for="checkbox3"><input type="checkbox" id="checkbox3">Studio</label>
+            <label for="checkbox1a"><input type="checkbox" id="checkbox1a">Lecture</label>
+            <label for="checkbox2a"><input type="checkbox" id="checkbox2a">Recitation</label>
+            <label for="checkbox3a"><input type="checkbox" id="checkbox3a">Studio</label>
             <hr/>
             <h5>Tags</h5>
-            <label for="checkbox1"><input type="checkbox" id="checkbox1">Recommended</label>
-            <label for="checkbox2"><input type="checkbox" id="checkbox2">18 & Above</label>
-            <label for="checkbox3"><input type="checkbox" id="checkbox3">University</label>
+            <label for="checkbox1b"><input type="checkbox" id="checkbox1b">Recommended</label>
+            <label for="checkbox2b"><input type="checkbox" id="checkbox2b">18 & Above</label>
+            <label for="checkbox3b"><input type="checkbox" id="checkbox3b">University</label>
           </form>
-      </div></div>
+      </div>
+    </div>
 
       <!-- Main Feed -->
 
@@ -92,7 +94,7 @@
 
         <div class="row"><div class="twelve columns"><div class="card">
               <div class="three columns mobile-four image">
-                <img src="http://placehold.it/240x240&amp;text=img">
+                <img src="http://placehold.it/240x240&amp;text=img" alt='img'>
               </div>
               <div class="nine columns info">
                 <h4 class="title"><a href="#">Semi-Annual Pastrami Feast</a></h4>
@@ -106,7 +108,7 @@
                     <span class="icon icon-clock"></span>8:00 - 9:00pm	
                   </div>
                   <div class="twelve columns item">
-                    <span class="icon icon-location"></span><a href="http://maps.google.com/?q=Kings Court English House"  target="_blank">Kings Court English House</a>
+                    <span class="icon icon-location"></span><a href="http://maps.google.com/?q=Kings+Court+English+House"  target="_blank">Kings Court English House</a>
                   </div>
                 </div>
 
@@ -122,7 +124,7 @@
 
         <div class="row"><div class="twelve columns"><div class="card">
               <div class="three columns mobile-four image">
-                <img src="http://placehold.it/240x240&amp;text=img">
+                <img src="http://placehold.it/240x240&amp;text=img" alt='img'>
               </div>
               <div class="nine columns info">
                 <h4 class="title"><a href="#">CG Shorts Screening</a></h4>
@@ -136,7 +138,7 @@
                     <span class="icon icon-clock"></span>8:00 - 9:00pm	
                   </div>
                   <div class="twelve columns item">
-                    <span class="icon icon-location"></span><a href="http://maps.google.com/?q=Wu & Chen Auditorium" target="_blank">Wu & Chen Auditorium</a>
+                    <span class="icon icon-location"></span><a href="http://maps.google.com/?q=Wu+and+Chen+Auditorium" target="_blank">Wu & Chen Auditorium</a>
                   </div>
                 </div>
 
@@ -149,6 +151,10 @@
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
     <script src="{{ url_for('static', filename='scripts/vendor/foundation.min.js') }}"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.3/underscore-min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/backbone.js/0.9.10/backbone-min.js"></script>
+    <script src="{{ url_for('static', filename='scripts/vendor/require.js') }}"></script>
+    <script data-main="scripts/main" src="{{ url_for('static', filename='scripts/app.js') }}"></script>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
     <script>

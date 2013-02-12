@@ -31,7 +31,7 @@ def events():
     # find the events based on the user
     # grab subscriptions then get events
     # returns a cursor
-    # db.events.find()
+    # db.events.find()[:]
     # pass in shit and get a list of paginated events?
     # should be infin-scroll!!
     return json.dumps([])
