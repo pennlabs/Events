@@ -1,10 +1,5 @@
-root = exports ? this
-
-root.App =
-  Models: {}
-  Collections: {}
-  Views: {}
-  Templates: {}
-
-$ ->
-  console.log "loaded"
+require ['static/scripts/views/main_view'],
+  (MainView) ->
+    $ ->
+      app = new MainView.view()
+      $('body').html app.el
