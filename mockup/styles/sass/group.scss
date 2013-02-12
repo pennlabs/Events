@@ -1,0 +1,67 @@
+@import "_variables";
+
+.profile {
+  float: left;
+  width: 100%;
+  
+  margin-top: 15px;
+  margin-bottom: 15px;
+  padding: 15px 0 15px 0;
+  
+  :last-child {
+    margin-bottom: 0px;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    color: $secondary;
+    font-weight: normal;
+  }
+  .title {
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+  .subtitle {
+    display:inline-block;
+    margin-bottom: 15px;    
+  }
+  
+  hr {
+    margin: 5px 0px 5px 0px;
+    border: none;
+    border-bottom: $secondary $solidBorder;    
+  }
+  
+  .image {
+    padding: 15px;
+    img {
+      width: 100%;
+    }
+  }
+  
+  .actions {    
+    .item {      
+      display: block;
+      border-top: $secondary $solidBorder;
+      padding: 10px;
+      
+      &:last-child {
+        border-bottom: $secondary $solidBorder;
+      }
+      
+      .icon {
+        margin-right: 5px;
+        color: $secondary;
+      }
+      
+    }
+  }
+}
+
+// small screen
+@media only screen and (max-width: 767px) {
+  .profile {
+    .info {
+      padding-bottom: 15px;
+    }
+  }
+}
