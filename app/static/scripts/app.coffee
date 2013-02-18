@@ -1,5 +1,5 @@
-require ['static/scripts/views/main_view', 'static/scripts/views/login_view'],
-  (MainView, LoginView) ->
+require ['static/scripts/views/main_view'],
+  (MainView) ->
     class Router extends Backbone.Router
       routes:
         ''          : 'index'
@@ -7,15 +7,14 @@ require ['static/scripts/views/main_view', 'static/scripts/views/login_view'],
         'event/:id' : 'show_event'
 
       index: ->
-        app ||= new MainView.view()
+        app = new MainView.view()
         $('body').html app.render().el
         # fetch events and render them
         # render sidebar
 
       login: ->
-        app ||= new MainView.view()
+        app = new MainView.view()
         $('body').html app.render().el
-        login_view = new LoginView.view()
 
       show_event: (event_id) ->
         event = @collection.get(event_id)
