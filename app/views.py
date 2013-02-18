@@ -4,6 +4,7 @@ from bson.objectid import ObjectId
 from app import app, db
 import bcrypt
 
+
 class APIEncoder(json.JSONEncoder):
     def default(self, obj):
         if isinstance(obj, ObjectId):
@@ -45,12 +46,20 @@ def logout():
 
 @app.route('/users/login', methods=['POST'])
 def login():
+    email = request.form.get('email', None)
     password = request.form.get('password', None)
+    if not email:
+        return "No email was entered."
+    if not password:
+        return "No password was entered."
     # grab user from database based on credentials
-    user = db.users.find_one({'password': password})
-    session['user'] = str(user['_id'])
-    # return user object dump
-    return json.dumps(user, cls=APIEncoder)
+    user = db.users.find_one({'email': email})
+    if bcrypt.hashpw(password, user['hashed_password']) == user['hashed_password']:
+        session['user'] = str(user['_id'])
+        # return user object dump
+        return json.dumps(user, cls=APIEncoder)
+    else:
+        return "Incorrect password."
 
 
 @app.route('/users/create', methods=['POST'])
@@ -65,13 +74,13 @@ def create_user():
             user['hashed_password'] = hashed_password
             del user['password']
             del user['confirm']
+            # insert returns an ObjectId
+            user_id = str(db.users.insert(user))
+            session['user'] = user_id
+            return json.dumps(user, cls=APIEncoder)
         else:
             # password != confirm
             return "Password does not match confirm."
     else:
         # no password was entered
         return "No password was entered."
-    # insert returns an ObjectId
-    user_id = str(db.users.insert(user))
-    session['user'] = user_id
-    return json.dumps(user, cls=APIEncoder)
