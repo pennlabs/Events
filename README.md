@@ -1,4 +1,3 @@
-
 # Events
 
 Event aggregate for Penn.
@@ -8,4 +7,6 @@ Event aggregate for Penn.
 ```
 coffee -cw app/static/scripts &
 sass -w app/static/stylesheets &
+mongod &
+python run.py &
 ```
