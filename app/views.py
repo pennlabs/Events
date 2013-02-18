@@ -54,7 +54,10 @@ def login():
         return "No password was entered."
     # grab user from database based on credentials
     user = db.users.find_one({'email': email})
-    if bcrypt.hashpw(password, user['hashed_password']) == user['hashed_password']:
+    if not user:
+        return "There is no user with that email."
+    hashed_password = user['hashed_password']
+    if bcrypt.hashpw(password, hashed_password) == hashed_password:
         session['user'] = str(user['_id'])
         # return user object dump
         return json.dumps(user, cls=APIEncoder)
