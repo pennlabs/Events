@@ -2,7 +2,7 @@ from flask import render_template, session, request
 import json
 from bson.objectid import ObjectId
 from app import app, db
-
+import bcrypt
 
 class APIEncoder(json.JSONEncoder):
     def default(self, obj):
@@ -57,6 +57,20 @@ def login():
 def create_user():
     user = request.form.to_dict()
     # get password and hash it
+    password = request.form.get('password', None)
+    confirm = request.form.get('confirm', None)
+    if password:
+        if password == confirm:
+            hashed_password = bcrypt.hashpw(password, bcrypt.gensalt())
+            user['hashed_password'] = hashed_password
+            del user['password']
+            del user['confirm']
+        else:
+            # password != confirm
+            return "Password does not match confirm."
+    else:
+        # no password was entered
+        return "No password was entered."
     # insert returns an ObjectId
     user_id = str(db.users.insert(user))
     session['user'] = user_id
