@@ -1,104 +1,92 @@
 @import "_variables";
 
-.cal iframe {
-  margin-top: 30px;
-  border: 0px;
-  width: 100%;
-  height: 400px;
-}
-
-.feed .date {
-  padding-top: 10px;
-  padding-bottom: 10px;
-}
-
-.card {
-  background-color: white;
-  float: left;
-  margin-bottom: 15px;
+.view-index {
   
-  h1, h2, h3, h4, h5, h6 {
-    color: $primary;
-    font-weight: normal;
-  }
+  .sidebar {
+    margin-bottom: 15px;
+    z-index: 100;
     
-  :last-child {
-    margin-bottom: 0px;
-  }
-  
-  .image {
-    padding: 15px;
-  }
-  .info {
-    padding: 15px;
-    padding-left: 0px;
-  }
-  
-  .title {
-    margin-top: 5px;
-    margin-bottom: 5px;
-  }
-  .subtitle {
-    display:inline-block;
-    margin-bottom: 15px;    
-  }
-  
-  .detail-row {
-    padding-bottom: 10px;
-    display: inline-block;
-    width: 100%;
-        
-    .item {
-      border-top: $solidBorder $lightGray;
-      border-bottom: $solidBorder $lightGray;
-      padding: 10px;
+    .sidebar-content {    
+      background-color: $secondary;
+      color: white;
+    }
+    
+    .sidebar-fold {
+      background-color: darken($secondary, 20%);
+      cursor: pointer;
       
-      .icon {
-        margin-right: 5px;
-        color: #999999;
+      &:hover {
+        background-color: darken($secondary, 30%);
+      }
+      
+      .arrow {
+        position: absolute;
+        border: solid 8px;
+        border-color: transparent transparent white transparent;
+        top: auto;      
+        right: 22.5px;
+        bottom: 50%;
+        margin-bottom: -4px;
       }
     }
     
-    :last-child {
-      border-top: none;
+    &.folded {
+      .sidebar-content {
+        display: none;
+      }
+      
+      .sidebar-fold {
+        background-color: $secondary;
+        
+        &:hover {
+          background-color: darken($secondary, 10%);
+        }
+        
+        .arrow {
+          top: 50%;
+          margin-top: -4px;
+          border-color: white transparent transparent transparent;
+        }
+      }
+    }
+    
+    hr {
+      border: none;
+      border-bottom: $dottedBorder $lightGray;
+      margin: 15px 0 15px 0;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      color: white;
+      font-family: $textFont;
+      font-weight: normal;
+      margin: 15px 0 15px 0;
+    }
+    label {
+      color: white;
+    }
+    .label {
+      color: $secondary;
+      background-color: $third;
     }
   }
 }
 
-.sidebar {
-  background-color: $secondary;
-  color: white;
-  margin-bottom: 15px;
-  
-  hr {
-    border: none;
-    border-bottom: $dottedBorder $lightGray;
-    margin: 15px 0 15px 0;
-  }
-  h1, h2, h3, h4, h5, h6 {
-    color: white;
-    font-family: "News Cycle", sans-serif;
-    font-weight: normal;
-  }
-  label {
-    color: white;
-  }
-  .label {
-    color: $secondary;
-    background-color: $third;
+// large screen
+@media only screen and (min-width: 940px) {
+  .view-index {
+    .sidebar.stick {
+      position: fixed;
+      top: 0;
+      width: 235px;
+    }
   }
 }
 
-@media only screen and (max-width: 767px) {
-  .card {
-    .image {
-      display: none;
-    }
-    .info {
-      padding: 15px;
-    }
-    .item:not(:first-child) {
-      border-top: none;
+@media only screen and (min-width: 768px) {
+  .view-index {
+    .sidebar.stick {
+      position: fixed;
+      top: 0;
     }
   }
 }
