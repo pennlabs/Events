@@ -4,7 +4,7 @@ define [], ->
       name: ''
       description: ''
 
-  class Events extends Bacbone.Collection
+  class Events extends Backbone.Collection
     model: Event
     url: '/events'
 
