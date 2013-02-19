@@ -25,6 +25,6 @@ require [
         event = @collection.get(event_id)
 
     $ ->
-      router = new Router()
+      window.router = new Router()
       # Route initial URL
-      Backbone.history.start(pushState: true)
+      Backbone.history.start(pushState: true, root: '/events')
