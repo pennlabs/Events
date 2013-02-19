@@ -12,6 +12,7 @@ class APIEncoder(json.JSONEncoder):
         return json.JSONEncoder.default(self, obj)
 
 
+@app.route('/login', methods=['GET'])
 @app.route('/')
 def index():
     return render_template('index.html')
