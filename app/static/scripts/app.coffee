@@ -8,7 +8,6 @@ require [
         ''          : 'index'
         'login'     : 'login'
         'event/:id' : 'show_event'
-
       index: ->
         app = new MainView.view()
         $('body').html app.render().el
@@ -16,15 +15,16 @@ require [
         # render sidebar
 
       login: ->
-        app = new LoginView.view()
+        app = new MainView.view()
         $('body').html app.render().el
-        console.log "login"
+
+        login_view = new LoginView.view()
+        $('#container').html login_view.render().el
 
       show_event: (event_id) ->
         event = @collection.get(event_id)
 
     $ ->
       router = new Router()
-
       # Route initial URL
       Backbone.history.start(pushState: true)
