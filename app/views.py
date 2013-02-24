@@ -59,6 +59,7 @@ def login():
         return "There is no user with that email."
     hashed_password = user['hashed_password']
     if bcrypt.hashpw(password, hashed_password) == hashed_password:
+        del user['hashed_password']
         session['user'] = str(user['_id'])
         # return user object dump
         return json.dumps(user, cls=APIEncoder)
@@ -80,6 +81,7 @@ def create_user():
             del user['confirm']
             # insert returns an ObjectId
             user_id = str(db.users.insert(user))
+            del user['hashed_password']
             session['user'] = user_id
             return json.dumps(user, cls=APIEncoder)
         else:
