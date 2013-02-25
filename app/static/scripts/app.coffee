@@ -11,20 +11,18 @@ require [
         'login'     : 'login'
         'event/:id' : 'show_event'
       index: ->
-        user = window.user
-        user ||= new User.model()
-        app = new MainView.view(model: user)
+        window.user ||= new User.model()
+        app = new MainView.view(model: window.user)
         $('body').html app.render().el
         # fetch events and render them
         # render sidebar
 
       login: ->
-        user = window.user
-        user ||= new User.model()
-        app = new MainView.view(model: user)
+        window.user ||= new User.model()
+        app = new MainView.view(model: window.user)
         $('body').html app.render().el
 
-        login_view = new LoginView.view()
+        login_view = new LoginView.view(model: window.user)
         $('#container').html login_view.render().el
 
       show_event: (event_id) ->
@@ -33,4 +31,4 @@ require [
     $ ->
       window.router = new Router()
       # Route initial URL
-      Backbone.history.start(pushState: true, root: '/events')
+      Backbone.history.start(pushState: true, root: '/')

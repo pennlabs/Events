@@ -5,10 +5,10 @@
       <div class="twelve prompt">
         <p>already have an account?</p>
       </div>
-      <form class="twelve login">
+      <form id="login-form" class="twelve login" method="post" action="users/login">
         <h3>Login</h3>
-        <input type="text" placeholder="Email" />
-        <input type="text" placeholder="Password" />
+        <input name="email" type="text" placeholder="Email" />
+        <input name="password" type="text" placeholder="Password" />
         <input class="button" type="submit" id="login-button" value="Login">
       </form>
     </div>
@@ -17,23 +17,23 @@
       <div class="twelve prompt">
         <p>need a new account?</p>
       </div>
-      <form class="twelve signup">
+      <form id="register-form" class="twelve signup" method="post" action="users/create">
         <h3>Sign Up</h3>
         <label>Name</label>
-        <input type="text" placeholder="" />
+        <input name="name" type="text" placeholder="" />
         <label>UPenn Email</label>
-        <input type="text" placeholder="" />
+        <input name="email" type="text" placeholder="" />
         <label>Password</label>
         <div class="row">
           <div class="six columns">
-            <input type="password" placeholder="Enter Password" />
+            <input name="password" type="password" placeholder="Enter Password" />
           </div>
           <div class="six columns">
-            <input type="password" placeholder="Confirm Password" />
+            <input name="confirm" type="password" placeholder="Confirm Password" />
           </div>
         </div>
         <label>Description</label>
-        <textarea placeholder=""></textarea>
+        <textarea name="description" placeholder=""></textarea>
         
         <input class="button" type="submit" id="register-button" value="Register">
       </form>
