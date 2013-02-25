@@ -20,8 +20,15 @@
       <form id="register-form" class="twelve signup" method="post" action="users/create">
         <h3>Sign Up</h3>
         <label>Name</label>
-        <input name="name" type="text" placeholder="" />
-        <label>UPenn Email</label>
+	<div class="row">
+           <div class="six columns">
+            <input name="first-name" type="text" placeholder="First Name" />
+           </div>
+            <div class="six columns">
+            <input name="last-name" type="text" placeholder="Last Name" />
+           </div> 
+        </div>
+	<label>UPenn Email</label>
         <input name="email" type="text" placeholder="" />
         <label>Password</label>
         <div class="row">
