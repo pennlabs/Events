@@ -15,7 +15,14 @@ class APIEncoder(json.JSONEncoder):
 @app.route('/login', methods=['GET'])
 @app.route('/')
 def index():
-    return render_template('index.html')
+    user_id = session.get('user', None)
+    user = '{}'
+    if user_id:
+        user = db.users.find_one({'_id': ObjectId(user_id)})
+        del user['hashed_password']
+        user['logged_in'] = True
+    return render_template('index.html',
+                           user=json.dumps(user, cls=APIEncoder))
 
 
 @app.route('/current')
@@ -59,7 +66,9 @@ def login():
         return "There is no user with that email."
     hashed_password = user['hashed_password']
     if bcrypt.hashpw(password, hashed_password) == hashed_password:
+        # abstract into pre-serialize user
         del user['hashed_password']
+        user['logged_in'] = True
         session['user'] = str(user['_id'])
         # return user object dump
         return json.dumps(user, cls=APIEncoder)
@@ -81,7 +90,9 @@ def create_user():
             del user['confirm']
             # insert returns an ObjectId
             user_id = str(db.users.insert(user))
+            # abstract into pre-serialize user
             del user['hashed_password']
+            user['logged_in'] = True
             session['user'] = user_id
             return json.dumps(user, cls=APIEncoder)
         else:

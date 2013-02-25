@@ -4,7 +4,8 @@ require [
   'static/scripts/views/login_view',
   ],
   (User, MainView, LoginView) ->
-    window.user = null
+    # push window.user into the Router class
+    window.user = new User.model(Data.user)
     class Router extends Backbone.Router
       routes:
         ''          : 'index'
@@ -31,4 +32,4 @@ require [
     $ ->
       window.router = new Router()
       # Route initial URL
-      Backbone.history.start(pushState: true, root: '/')
+      Backbone.history.start(pushState: true, root: '/events')
