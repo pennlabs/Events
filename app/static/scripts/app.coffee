@@ -1,21 +1,27 @@
 require [
+  'static/scripts/models/user',
   'static/scripts/views/main_view',
   'static/scripts/views/login_view',
   ],
-  (MainView, LoginView) ->
+  (User, MainView, LoginView) ->
+    window.user = null
     class Router extends Backbone.Router
       routes:
         ''          : 'index'
         'login'     : 'login'
         'event/:id' : 'show_event'
       index: ->
-        app = new MainView.view()
+        user = window.user
+        user ||= new User.model()
+        app = new MainView.view(model: user)
         $('body').html app.render().el
         # fetch events and render them
         # render sidebar
 
       login: ->
-        app = new MainView.view()
+        user = window.user
+        user ||= new User.model()
+        app = new MainView.view(model: user)
         $('body').html app.render().el
 
         login_view = new LoginView.view()

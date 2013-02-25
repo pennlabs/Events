@@ -3,7 +3,7 @@
 <div class="contain-to-grid">
   <nav class="top-bar">
   <ul>
-    <li class="name"><h1><a href="#">events@penn</a></h1></li>
+    <li class="name"><h1><a href="#" class='home'>events@penn</a></h1></li>
     <li class="toggle-topbar"><a href="#"></a></li>
   </ul>
 
@@ -16,7 +16,11 @@
     <li><a href="#">FAQ</a></li>
     <li><a href="#">Feedback</a></li>
     <li><a href="#">Contact</a></li>
-    <li><a href="#/login">Login / Register</a><li>
+    <% if (logged_in) { %>
+    <li>Hi, <%= first_name %></li>
+    <% } else { %>
+    <li><a href="#" class='login'>Login / Register</a><li>
+    <% } %>
   </ul>
   </section>
   </nav>
@@ -62,10 +66,6 @@
   
   
   <!-- Main Feed -->
-  
-  <div class="nine columns cal" style="display:none;">
-    <iframe src="gcal.html"></iframe>
-  </div>
   
   <div class="nine columns feed">
     
