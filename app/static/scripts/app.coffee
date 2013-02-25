@@ -32,4 +32,4 @@ require [
     $ ->
       window.router = new Router()
       # Route initial URL
-      Backbone.history.start(pushState: true, root: '/events')
+      Backbone.history.start(pushState: true, root: '/')

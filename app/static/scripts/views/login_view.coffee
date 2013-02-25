@@ -4,22 +4,30 @@ define ['static/scripts/vendor/text!static/scripts/templates/login_template.html
       events:
         'click #register-button' : 'register'
         'click #login-button'    : 'login'
+      submit_form: ($form, success) ->
+        $.ajax(
+          url: $form.attr 'action'
+          method: $form.attr 'method'
+          data: $form.serialize()
+        ).done success
       register: (e) ->
         e.preventDefault()
         $register = $('#register-form')
-        $.ajax(
-          url: $register.attr('action')
-          method: $register.attr('method')
-          data: $register.serialize()
-        ).done (data) =>
+        @submit_form $register, (data) =>
           # fix this on the server side
           data = $.parseJSON data
           if data._id
             @model.set data
-            @model.set "logged_in", true
             window.router.navigate '', {trigger: true}
       login: (e) ->
-       e.preventDefault()
+        e.preventDefault()
+        $login = $('#login-form')
+        @submit_form $login, (data) =>
+          # fix this on the server side
+          data = $.parseJSON data
+          if data._id
+            @model.set data
+            window.router.navigate '', {trigger: true}  
       render: ->
         @$el.html template
         return @
