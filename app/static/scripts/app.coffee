@@ -4,7 +4,6 @@ require [
   'static/scripts/views/login_view',
   ],
   (User, MainView, LoginView) ->
-    # push window.user into the Router class
     class Router extends Backbone.Router
       initialize: ->
         @user = new User.model(Data.user)
