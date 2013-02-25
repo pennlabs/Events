@@ -5,6 +5,11 @@ from app import app, db
 import bcrypt
 
 
+INCORRECT_EMAIL_PASSWORD = 'Incorrect email/password'
+PASSWORDS_DO_NOT_MATCH = 'Passwords do not match'
+NO_PASSWORD_PROVIDED = 'No password provided'
+
+
 class APIEncoder(json.JSONEncoder):
     def default(self, obj):
         if isinstance(obj, ObjectId):
@@ -16,23 +21,13 @@ class APIEncoder(json.JSONEncoder):
 @app.route('/')
 def index():
     user_id = session.get('user', None)
-    user = '{}'
+    user = {}
     if user_id:
         user = db.users.find_one({'_id': ObjectId(user_id)})
         del user['hashed_password']
         user['logged_in'] = True
     return render_template('index.html',
                            user=json.dumps(user, cls=APIEncoder))
-
-
-@app.route('/current')
-def current():
-    user_id = session.get('user', None)
-    if user_id:
-        user = db.users.find_one({'_id': ObjectId(user_id)})
-        return json.dumps(user, cls=APIEncoder)
-    else:
-        return json.dumps({})
 
 
 @app.route('/events', methods=['GET'])
@@ -56,14 +51,12 @@ def logout():
 def login():
     email = request.form.get('email', None)
     password = request.form.get('password', None)
-    if not email:
-        return "No email was entered."
-    if not password:
-        return "No password was entered."
+    if not email or not password:
+        return json.dumps({'error': INCORRECT_EMAIL_PASSWORD})
     # grab user from database based on credentials
     user = db.users.find_one({'email': email})
     if not user:
-        return "There is no user with that email."
+        return json.dumps({'error': INCORRECT_EMAIL_PASSWORD})
     hashed_password = user['hashed_password']
     if bcrypt.hashpw(password, hashed_password) == hashed_password:
         # abstract into pre-serialize user
@@ -73,7 +66,7 @@ def login():
         # return user object dump
         return json.dumps(user, cls=APIEncoder)
     else:
-        return "Incorrect password."
+        return json.dumps({'error': INCORRECT_EMAIL_PASSWORD})
 
 
 @app.route('/users/create', methods=['POST'])
@@ -97,7 +90,7 @@ def create_user():
             return json.dumps(user, cls=APIEncoder)
         else:
             # password != confirm
-            return "Password does not match confirm."
+            return json.dumps({'error': PASSWORDS_DO_NOT_MATCH})
     else:
         # no password was entered
-        return "No password was entered."
+        return json.dumps({'error': NO_PASSWORD_PROVIDED})
