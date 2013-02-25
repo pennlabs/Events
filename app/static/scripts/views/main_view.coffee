@@ -11,7 +11,8 @@ define ['static/scripts/vendor/text!static/scripts/templates/main_template.html'
         e.preventDefault()
         window.router.navigate 'login', {trigger: true}
       render: ->
-        @$el.html template
+        compiled = _.template template, @model.toJSON()
+        @$el.html compiled
         return @
 
     return {view: MainView}
