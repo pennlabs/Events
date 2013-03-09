@@ -2,8 +2,9 @@ require [
   'static/scripts/models/user',
   'static/scripts/views/main_view',
   'static/scripts/views/login_view',
+  'static/scripts/config'
   ],
-  (User, MainView, LoginView) ->
+  (User, MainView, LoginView, Config) ->
     class Router extends Backbone.Router
       initialize: ->
         @user = new User.model(Data.user)
@@ -26,4 +27,4 @@ require [
     $ ->
       window.router = new Router()
       # Route initial URL
-      Backbone.history.start(pushState: true, root: '/events')
+      Backbone.history.start(pushState: true, root: Config.ROOT)
