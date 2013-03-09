@@ -1,0 +1,95 @@
+@import "_variables";
+
+.view-index {
+  
+  .sidebar {
+    margin-bottom: 15px;
+    z-index: 100;
+    
+    .sidebar-content {    
+      background-color: $secondary-color;
+      color: white;
+    }
+    
+    .sidebar-fold {
+      background-color: darken($secondary-color, 20%);
+      cursor: pointer;
+      
+      &:hover {
+        background-color: darken($secondary-color, 30%);
+      }
+      
+      .arrow {
+        position: absolute;
+        border: solid 8px;
+        border-color: transparent transparent white transparent;
+        top: auto;      
+        right: 22.5px;
+        bottom: 50%;
+        margin-bottom: -4px;
+      }
+    }
+    
+    &.folded {
+      .sidebar-content {
+        display: none;
+      }
+      
+      .sidebar-fold {
+        background-color: $secondary-color;
+        
+        &:hover {
+          background-color: darken($secondary-color, 10%);
+        }
+        
+        .arrow {
+          top: 50%;
+          margin-top: -4px;
+          border-color: white transparent transparent transparent;
+        }
+      }
+    }
+    
+    hr {
+      border: none;
+      border-bottom: $dottedBorder $lightGray;
+      margin: 10px 0 10px 0;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      color: white;
+      font-family: $textFont;
+      font-weight: normal;
+      margin: 10px 0 10px 0;
+    }
+    label {
+      color: white;
+    }
+    .label {
+      color: $secondary-color;
+      background-color: $tertiary-color;
+    }
+    input[type=checkbox] {
+      margin: 3px 3px 3px 0px;
+    }
+  }
+}
+
+// large screen
+@media only screen and (min-width: 940px) {
+  .view-index {
+    .sidebar.stick {
+      position: fixed;
+      top: 0;
+      width: 235px;
+    }
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .view-index {
+    .sidebar.stick {
+      position: fixed;
+      top: 0;
+    }
+  }
+}
