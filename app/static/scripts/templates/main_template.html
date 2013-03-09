@@ -18,6 +18,7 @@
     <li><a href="#">Contact</a></li>
     <% if (logged_in) { %>
     <li><a href='#'><%= name %></a></li>
+    <li><a href="#" class='logout'>Logout</a><li>
     <% } else { %>
     <li><a href="#" class='login'>Login / Register</a><li>
     <% } %>

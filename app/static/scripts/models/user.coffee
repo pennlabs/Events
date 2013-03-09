@@ -6,4 +6,8 @@ define [], ->
       last_name: 'Vedernikoff'
       logged_in: false
 
+    logout: ->
+      @url = 'users/logout'
+      @save(logged_in: false)
+
   return {model: User}

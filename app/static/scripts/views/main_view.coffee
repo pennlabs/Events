@@ -2,14 +2,25 @@ define ['static/scripts/vendor/text!static/scripts/templates/main_template.html'
   (template) ->
     class MainView extends Backbone.View
       events:
-        'click a.home'  : 'index'
-        'click a.login' : 'login'
+        'click a.home'   : 'index'
+        'click a.login'  : 'login'
+        'click a.logout' : 'logout'
       index: (e) ->
         e.preventDefault()
         window.router.navigate '', {trigger: true}
       login: (e) ->
         e.preventDefault()
         window.router.navigate 'login', {trigger: true}
+      logout: (e) ->
+        e.preventDefault()
+        @model.logout()
+
+        # See: https://github.com/documentcloud/backbone/issues/652#issuecomment-10731041
+        if Backbone.history.fragment == ''
+          Backbone.history.loadUrl Backbone.history.fragment
+        else
+          router.navigate '', {'trigger': true}
+        
       render: ->
         compiled = _.template template, @model.toJSON()
         @$el.html compiled
