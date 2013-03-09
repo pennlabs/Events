@@ -8,14 +8,14 @@ require [
     class Router extends Backbone.Router
       initialize: ->
         @user = new User.model(Data.user)
+
       routes:
         ''          : 'index'
         'login'     : 'login'
+
       index: ->
         app = new MainView.view(model: @user)
         $('body').html app.render().el
-        # fetch events and render them
-        # render sidebar
 
       login: ->
         app = new MainView.view(model: @user)
