@@ -7,6 +7,4 @@ app.config.from_object('config')
 connection = MongoClient()
 db = connection.events
 
-from app.views import general
-from app.views import auth
-from app.views import users
+from app.views import general, auth, users, events
