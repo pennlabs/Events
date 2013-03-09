@@ -2,6 +2,7 @@ import json
 
 import bcrypt
 from flask import session, request
+from bson import ObjectId
 
 from app import app, db
 from encoder import APIEncoder
@@ -9,6 +10,22 @@ from encoder import APIEncoder
 
 PASSWORDS_DO_NOT_MATCH = 'Passwords do not match'
 NO_PASSWORD_PROVIDED = 'No password provided'
+
+
+@app.route('/users/', methods=['GET'])
+def list_users():
+    """Show a list of user ids."""
+    limit = int(request.args.get('limit', 10))
+    offset = int(request.args.get('offset', 0))
+    users = list(db.users.find(skip=offset, limit=limit))
+    return json.dumps(users, cls=APIEncoder)
+
+
+@app.route('/users/<user_id>', methods=['GET'])
+def show_user(user_id):
+    """Show data for a particular user."""
+    user = db.users.find_one({"_id": ObjectId(user_id)})
+    return json.dumps(user, cls=APIEncoder)
 
 
 @app.route('/users/create', methods=['POST'])
