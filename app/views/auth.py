@@ -4,7 +4,7 @@ import bcrypt
 from flask import session, request
 
 from app import app, db
-from encoder import APIEncoder
+from helpers import jsonify
 
 
 INCORRECT_EMAIL_PASSWORD = 'Incorrect email/password'
@@ -27,7 +27,7 @@ def login():
         user['logged_in'] = True
         session['user'] = str(user['_id'])
         # return user object dump
-        return json.dumps(user, cls=APIEncoder)
+        return jsonify(user)
     else:
         return json.dumps({'error': INCORRECT_EMAIL_PASSWORD})
 

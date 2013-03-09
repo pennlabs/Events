@@ -1,10 +1,8 @@
-import json
-
 from flask import render_template, session
 from bson import ObjectId
 
 from app import app, db
-from encoder import APIEncoder
+from helpers import jsonify
 
 
 def get_current_user():
@@ -23,5 +21,4 @@ def index():
     if user:
         del user['hashed_password']
         user['logged_in'] = True
-    return render_template('index.html',
-                           user=json.dumps(user, cls=APIEncoder))
+    return render_template('index.html', user=jsonify(user))

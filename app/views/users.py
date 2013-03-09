@@ -2,25 +2,21 @@ import json
 
 import bcrypt
 from flask import session, request
-from bson import ObjectId
 
-from app import app, db
-from encoder import APIEncoder
+from app import db
+from helpers import BSONView, register_api, jsonify
 
 
 PASSWORDS_DO_NOT_MATCH = 'Passwords do not match'
 NO_PASSWORD_PROVIDED = 'No password provided'
 
 
-@app.route('/users/', methods=['GET', 'POST'])
-def list_users():
-    """Show a list of user ids."""
-    if request.method == 'GET':
-        limit = int(request.args.get('limit', 10))
-        offset = int(request.args.get('offset', 0))
-        users = list(db.users.find(skip=offset, limit=limit))
-        return json.dumps(users, cls=APIEncoder)
-    else:
+class UserAPI(BSONView):
+    @property
+    def collection_name(self):
+        return 'users'
+
+    def post(self):
         user = request.form.to_dict()
         # get password and hash it
         password = request.form.get('password', None)
@@ -37,7 +33,7 @@ def list_users():
                 del user['hashed_password']
                 user['logged_in'] = True
                 session['user'] = user_id
-                return json.dumps(user, cls=APIEncoder)
+                return jsonify(user)
             else:
                 # password != confirm
                 return json.dumps({'error': PASSWORDS_DO_NOT_MATCH})
@@ -46,8 +42,4 @@ def list_users():
             return json.dumps({'error': NO_PASSWORD_PROVIDED})
 
 
-@app.route('/users/<user_id>', methods=['GET'])
-def show_user(user_id):
-    """Show data for a particular user."""
-    user = db.users.find_one({"_id": ObjectId(user_id)})
-    return json.dumps(user, cls=APIEncoder)
+register_api(UserAPI, 'user_api', '/users/')
