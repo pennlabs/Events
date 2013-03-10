@@ -43,3 +43,4 @@ require [
       window.router = new Router()
       # Route initial URL
       Backbone.history.start(pushState: true, root: Config.ROOT)
+      $(document).foundation()
