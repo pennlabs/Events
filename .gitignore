@@ -3,10 +3,12 @@
 css/
 
 *.pyc
+*~
 
 build/
 newenv/
 app/static/stylesheets/*.css
+app/static/scripts/*.js
 
 config.coffee
 
