@@ -11,19 +11,18 @@
     <meta name="viewport" content="width=device-width">
 
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/css/foundation/normalize.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/css/foundation/foundation.css') }}">
 
-    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/vendor/normalize.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/vendor/main.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/vendor/foundation.min.css') }}">
-
-    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/app.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/index.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/event.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/group.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/feed.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/login.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/vendor/icomoon.css') }}">
-    <script src="{{ url_for('static', filename='scripts/vendor/modernizr.foundation.js') }}"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/css/app.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/css/index.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/css/event.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/css/group.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/css/feed.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/css/login.css') }}">
+      
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/css/icomoon/icomoon.css') }}">
     
     <link href='http://fonts.googleapis.com/css?family=Merriweather:400,700' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=News+Cycle:400,700' rel='stylesheet' type='text/css'>
@@ -40,7 +39,6 @@
     </script>
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
-    <script src="{{ url_for('static', filename='scripts/vendor/foundation.min.js') }}"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.3/underscore-min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/backbone.js/0.9.10/backbone-min.js"></script>
     <script src="{{ url_for('static', filename='scripts/vendor/require.js') }}"></script>
@@ -53,5 +51,27 @@
         g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
         s.parentNode.insertBefore(g,s)}(document,'script'));
     </script>
-  </body>
+
+  <script src="{{ url_for('static', filename='scripts/vendor/zepto.js') }}"></script>
+  <script src="{{ url_for('static', filename='scripts/vendor/foundation/foundation.js') }}"></script>
+  <script src="{{ url_for('static', filename='scripts/vendor/foundation/foundation.cookie.js') }}"></script>
+  <script src="{{ url_for('static', filename='scripts/vendor/foundation/foundation.alerts.js') }}"></script>
+  <script src="{{ url_for('static', filename='scripts/vendor/foundation/foundation.clearing.js') }}"></script>
+  <script src="{{ url_for('static', filename='scripts/vendor/foundation/foundation.dropdown.js') }}"></script>
+  <script src="{{ url_for('static', filename='scripts/vendor/foundation/foundation.forms.js') }}"></script>
+  <script src="{{ url_for('static', filename='scripts/vendor/foundation/foundation.joyride.js') }}"></script>
+  <script src="{{ url_for('static', filename='scripts/vendor/foundation/foundation.magellan.js') }}"></script>
+  <script src="{{ url_for('static', filename='scripts/vendor/foundation/foundation.orbit.js') }}"></script>
+  <script src="{{ url_for('static', filename='scripts/vendor/foundation/foundation.placeholder.js') }}"></script>
+  <script src="{{ url_for('static', filename='scripts/vendor/foundation/foundation.reveal.js') }}"></script>
+  <script src="{{ url_for('static', filename='scripts/vendor/foundation/foundation.section.js') }}"></script>
+  <script src="{{ url_for('static', filename='scripts/vendor/foundation/foundation.tooltips.js') }}"></script>
+  <script src="{{ url_for('static', filename='scripts/vendor/foundation/foundation.topbar.js') }}"></script>
+  <!-- Application Javascript, safe to override -->
+
+  <script src="{{ url_for('static', filename='scripts/vendor/foundation/index.js') }}"></script>
+  <script>
+      $(document).foundation().foundation('joyride', 'start');
+    </script>
+</body>
 </html>

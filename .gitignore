@@ -9,6 +9,8 @@ build/
 newenv/
 app/static/stylesheets/*.css
 app/static/scripts/*.js
+app/static/scripts/views/*.js
+app/static/scripts/models/*.js
 
 config.coffee
 
