@@ -2,9 +2,10 @@ define ['static/scripts/vendor/text!static/scripts/templates/main_template.html'
   (template) ->
     class MainView extends Backbone.View
       events:
-        'click a.home'   : 'index'
-        'click a.login'  : 'login'
-        'click a.logout' : 'logout'
+        'click a.home'      : 'index'
+        'click a.login'     : 'login'
+        'click a.logout'    : 'logout'
+        'click .card .title'  : 'event'
       index: (e) ->
         e.preventDefault()
         window.router.navigate '', {trigger: true}
@@ -20,6 +21,9 @@ define ['static/scripts/vendor/text!static/scripts/templates/main_template.html'
           Backbone.history.loadUrl Backbone.history.fragment
         else
           router.navigate '', {'trigger': true}
+      event: (e) ->
+        e.preventDefault()
+        window.router.navigate 'event', {trigger: true}
         
       render: ->
         compiled = _.template template, @model.toJSON()
