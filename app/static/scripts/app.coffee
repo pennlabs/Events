@@ -1,3 +1,8 @@
+requirejs.onError = (err) ->
+  if err.requireType == 'scripterror'
+    alert "please copy static/scripts/config.coffee.default!"
+  throw err
+
 require [
   'static/scripts/models/user',
   'static/scripts/views/main_view',
