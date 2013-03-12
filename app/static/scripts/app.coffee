@@ -63,4 +63,4 @@ require [
       Backbone.history.start(pushState: true, root: Config.ROOT)
       
       $(document).foundation()
-      window.initUI()
+      UI.initUI()
