@@ -2,7 +2,7 @@ define ['static/scripts/vendor/text!static/scripts/templates/create_template.htm
   (template) ->
     class CreateView extends Backbone.View
       render: ->
-        compiled = _.template template, null
+        compiled = _.template template, {}
         @$el.html compiled
         return @
 
