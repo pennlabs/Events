@@ -1,6 +1,6 @@
 @import "_variables";
 
-.view-login {
+.view-create {
 
   .prompt {
     margin-top: 30px;
@@ -14,7 +14,7 @@
     margin: 0;
   }
   
-  .login {
+  .rightbox {
     background-color: $secondary-color;
     color: white;
     padding: 15px;
@@ -38,7 +38,7 @@
     }
   }
   
-  .signup {
+  .leftbox {
     background-color: white;
     padding: 15px;
     
