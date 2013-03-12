@@ -9,6 +9,7 @@ from helpers import BSONView, register_api, jsonify
 
 PASSWORDS_DO_NOT_MATCH = 'Passwords do not match'
 NO_PASSWORD_PROVIDED = 'No password provided'
+UNAUTHORIZED_REQUEST = 'User is not logged in'
 
 
 class UserAPI(BSONView):
@@ -40,6 +41,25 @@ class UserAPI(BSONView):
         else:
             # no password was entered
             return json.dumps({'error': NO_PASSWORD_PROVIDED})
+
+
+@app.route('/users/<f_id>/subscriptions', methods=['POST', 'DELETE'])
+def subscriptions(f_id):
+    u_id = session.get('user', None)
+    if u_id:
+        if request.method == 'POST':
+            # TODO Merge the database requests
+            # add f_id to u_id's following
+            db.users.update({'_id': ObjectId(u_id)}, {'$push': {'following': f_id}}, {'upsert': True})
+            # add u_id to f_id's followers
+            db.users.update({'_id': ObjectId(f_id)}, {'$push': {'followers': u_id}}, {'upsert': True})
+            # TODO Get f_id's events and add them to u_id's event queue
+        else:
+            # remove f_id from u_id's following
+            # remove u_id from f_id's followers
+            pass
+    else:
+        return json.dumps({'error': UNAUTHORIZED_REQUEST})
 
 
 register_api(UserAPI, 'user_api', '/users/')
