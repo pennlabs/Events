@@ -4,7 +4,8 @@ import fabric
 
 
 SCRIPTS_DIR = "app/static/scripts"
-STYLESHEETS_DIR = "app/static/stylesheets"
+SCSS_DIR = "app/static/styles/scss"
+CSS_DIR = "app/static/styles/css"
 
 
 # TODO: Make some kind of way to kill background processes.
@@ -22,7 +23,7 @@ def _local(command, capture=False, shell=False, bg=False):
 def make_static(capture=True, bg=True):
     """Build static files and update on change."""
     _local("coffee -cw %s" % SCRIPTS_DIR, capture=capture, bg=bg)
-    _local("sass -w %s" % STYLESHEETS_DIR, capture=capture, bg=bg)
+    _local("sass -w %s:%s" % (SCSS_DIR, CSS_DIR), capture=capture, bg=bg)
 
 
 def run_server(capture=True, bg=True):

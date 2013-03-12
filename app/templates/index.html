@@ -3,55 +3,67 @@
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title></title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title></title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width">
 
-    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+  <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+  
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/css/foundation/normalize.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/css/foundation/foundation.css') }}">
 
-    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/vendor/normalize.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/vendor/main.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/vendor/foundation.min.css') }}">
-
-    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/app.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/index.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/event.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/group.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/feed.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/login.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/vendor/icomoon.css') }}">
-    <script src="{{ url_for('static', filename='scripts/vendor/modernizr.foundation.js') }}"></script>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/css/app.css') }}">      
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/css/feed.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/css/index.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/css/event.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/css/group.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/css/login.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/css/create.css') }}">
     
-    <link href='http://fonts.googleapis.com/css?family=Merriweather:400,700' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=News+Cycle:400,700' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
-  </head>
-  <body>
-    <!--[if lt IE 7]>
-    <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
-    <![endif]-->
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/css/icomoon/style.css') }}">
+  
+  <link href='http://fonts.googleapis.com/css?family=Merriweather:400,700' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=News+Cycle:400,700' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+    
+</head>
+<body>
+  <!--[if lt IE 7]>
+  <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+  <![endif]-->
 
-    <script type='text/javascript'>
-      Data = {};
-      Data.user = {{ user | safe }};
-    </script>
+  <script type='text/javascript'>
+    Data = {};
+    Data.user = {{ user | safe }};
+  </script>
 
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
-    <script src="{{ url_for('static', filename='scripts/vendor/foundation.min.js') }}"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.3/underscore-min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/backbone.js/0.9.10/backbone-min.js"></script>
-    <script src="{{ url_for('static', filename='scripts/vendor/require.js') }}"></script>
-    <script data-main="scripts/main" src="{{ url_for('static', filename='scripts/app.js') }}"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.3/underscore-min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/backbone.js/0.9.10/backbone-min.js"></script>
+  <script src="{{ url_for('static', filename='scripts/vendor/custom.modernizr.js') }}"></script>
+  <script src="{{ url_for('static', filename='scripts/vendor/require.js') }}"></script>
+  <script data-main="scripts/main" src="{{ url_for('static', filename='scripts/app.js') }}"></script>
 
-    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
-    <script>
-      var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
-      (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-        g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
-        s.parentNode.insertBefore(g,s)}(document,'script'));
-    </script>
-  </body>
+  <script src="{{ url_for('static', filename='scripts/vendor/foundation/foundation.js') }}"></script>
+  <script src="{{ url_for('static', filename='scripts/vendor/foundation/foundation.cookie.js') }}"></script>
+  <script src="{{ url_for('static', filename='scripts/vendor/foundation/foundation.alerts.js') }}"></script>
+  <script src="{{ url_for('static', filename='scripts/vendor/foundation/foundation.clearing.js') }}"></script>
+  <script src="{{ url_for('static', filename='scripts/vendor/foundation/foundation.dropdown.js') }}"></script>
+  <script src="{{ url_for('static', filename='scripts/vendor/foundation/foundation.forms.js') }}"></script>
+  <script src="{{ url_for('static', filename='scripts/vendor/foundation/foundation.joyride.js') }}"></script>
+  <script src="{{ url_for('static', filename='scripts/vendor/foundation/foundation.magellan.js') }}"></script>
+  <script src="{{ url_for('static', filename='scripts/vendor/foundation/foundation.orbit.js') }}"></script>
+  <script src="{{ url_for('static', filename='scripts/vendor/foundation/foundation.placeholder.js') }}"></script>
+  <script src="{{ url_for('static', filename='scripts/vendor/foundation/foundation.reveal.js') }}"></script>
+  <script src="{{ url_for('static', filename='scripts/vendor/foundation/foundation.section.js') }}"></script>
+  <script src="{{ url_for('static', filename='scripts/vendor/foundation/foundation.tooltips.js') }}"></script>
+  <script src="{{ url_for('static', filename='scripts/vendor/foundation/foundation.topbar.js') }}"></script>
+  <!-- Application Javascript, safe to override -->
+
+  <!--<script src="{{ url_for('static', filename='scripts/vendor/foundation/index.js') }}"></script>-->
+  
+</body>
 </html>
