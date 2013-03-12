@@ -1,4 +1,5 @@
 require [
+  'static/scripts/ui',
   'static/scripts/models/user',
   'static/scripts/views/main_view',
   'static/scripts/views/login_view',
@@ -6,7 +7,9 @@ require [
   'static/scripts/views/create_view',
   'static/scripts/config'
   ],
-  (User,
+  (
+  UI,
+  User,
   MainView,
   LoginView,
   EventView,
@@ -53,4 +56,6 @@ require [
       window.router = new Router()
       # Route initial URL
       Backbone.history.start(pushState: true, root: Config.ROOT)
+      
       $(document).foundation()
+      window.initUI()
