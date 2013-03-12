@@ -15,6 +15,7 @@ def get_current_user():
 
 
 @app.route('/login', methods=['GET'])
+@app.route('/create', methods=['GET'])
 @app.route('/')
 def index():
     user = get_current_user()

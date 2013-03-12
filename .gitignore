@@ -1,14 +1,15 @@
-# front-end stuff
 .sass-cache
-css/
 
 *.pyc
 *~
 
 build/
 newenv/
-app/static/stylesheets/*.css
 app/static/scripts/*.js
+app/static/scripts/views/*.js
+app/static/scripts/models/*.js
+app/static/styles/css/foundation/
+app/static/styles/css/*.css
 
 config.coffee
 
