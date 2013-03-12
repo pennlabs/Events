@@ -22,10 +22,17 @@
         <li><a href="#">Feedback</a></li>
         <li><a href="#">Contact</a></li>
         <% if (logged_in) { %>
-        <li><a href='#'><%= name %></a></li>
-        <li><a href="#" class='logout'>Logout</a><li>
+        <li class="has-dropdown"><a href='#'><%= name %></a>
+          <ul class="dropdown"><li class="title back js-generated"><h5><a href="#">« Back</a></h5></li>
+            <li><a href="#">Profile</a></li>
+            <li><a href="#">My Events</a></li>
+            <li><a href="#">Create Event</a></li>
+            <li class="divider"></li>
+            <li><a href="#" class='logout'>Logout</a><li>
+          </ul>
+        </li>        
         <% } else { %>
-        <li><a href="#" class='login'>Login / Register</a><li>
+        <li><a href="#" class='login'>Login</a><li>
         <% } %>
       </ul>
     </section>
