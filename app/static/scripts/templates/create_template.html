@@ -2,21 +2,19 @@
   
   <div class="row">
     <div class="large-4 columns">
-      <div class="large-12 prompt">
-        <p>already have an account?</p>
+      <div class="right box large-12 small-12">
+        <h3>Create New Event</h3>
+        <p>Your event will be publicly available. Please respect the following rules. Any posts that violate these rules will be moderated and removed.</p>
+        <ol>
+          <li>No obscene pictures or languages.</li>
+          <li>Shirts and shoes required.</li>
+          <li>Don't be an asshole.</li>
+        </ol>
       </div>
-      <form class="rightbox" method="post" action="users/login">
-        <h3>Keep in Mind</h3>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-      </form>
     </div>
     
     <div class="large-8 columns">
-      <div class="large-12 prompt">
-        <p>need a new account?</p>
-      </div>
-      <form class="leftbox" method="post" action="users/">
-        <h3>New Event</h3>
+      <form class="left box large-12 small-12" method="post" action="">        
         <label>Name</label>
         <input name="name" type="text" placeholder="Event Name" />
         <label>When?</label>
@@ -24,10 +22,10 @@
           <div class="large-6 columns">
             <input name="date" type="text" placeholder="Date" />
           </div>
-          <div class="large-3 columns">
+          <div class="large-3 small-6 columns">
             <input name="time_start" type="text" placeholder="Start" />
           </div>
-          <div class="large-3 columns">
+          <div class="large-3 small-6 columns">
             <input name="time_end" type="text" placeholder="End" />
           </div>
         </div>
@@ -35,6 +33,8 @@
         <input name="location" type="text" placeholder="Location" />
         <label>Description</label>
         <textarea name="description" placeholder=""></textarea>
+        <label>Upload Image</label>
+        <input name="image" type="text" placeholder="Browse..." />
         
         <input class="button" type="submit" id="submit-button" value="Submit">
       </form>
