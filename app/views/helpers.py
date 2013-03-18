@@ -1,10 +1,14 @@
+from __future__ import absolute_import
 import json
+import urlparse
 
-from flask import request
+from flask import request, Response, g
 from flask.views import MethodView
 from bson.objectid import ObjectId
 
-from app import app, db
+from app import app
+
+API_PREFIX = '/api/'
 
 
 class BSONEncoder(json.JSONEncoder):
@@ -27,7 +31,7 @@ def jsonify(entity):
     return json.dumps(entity, cls=BSONEncoder)
 
 
-class BSONView(MethodView):
+class BSONAPI(MethodView):
     """
     Convenience wrapper on MethodView for BSON entities.
 
@@ -41,7 +45,7 @@ class BSONView(MethodView):
 
     @property
     def collection(self):
-        return getattr(db, self.collection_name)
+        return getattr(g.db, self.collection_name)
 
     def get(self, _id):
         """
@@ -53,10 +57,10 @@ class BSONView(MethodView):
             limit = int(request.args.get('limit', 10))
             offset = int(request.args.get('offset', 0))
             entities = list(self.collection.find(skip=offset, limit=limit))
-            return jsonify(entities)
+            return Response(jsonify(entities), mimetype='text/json')
         else:
             entity = self.collection.find_one({"_id": ObjectId(_id)})
-            return jsonify(entity)
+            return Response(jsonify(entity), mimetype='text/json')
 
     def post(self):
         """
@@ -64,7 +68,7 @@ class BSONView(MethodView):
         """
         entity = request.form.to_dict()
         self.collection.insert(entity)
-        return jsonify(entity)
+        return Response(jsonify(entity), mimetype='text/json')
 
 
 def register_api(view, endpoint, url, pk='_id', pk_type='string'):
@@ -80,6 +84,8 @@ def register_api(view, endpoint, url, pk='_id', pk_type='string'):
     -   `pk_type` should be the type of the primary key. Defaults to string.
     """
     view_func = view.as_view(endpoint)
+    assert not url.startswith('/')
+    url = urlparse.urljoin(API_PREFIX, url) + '/'
     app.add_url_rule(url,
                      defaults={pk: None},
                      view_func=view_func,
