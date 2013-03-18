@@ -2,7 +2,7 @@ from __future__ import absolute_import
 import json
 import urlparse
 
-from flask import request, Response, g, session
+from flask import request, Response, g
 from flask.views import MethodView
 from bson.objectid import ObjectId
 from blinker import Namespace
@@ -12,9 +12,7 @@ from app import app
 API_PREFIX = '/api/'
 
 
-my_signals = Namespace()
-#creates a signal to be called when an event is made
-new_event_signal = my_signals.signal('new-event-signal')
+signals = Namespace()
 
 
 class BSONEncoder(json.JSONEncoder):
@@ -74,8 +72,6 @@ class BSONAPI(MethodView):
         """
         entity = request.form.to_dict()
         self.collection.insert(entity)
-        #signals that a new event was made
-        new_event_signal.send(self, entity=entity, u_id=session['user'])
         return Response(jsonify(entity), mimetype='text/json')
 
 

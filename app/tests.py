@@ -33,6 +33,10 @@ class TestUsersAPI(object):
             password=password,
         ), follow_redirects=True)
 
+    def subscribe(self, f_id):
+        return self.app.post(self.ENDPOINT + f_id + '/subscriptions',
+            follow_redirects=True)
+
     def logout(self):
         return self.app.get('/logout', follow_redirects=True)
 
@@ -53,3 +57,12 @@ class TestUsersAPI(object):
         rv = self.login("email1", "pw1")
         user = json.loads(rv.data)
         assert user['name'] == 'user1', user
+
+    def test_subscriptions(self):
+        user1 = self.create("user1", "pw1", "email1")
+        user2 = self.create("user2", "pw2", "email2")
+        u2 = json.loads(user2.data)
+        rv = self.login("email1", "pw1")
+        r = self.subscribe(u2["_id"])
+        sub = json.loads(r.data)
+        assert "success" in sub

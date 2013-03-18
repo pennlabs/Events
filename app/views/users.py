@@ -14,6 +14,7 @@ from bson.objectid import ObjectId
 PASSWORDS_DO_NOT_MATCH = 'Passwords do not match'
 NO_PASSWORD_PROVIDED = 'No password provided'
 UNAUTHORIZED_REQUEST = 'User is not logged in'
+SUBSCRIBED_SUCCESSFULLY = 'User has subscribed successfully'
 
 
 class UserAPI(BSONAPI):
@@ -65,6 +66,7 @@ def subscriptions(f_id):
                               {'$push': {'followers': o_u_id}},
                               upsert=True)
             # TODO Get f_id's events and add them to u_id's event queue
+            return json.dumps({'success': SUBSCRIBED_SUCCESSFULLY})
         else:
             # remove f_id from u_id's following
             # remove u_id from f_id's followers
