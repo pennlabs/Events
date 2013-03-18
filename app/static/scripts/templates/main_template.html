@@ -2,161 +2,149 @@
 
 <div class="contain-to-grid">
   <nav class="top-bar">
-  <ul>
-    <li class="name"><h1><a href="#" class='home'>events@penn</a></h1></li>
-    <li class="toggle-topbar"><a href="#"></a></li>
-  </ul>
-
-  <section>
-  <ul class="left">
-  </ul>
-
-  <ul class="right">
-    <li><a class='home' href="#">Home</a></li>
-    <li><a href="#">FAQ</a></li>
-    <li><a href="#">Feedback</a></li>
-    <li><a href="#">Contact</a></li>
-    <% if (logged_in) { %>
-    <li><a href='#'><%= name %></a></li>
-    <li><a href="#" class='logout'>Logout</a><li>
-    <% } else { %>
-    <li><a href="#" class='login'>Login / Register</a><li>
-    <% } %>
-  </ul>
-  </section>
+    <ul class="title-area">
+      <!-- Title Area -->
+      <li class="name">
+        <h1>
+          <a href="#">
+            events@penn
+          </a>
+        </h1>
+      </li>
+      <li class="toggle-topbar menu-icon"><a href="#"><span>menu</span></a></li>
+    </ul>
+ 
+    <section class="top-bar-section">
+      <!-- Right Nav Section -->
+      <ul class="right">
+        <li><a class='home' href="#">Home</a></li>
+        <li><a href="#">FAQ</a></li>
+        <li><a href="#">Feedback</a></li>
+        <li><a href="#">Contact</a></li>
+        <% if (logged_in) { %>
+        <li class="has-dropdown"><a href="#"><%= name %></a>
+          <ul class="dropdown">
+            <li><a href="#">Profile</a></li>
+            <li><a href="#">My Events</a></li>
+            <li><a href="#" class="create">Create Event</a></li>
+            <li class="divider"></li>
+            <li><a href="#" class="logout">Logout</a><li>            
+          </ul>
+        </li>        
+        <% } else { %>
+        <li><a href="#" class='login'>Login</a><li>
+        <% } %>
+      </ul>
+    </section>
   </nav>
 </div>
 
-<div id='container'>
+<div id="container">  
+  
+<div class="view-index">
 
-  <div class="view-index">
-
+<div class="row">
+  
+  <!-- Sidebar Filters -->
+  
+  <div class="large-3 columns sidebar">
+    <div class="large-12 columns sidebar-content">
+      <form>
+        <h5>Groups</h5>
+        <input type="text" placeholder="Groups" />
+        <div>
+          <span class="radius label">upenn</span>
+          <span class="radius label">spec</span>
+          <span class="radius label">philo</span>
+          <span class="radius label">dp</span>
+          <span class="radius label">starred</span>
+        </div>
+        <hr/>
+        <h5>Type</h5>
+        <label for="checkbox1"><input type="checkbox" id="checkbox1">Lecture</label>
+        <label for="checkbox2"><input type="checkbox" id="checkbox2">Recitation</label>
+        <label for="checkbox3"><input type="checkbox" id="checkbox3">Studio</label>
+        <hr/>
+        <h5>Tags</h5>
+        <label for="checkbox4"><input type="checkbox" id="checkbox4">Recommended</label>
+        <label for="checkbox5"><input type="checkbox" id="checkbox5">18 & Above</label>
+        <label for="checkbox6"><input type="checkbox" id="checkbox6">University</label>
+      </form>
+    </div>
+    <div class="large-12 columns sidebar-fold">
+      <span class="arrow"></span>
+      <h5>Filters</h5>
+    </div>
+  </div>
+  
+  
+  <!-- Main Feed -->
+  
+  <div class="large-9 columns feed">
+    
     <div class="row">
-      
-      <!-- Sidebar Filters -->
-      
-      <div class="three columns mobile-four sidebar">
-        <div class="twelve columns sidebar-content">
-          <form>
-            <h5>Groups</h5>
-            <input type="text" placeholder="Groups" />
-            <div>
-              <span class="radius label">upenn</span>
-              <span class="radius label">spec</span>
-              <span class="radius label">philo</span>
-              <span class="radius label">dp</span>
-              <span class="radius label">starred</span>
-            </div>
-            <hr/>
-            <h5>Type</h5>
-            <label for="checkbox1"><input type="checkbox" id="checkbox1">Lecture</label>
-            <label for="checkbox2"><input type="checkbox" id="checkbox2">Recitation</label>
-            <label for="checkbox3"><input type="checkbox" id="checkbox3">Studio</label>
-            <hr/>
-            <h5>Tags</h5>
-            <label for="checkbox4"><input type="checkbox" id="checkbox4">Recommended</label>
-            <label for="checkbox5"><input type="checkbox" id="checkbox5">18 & Above</label>
-            <label for="checkbox6"><input type="checkbox" id="checkbox6">University</label>
-          </form>
-        </div>
-        <div class="twelve columns sidebar-fold">
-          <span class="arrow"></span>
-          <h5>Filters</h5>
-        </div>
-      </div>
-      
-      
-      <!-- Main Feed -->
-      
-      <div class="nine columns feed">
-        
-        <div class="row">
-          <div class="twelve columns date">
-            <h4>Tuesday, January 29, 2013</h4>
-          </div>
-        </div>
-        
-        <div class="row"><div class="twelve columns"><div class="card">
-          <div class="three columns mobile-four image">
-            <img src="http://placehold.it/240x240&amp;text=img">
-          </div>
-          <div class="nine columns info">
-            <h4 class="title"><a href="#">Semi-Annual Pastrami Feast</a></h4>
-            <span class="subtitle">by <a href="#">M.E.A.T. Club</a></span>
-            
-            <div class="detail-row">
-              <div class="six columns item">
-                <span class="icon icon-calendar"></span>Tuesday, January 29
-              </div>
-              <div class="six columns item">
-                <span class="icon icon-clock"></span>8:00 - 9:00pm  
-              </div>
-              <div class="twelve columns item">
-                <span class="icon icon-location"></span><a href="http://maps.google.com/?q=Kings Court English House"  target="_blank">Kings Court English House</a>
-              </div>
-            </div>
-              
-            <p>Bacon ipsum dolor sit amet nulla ham qui sint exercitation eiusmod commodo, chuck duis velit. Aute in reprehenderit, dolore aliqua non est magna in labore pig pork biltong.</p>
-          </div>
-        </div></div></div>
-        
-        <div class="row">
-          <div class="twelve columns date">
-            <h4>Wednesday, January 30, 2013</h4>
-          </div>
-        </div>
-        
-        <div class="row"><div class="twelve columns"><div class="card">
-          <div class="three columns mobile-four image">
-            <img src="http://placehold.it/240x240&amp;text=img">
-          </div>
-          <div class="nine columns info">
-            <h4 class="title"><a href="#">CG Shorts Screening</a></h4>
-            <span class="subtitle">by <a href="#">UPenn SIGGRAPH</a></span>
-            
-            <div class="detail-row">
-              <div class="six columns item">
-                <span class="icon icon-calendar"></span>Wednesday, January 30
-              </div>
-              <div class="six columns item">
-                <span class="icon icon-clock"></span>8:00 - 9:00pm  
-              </div>
-              <div class="twelve columns item">
-                <span class="icon icon-location"></span><a href="http://maps.google.com/?q=Wu & Chen Auditorium" target="_blank">Wu & Chen Auditorium</a>
-              </div>
-            </div>
-              
-            <p>Bacon ipsum dolor sit amet nulla ham qui sint exercitation eiusmod commodo, chuck duis velit. Aute in reprehenderit, dolore aliqua non est magna in labore pig pork biltong.</p>
-          </div>
-        </div></div></div>
-        
-        <div class="row"><div class="twelve columns"><div class="card">
-          <div class="three columns mobile-four image">
-            <img src="http://placehold.it/240x240&amp;text=img">
-          </div>
-          <div class="nine columns info">
-            <h4 class="title"><a href="#">CG Shorts Screening</a></h4>
-            <span class="subtitle">by <a href="#">UPenn SIGGRAPH</a></span>
-            
-            <div class="detail-row">
-              <div class="six columns item">
-                <span class="icon icon-calendar"></span>Wednesday, January 30
-              </div>
-              <div class="six columns item">
-                <span class="icon icon-clock"></span>8:00 - 9:00pm  
-              </div>
-              <div class="twelve columns item">
-                <span class="icon icon-location"></span><a href="http://maps.google.com/?q=Wu & Chen Auditorium" target="_blank">Wu & Chen Auditorium</a>
-              </div>
-            </div>
-              
-            <p>Bacon ipsum dolor sit amet nulla ham qui sint exercitation eiusmod commodo, chuck duis velit. Aute in reprehenderit, dolore aliqua non est magna in labore pig pork biltong.</p>
-          </div>
-        </div></div></div>
-        
+      <div class="large-12 columns date">
+        <h3>Tuesday, January 29, 2013</h3>
       </div>
     </div>
-
+    
+    <div class="row"><div class="large-12 columns"><div class="card">
+      <div class="large-3 columns image">
+        <img src="http://placehold.it/240x240&amp;text=img">
+      </div>
+      <div class="large-9 columns info">
+        <h3 class="title"><a href="#">Semi-Annual Pastrami Feast</a></h3>
+        <span class="subtitle">by <a href="#">M.E.A.T. Club</a></span>
+        
+        <div class="detail-row">
+          <div class="large-6 columns item">
+            <span class="icon icon-calendar"></span>Tuesday, January 29
+          </div>
+          <div class="large-6 columns item">
+            <span class="icon icon-clock"></span>8:00 - 9:00pm  
+          </div>
+          <div class="large-12 columns item">
+            <span class="icon icon-location"></span><a href="http://maps.google.com/?q=Kings Court English House"  target="_blank">Kings Court English House</a>
+          </div>
+        </div>
+          
+        <p>Bacon ipsum dolor sit amet nulla ham qui sint exercitation eiusmod commodo, chuck duis velit. Aute in reprehenderit, dolore aliqua non est magna in labore pig pork biltong.</p>
+      </div>
+    </div></div></div>
+    
+    <div class="row">
+      <div class="large-12 columns date">
+        <h3>Tuesday, January 29, 2013</h3>
+      </div>
+    </div>
+    
+    <div class="row"><div class="large-12 columns"><div class="card">
+      <div class="large-3 columns image">
+        <img src="http://placehold.it/240x240&amp;text=img">
+      </div>
+      <div class="large-9 columns info">
+        <h3 class="title"><a href="#">Semi-Annual Pastrami Feast</a></h3>
+        <span class="subtitle">by <a href="#">M.E.A.T. Club</a></span>
+        
+        <div class="detail-row">
+          <div class="large-6 columns item">
+            <span class="icon icon-calendar"></span>Tuesday, January 29
+          </div>
+          <div class="large-6 columns item">
+            <span class="icon icon-clock"></span>8:00 - 9:00pm  
+          </div>
+          <div class="large-12 columns item">
+            <span class="icon icon-location"></span><a href="http://maps.google.com/?q=Kings Court English House"  target="_blank">Kings Court English House</a>
+          </div>
+        </div>
+          
+        <p>Bacon ipsum dolor sit amet nulla ham qui sint exercitation eiusmod commodo, chuck duis velit. Aute in reprehenderit, dolore aliqua non est magna in labore pig pork biltong.</p>
+      </div>
+    </div></div></div>
+    
   </div>
+</div>
+
+</div>
 
 </div>

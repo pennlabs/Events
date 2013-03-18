@@ -6,6 +6,7 @@ define ['static/scripts/vendor/text!static/scripts/templates/main_template.html'
         'click a.login'     : 'login'
         'click a.logout'    : 'logout'
         'click .card .title'  : 'event'
+        'click a.create'    : 'create'
       index: (e) ->
         e.preventDefault()
         window.router.navigate '', {trigger: true}
@@ -21,6 +22,9 @@ define ['static/scripts/vendor/text!static/scripts/templates/main_template.html'
           Backbone.history.loadUrl Backbone.history.fragment
         else
           router.navigate '', {'trigger': true}
+      create: (e) ->
+        e.preventDefault()
+        window.router.navigate 'create', {trigger: true}
       event: (e) ->
         e.preventDefault()
         window.router.navigate 'event', {trigger: true}

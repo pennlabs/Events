@@ -1,14 +1,24 @@
+requirejs.onError = (err) ->
+  if err.requireType == 'scripterror'
+    alert "please copy static/scripts/config.coffee.default!"
+  throw err
+
 require [
+  'static/scripts/ui',
   'static/scripts/models/user',
   'static/scripts/views/main_view',
   'static/scripts/views/login_view',
   'static/scripts/views/event_view',
+  'static/scripts/views/create_view',
   'static/scripts/config'
   ],
-  (User,
+  (
+  UI,
+  User,
   MainView,
   LoginView,
   EventView,
+  CreateView,
   Config) ->
     class Router extends Backbone.Router
       initialize: ->
@@ -18,6 +28,7 @@ require [
         ''          : 'index'
         'login'     : 'login'
         'event'     : 'event'
+        'create'    : 'create'
 
       index: ->
         app = new MainView.view(model: @user)
@@ -38,8 +49,18 @@ require [
 
         view = new EventView.view()
         $('#container').html view.render().el
+        
+      create: ->
+        app = new MainView.view(model: @user)
+        $('body').html app.render().el
+
+        create_view = new CreateView.view(model: @user)
+        $('#container').html create_view.render().el
 
     $ ->
       window.router = new Router()
       # Route initial URL
       Backbone.history.start(pushState: true, root: Config.ROOT)
+      
+      $(document).foundation()
+      UI.initUI()

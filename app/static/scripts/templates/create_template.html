@@ -1,0 +1,44 @@
+<div class="view-create">
+  
+  <div class="row">
+    <div class="large-4 columns">
+      <div class="right box large-12 small-12">
+        <h3>Create New Event</h3>
+        <p>Your event will be publicly available. Please respect the following rules. Any posts that violate these rules will be moderated and removed.</p>
+        <ol>
+          <li>No obscene pictures or languages.</li>
+          <li>Shirts and shoes required.</li>
+          <li>Don't be an asshole.</li>
+        </ol>
+      </div>
+    </div>
+    
+    <div class="large-8 columns">
+      <form class="left box large-12 small-12" method="post" action="">        
+        <label>Name</label>
+        <input name="name" type="text" placeholder="Event Name" />
+        <label>When?</label>
+        <div class="row">
+          <div class="large-6 columns">
+            <input name="date" type="text" placeholder="Date" />
+          </div>
+          <div class="large-3 small-6 columns">
+            <input name="time_start" type="text" placeholder="Start" />
+          </div>
+          <div class="large-3 small-6 columns">
+            <input name="time_end" type="text" placeholder="End" />
+          </div>
+        </div>
+        <label>Location</label>
+        <input name="location" type="text" placeholder="Location" />
+        <label>Description</label>
+        <textarea name="description" placeholder=""></textarea>
+        <label>Upload Image</label>
+        <input name="image" type="text" placeholder="Browse..." />
+        
+        <input class="button" type="submit" id="submit-button" value="Submit">
+      </form>
+    </div>
+  </div>
+
+</div>
