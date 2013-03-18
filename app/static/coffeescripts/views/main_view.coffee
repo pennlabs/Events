@@ -8,6 +8,7 @@ define ['static/javascripts/vendor/text!static/templates/main_template.html'],
         'click .card .title'  : 'event'
         'click a.create'    : 'create'
         'click a.user'      : 'user'
+        'click .card .subtitle a'      : 'user'
       index: (e) ->
         e.preventDefault()
         window.router.navigate '', {trigger: true}
