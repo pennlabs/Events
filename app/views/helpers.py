@@ -74,13 +74,9 @@ class BSONAPI(MethodView):
         """
         entity = request.form.to_dict()
         self.collection.insert(entity)
-<<<<<<< HEAD
         #signals that a new event was made
         new_event_signal.send(self, entity=entity, u_id=session['user'])
-        return jsonify(entity)
-=======
         return Response(jsonify(entity), mimetype='text/json')
->>>>>>> 2764be45da3ee1321a4742ba38f95d5e9a0416db
 
 
 def register_api(view, endpoint, url, pk='_id', pk_type='string'):
