@@ -6,6 +6,8 @@ from flask import session, request
 from app import db, app
 from helpers import BSONView, register_api, jsonify
 
+from bson.objectid import ObjectId
+
 
 PASSWORDS_DO_NOT_MATCH = 'Passwords do not match'
 NO_PASSWORD_PROVIDED = 'No password provided'
@@ -48,11 +50,15 @@ def subscriptions(f_id):
     u_id = session.get('user', None)
     if u_id:
         if request.method == 'POST':
-            # TODO Merge the database requests
+            # TODO Merge the database requests (Supposedly no bulk upserts...)
+            o_u_id = ObjectId(u_id)
+            o_f_id = ObjectId(f_id)
             # add f_id to u_id's following
-            db.users.update({'_id': ObjectId(u_id)}, {'$push': {'following': f_id}}, {'upsert': True})
+            db.users.update({'_id': o_u_id}, {'$push': {'following': o_f_id}},
+                            upsert=True)
             # add u_id to f_id's followers
-            db.users.update({'_id': ObjectId(f_id)}, {'$push': {'followers': u_id}}, {'upsert': True})
+            db.users.update({'_id': o_f_id}, {'$push': {'followers': o_u_id}},
+                            upsert=True)
             # TODO Get f_id's events and add them to u_id's event queue
         else:
             # remove f_id from u_id's following

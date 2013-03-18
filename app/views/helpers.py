@@ -1,10 +1,16 @@
 import json
 
-from flask import request
+from flask import request, session
 from flask.views import MethodView
 from bson.objectid import ObjectId
+from blinker import Namespace
 
 from app import app, db
+
+
+my_signals = Namespace()
+#creates a signal to be called when an event is made
+new_event_signal = my_signals.signal('new-event-signal')
 
 
 class BSONEncoder(json.JSONEncoder):
@@ -64,6 +70,8 @@ class BSONView(MethodView):
         """
         entity = request.form.to_dict()
         self.collection.insert(entity)
+        #signals that a new event was made
+        new_event_signal.send(self, entity=entity, u_id=session['user'])
         return jsonify(entity)
 
 

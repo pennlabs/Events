@@ -25,10 +25,11 @@ define ['static/scripts/vendor/text!static/scripts/templates/main_template.html'
       create: (e) ->
         e.preventDefault()
         window.router.navigate 'create', {trigger: true}
+
       event: (e) ->
         e.preventDefault()
         window.router.navigate 'event', {trigger: true}
-        
+
       render: ->
         compiled = _.template template, @model.toJSON()
         @$el.html compiled
