@@ -5,8 +5,8 @@ import fabric
 
 COFFEESCRIPTS_DIR = "app/static/coffeescripts"
 JAVASCRIPTS_DIR = "app/static/javascripts"
-SCSS_DIR = "app/static/styles/scss"
-CSS_DIR = "app/static/styles/css"
+SCSS_DIR = "app/static/scss"
+CSS_DIR = "app/static/css"
 
 
 # TODO: Make some kind of way to kill background processes.
