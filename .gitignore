@@ -5,11 +5,11 @@
 
 build/
 newenv/
-app/static/scripts/*.js
-app/static/scripts/views/*.js
-app/static/scripts/models/*.js
-app/static/styles/css/foundation/
-app/static/styles/css/*.css
+app/static/javascripts/*.js
+app/static/javascripts/views/*.js
+app/static/javascripts/models/*.js
+app/static/css/foundation/
+app/static/css/*.css
 
 config.coffee
 

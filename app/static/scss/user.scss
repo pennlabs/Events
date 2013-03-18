@@ -1,0 +1,69 @@
+@import "_variables";
+
+.view-user {
+  
+  .profile {    
+    margin-top: 30px;
+    margin-bottom: 15px;
+    
+    :last-child {
+      margin-bottom: 0px;
+    }
+    
+    h1, h2, h3, h4, h5, h6 {
+      color: $secondary-color;
+      font-weight: normal;
+    }
+    .title {
+      margin-top: 5px;
+      margin-bottom: 5px;
+    }
+    .subtitle {
+      display:inline-block;
+      margin-bottom: 15px;    
+    }
+    
+    hr {
+      margin: 5px 0px 5px 0px;
+      border: none;
+      border-bottom: $secondary-color $solidBorder;    
+    }
+    
+    .image {
+      padding: 15px;
+      img {
+        width: 100%;
+      }
+    }
+    
+    .actions {    
+      .item {      
+        display: block;
+        border-top: $secondary-color $solidBorder;
+        padding: 10px;
+        
+        &:last-child {
+          border-bottom: $secondary-color $solidBorder;
+        }
+        
+        .icon {
+          margin-right: 5px;
+          color: $secondary-color;
+        }
+        
+      }
+    }
+  }
+
+}
+
+// small screen
+@media only screen and (max-width: 767px) {
+  .view-user {
+    .profile {
+      .info {
+        margin-bottom: 30px;
+      }
+    }
+  }
+}

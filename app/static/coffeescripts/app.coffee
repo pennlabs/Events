@@ -10,6 +10,7 @@ require [
   "static/javascripts/views/login_view"
   "static/javascripts/views/event_view"
   "static/javascripts/views/create_view"
+  "static/javascripts/views/user_view"
   "static/javascripts/config"
   ],
   (
@@ -19,6 +20,7 @@ require [
   LoginView,
   EventView,
   CreateView,
+  UserView,
   Config) ->
     class Router extends Backbone.Router
       initialize: ->
@@ -29,6 +31,7 @@ require [
         'login'     : 'login'
         'event'     : 'event'
         'create'    : 'create'
+        'user'      : 'user'
 
       index: ->
         app = new MainView.view(model: @user)
@@ -56,6 +59,13 @@ require [
 
         create_view = new CreateView.view(model: @user)
         $('#container').html create_view.render().el
+      
+      user: ->
+        app = new MainView.view(model: @user)
+        $('body').html app.render().el
+
+        user_view = new UserView.view(model: @user)
+        $('#container').html user_view.render().el
 
     $ ->
       window.router = new Router()

@@ -7,6 +7,7 @@ define ['static/javascripts/vendor/text!static/templates/main_template.html'],
         'click a.logout'    : 'logout'
         'click .card .title'  : 'event'
         'click a.create'    : 'create'
+        'click a.user'      : 'user'
       index: (e) ->
         e.preventDefault()
         window.router.navigate '', {trigger: true}
@@ -29,6 +30,10 @@ define ['static/javascripts/vendor/text!static/templates/main_template.html'],
       event: (e) ->
         e.preventDefault()
         window.router.navigate 'event', {trigger: true}
+        
+      user: (e) ->
+        e.preventDefault()
+        window.router.navigate 'user', {trigger: true}
 
       render: ->
         compiled = _.template template, @model.toJSON()
