@@ -3,7 +3,7 @@ import json
 
 import bcrypt
 from flask import session, request, g
-from bson.object_id import ObjectId
+from bson.objectid import ObjectId
 
 from app import app
 from app.views.helpers import BSONAPI, register_api, jsonify

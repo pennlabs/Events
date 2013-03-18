@@ -1,5 +1,5 @@
 from __future__ import absolute_import
-from events.views.helpers import BSONAPI, register_api
+from app.views.helpers import BSONAPI, register_api
 
 
 class EventAPI(BSONAPI):

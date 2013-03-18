@@ -3,7 +3,7 @@ import json
 
 from pymongo import MongoClient
 
-from events import app
+from app import app
 
 
 class TestUsersAPI(object):

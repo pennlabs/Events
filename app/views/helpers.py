@@ -6,7 +6,7 @@ from flask import request, Response, g
 from flask.views import MethodView
 from bson.objectid import ObjectId
 
-from events import app
+from app import app
 
 API_PREFIX = '/api/'
 
@@ -45,7 +45,6 @@ class BSONAPI(MethodView):
 
     @property
     def collection(self):
-        print g, dir(g)
         return getattr(g.db, self.collection_name)
 
     def get(self, _id):
@@ -54,7 +53,6 @@ class BSONAPI(MethodView):
 
         If `_id` is `None`, show data about the collection.
         """
-        print g, dir(g)
         if _id is None:
             limit = int(request.args.get('limit', 10))
             offset = int(request.args.get('offset', 0))

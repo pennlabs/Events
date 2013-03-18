@@ -17,4 +17,4 @@ def before_request():
 def teardown_request(exception):
     g._connection.close()
 
-from events.views import auth, general, events, users
+from app.views import auth, general, events, users
