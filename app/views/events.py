@@ -1,9 +1,10 @@
-from helpers import BSONView, register_api
+from __future__ import absolute_import
+from events.views.helpers import BSONAPI, register_api
 
 
-class EventAPI(BSONView):
+class EventAPI(BSONAPI):
     @property
     def collection_name(self):
         return 'events'
 
-register_api(EventAPI, 'event_api', '/events/')
+register_api(EventAPI, 'event_api', 'events')

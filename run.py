@@ -1,3 +1,4 @@
 #!/bin/python
-from app import app
+from events import app
+
 app.run(debug=True)

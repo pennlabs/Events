@@ -1,17 +1,17 @@
+from __future__ import absolute_import
 import json
 
 import bcrypt
-from flask import session, request
+from flask import session, request, g
 
-from app import db
-from helpers import BSONView, register_api, jsonify
+from events.views.helpers import BSONAPI, register_api, jsonify
 
 
 PASSWORDS_DO_NOT_MATCH = 'Passwords do not match'
 NO_PASSWORD_PROVIDED = 'No password provided'
 
 
-class UserAPI(BSONView):
+class UserAPI(BSONAPI):
     @property
     def collection_name(self):
         return 'users'
@@ -28,18 +28,16 @@ class UserAPI(BSONView):
                 del user['password']
                 del user['confirm']
                 # insert returns an ObjectId
-                user_id = str(db.users.insert(user))
+                user_id = str(g.db.users.insert(user))
                 # abstract into pre-serialize user
                 del user['hashed_password']
                 user['logged_in'] = True
                 session['user'] = user_id
                 return jsonify(user)
             else:
-                # password != confirm
                 return json.dumps({'error': PASSWORDS_DO_NOT_MATCH})
         else:
-            # no password was entered
             return json.dumps({'error': NO_PASSWORD_PROVIDED})
 
 
-register_api(UserAPI, 'user_api', '/users/')
+register_api(UserAPI, 'user_api', 'users')

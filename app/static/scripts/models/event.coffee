@@ -6,6 +6,6 @@ define [], ->
 
   class Events extends Backbone.Collection
     model: Event
-    url: '/events'
+    url: '/api/events'
 
   return {model: Event, collection: Events}
