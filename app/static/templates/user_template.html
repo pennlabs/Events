@@ -1,85 +1,32 @@
-<!-- Navigation Bar -->
+<div class="view-user">
 
-<div class="contain-to-grid">
-  <nav class="top-bar">
-    <ul class="title-area">
-      <!-- Title Area -->
-      <li class="name">
-        <h1>
-          <a class="home" href="#">
-            events@penn
-          </a>
-        </h1>
-      </li>
-      <li class="toggle-topbar menu-icon"><a href="#"><span>menu</span></a></li>
-    </ul>
- 
-    <section class="top-bar-section">
-      <!-- Right Nav Section -->
-      <ul class="right">
-        <li><a class="home" href="#">Home</a></li>
-        <li><a href="#">FAQ</a></li>
-        <li><a href="#">Feedback</a></li>
-        <li><a href="#">Contact</a></li>
-        <% if (logged_in) { %>
-        <li class="has-dropdown"><a href="#"><%= name %></a>
-          <ul class="dropdown">
-            <li><a href="#" class="user">Profile</a></li>
-            <li><a href="#" class="create">Create Event</a></li>
-            <li class="divider"></li>
-            <li><a href="#" class="logout">Logout</a><li>            
-          </ul>
-        </li>        
-        <% } else { %>
-        <li><a href="#" class='login'>Login</a><li>
-        <% } %>
-      </ul>
-    </section>
-  </nav>
-</div>
-
-<div id="container">  
+    
+  <!-- Profile -->
   
-<div class="view-index">
-
-<div class="row">
-  
-  <!-- Sidebar Filters -->
-  
-  <div class="large-3 columns sidebar">
-    <div class="large-12 columns sidebar-content">
-      <form>
-        <h5>Groups</h5>
-        <input type="text" placeholder="Groups" />
-        <div>
-          <span class="radius label">upenn</span>
-          <span class="radius label">spec</span>
-          <span class="radius label">philo</span>
-          <span class="radius label">dp</span>
-          <span class="radius label">starred</span>
-        </div>
-        <hr/>
-        <h5>Type</h5>
-        <label for="checkbox1"><input type="checkbox" id="checkbox1">Lecture</label>
-        <label for="checkbox2"><input type="checkbox" id="checkbox2">Recitation</label>
-        <label for="checkbox3"><input type="checkbox" id="checkbox3">Studio</label>
-        <hr/>
-        <h5>Tags</h5>
-        <label for="checkbox4"><input type="checkbox" id="checkbox4">Recommended</label>
-        <label for="checkbox5"><input type="checkbox" id="checkbox5">18 & Above</label>
-        <label for="checkbox6"><input type="checkbox" id="checkbox6">University</label>
-      </form>
+  <div class="profile row">
+    <div class="large-9 columns info">
+      <h2 class="title">M.E.A.T. Club</h2>
+      <span class="subtitle">Men Eating Animals Together</span>
+      <hr/>
+      <p>Bacon ipsum dolor sit amet chicken sirloin drumstick shankle fatback meatball cow jowl tongue rump flank doner. Frankfurter ground round chicken, shoulder fatback pork belly jowl pig bacon. Chuck swine short loin kielbasa tri-tip tail pastrami hamburger, ham chicken corned beef boudin capicola. Pastrami doner sirloin, salami kielbasa tri-tip drumstick pancetta.</p>        
     </div>
-    <div class="large-12 columns sidebar-fold">
-      <span class="arrow"></span>
-      <h5>Filters</h5>
+    <div class="large-3 columns actions">
+      <a class="item" href="#">
+        <span class="icon icon-mail-2"></span>Subscribe
+      </a>
+      <a class="item" href="#">
+        <span class="icon icon-facebook-2"></span>Facebook Page
+      </a>
+      <a class="item" href="#">
+        <span class="icon icon-calendar-2"></span>Google Calendar
+      </a>
     </div>
   </div>
-  
   
   <!-- Main Feed -->
   
-  <div class="large-9 columns feed">
+  <div class="row">
+  <div class="large-12 columns feed">
     
     <div class="row">
       <div class="large-12 columns date">
@@ -142,8 +89,8 @@
     </div></div></div>
     
   </div>
-</div>
-
+  </div>
+  
 </div>
 
 </div>
