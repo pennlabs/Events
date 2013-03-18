@@ -1,0 +1,84 @@
+@import "_variables";
+
+.cal iframe {
+  margin-top: 30px;
+  border: 0px;
+  width: 100%;
+  height: 400px;
+}
+
+.feed .date {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.card {
+  background-color: white;
+  float: left;
+  margin-bottom: 15px;
+  
+  h1, h2, h3, h4, h5, h6 {
+    color: $primary-color;
+    font-weight: normal;
+  }
+    
+  :last-child {
+    margin-bottom: 0px;
+  }
+  
+  .image {
+    padding: 15px;
+    img {
+      width: 100%;
+    }
+  }
+  .info {
+    padding: 15px;
+    padding-left: 0px;
+  }
+  
+  .title {
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+  .subtitle {
+    display:inline-block;
+    margin-bottom: 15px;    
+  }
+  
+  .detail-row {
+    padding-bottom: 10px;
+    display: inline-block;
+    width: 100%;
+        
+    .item {
+      border-top: $solidBorder $lightGray;
+      border-bottom: $solidBorder $lightGray;
+      padding: 10px;
+      
+      .icon {
+        margin-right: 5px;
+        color: #999999;
+      }
+    }
+    
+    :last-child {
+      border-top: none;
+    }
+  }
+}
+
+// small screen
+@media only screen and (max-width: 767px) {
+  .card {
+    .image {
+      display: none;
+    }
+    .info {
+      padding: 15px;
+    }
+    .item:not(:first-child) {
+      border-top: none;
+    }
+  }
+}
