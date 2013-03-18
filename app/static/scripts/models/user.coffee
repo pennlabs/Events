@@ -7,7 +7,11 @@ define [], ->
       logged_in: false
 
     logout: ->
-      @url = 'users/logout'
+      @url = 'logout'
       @save(logged_in: false)
 
-  return {model: User}
+  class Users extends Backbone.Collection
+    model: Users
+    url: '/api/users'
+
+  return {model: User, collection: Users}
