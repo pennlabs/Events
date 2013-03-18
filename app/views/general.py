@@ -1,24 +1,21 @@
-from flask import render_template, session
-from bson import ObjectId
+from __future__ import absolute_import
 
-from app import app, db
-from helpers import jsonify
+from flask import render_template, session, g
+from bson.objectid import ObjectId
 
-
-def get_current_user():
-    """Get the current user."""
-    user_id = session.get('user', None)
-    if user_id:
-        return db.users.find_one({'_id': ObjectId(user_id)})
-    else:
-        return {}
+from app import app
+from app.views.helpers import jsonify
 
 
 @app.route('/login', methods=['GET'])
 @app.route('/create', methods=['GET'])
 @app.route('/')
 def index():
-    user = get_current_user()
+    user_id = session.get('user', None)
+    if user_id:
+        user = g.db.users.find_one({'_id': ObjectId(user_id)})
+    else:
+        user = {}
     if user:
         del user['hashed_password']
         user['logged_in'] = True

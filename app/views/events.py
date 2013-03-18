@@ -1,14 +1,16 @@
-from helpers import BSONView, register_api, new_event_signal
+from __future__ import absolute_import
 from app import db
 from bson.objectid import ObjectId
+from app.views.helpers import BSONAPI, register_api, new_event_signal
 
 
-class EventAPI(BSONView):
+class EventAPI(BSONAPI):
     @property
     def collection_name(self):
         return 'events'
 
 register_api(EventAPI, 'event_api', '/events/')
+
 
 @new_event_signal.connect
 def new_event_triggered(sender=None, **kwargs):

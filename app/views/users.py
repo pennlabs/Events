@@ -1,10 +1,12 @@
+from __future__ import absolute_import
 import json
 
 import bcrypt
-from flask import session, request
+from flask import session, request, g
+from bson.objectid import ObjectId
 
-from app import db, app
-from helpers import BSONView, register_api, jsonify
+from app import app
+from app.views.helpers import BSONAPI, register_api, jsonify
 
 from bson.objectid import ObjectId
 
@@ -14,7 +16,7 @@ NO_PASSWORD_PROVIDED = 'No password provided'
 UNAUTHORIZED_REQUEST = 'User is not logged in'
 
 
-class UserAPI(BSONView):
+class UserAPI(BSONAPI):
     @property
     def collection_name(self):
         return 'users'
@@ -31,21 +33,22 @@ class UserAPI(BSONView):
                 del user['password']
                 del user['confirm']
                 # insert returns an ObjectId
-                user_id = str(db.users.insert(user))
+                user_id = str(g.db.users.insert(user))
                 # abstract into pre-serialize user
                 del user['hashed_password']
                 user['logged_in'] = True
                 session['user'] = user_id
                 return jsonify(user)
             else:
-                # password != confirm
                 return json.dumps({'error': PASSWORDS_DO_NOT_MATCH})
         else:
-            # no password was entered
             return json.dumps({'error': NO_PASSWORD_PROVIDED})
 
 
-@app.route('/users/<f_id>/subscriptions', methods=['POST', 'DELETE'])
+register_api(UserAPI, 'user_api', 'users')
+
+
+@app.route('/api/users/<f_id>/subscriptions', methods=['POST', 'DELETE'])
 def subscriptions(f_id):
     u_id = session.get('user', None)
     if u_id:
@@ -54,11 +57,13 @@ def subscriptions(f_id):
             o_u_id = ObjectId(u_id)
             o_f_id = ObjectId(f_id)
             # add f_id to u_id's following
-            db.users.update({'_id': o_u_id}, {'$push': {'following': o_f_id}},
-                            upsert=True)
+            g.db.users.update({'_id': o_u_id},
+                              {'$push': {'following': o_f_id}},
+                              upsert=True)
             # add u_id to f_id's followers
-            db.users.update({'_id': o_f_id}, {'$push': {'followers': o_u_id}},
-                            upsert=True)
+            g.db.users.update({'_id': o_f_id},
+                              {'$push': {'followers': o_u_id}},
+                              upsert=True)
             # TODO Get f_id's events and add them to u_id's event queue
         else:
             # remove f_id from u_id's following
@@ -66,6 +71,3 @@ def subscriptions(f_id):
             pass
     else:
         return json.dumps({'error': UNAUTHORIZED_REQUEST})
-
-
-register_api(UserAPI, 'user_api', '/users/')
