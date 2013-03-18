@@ -1,13 +1,24 @@
 from __future__ import absolute_import
-from flask import g
+from flask import g, request, session
 from bson.objectid import ObjectId
-from app.views.helpers import BSONAPI, register_api, new_event_signal
+from app.views.helpers import BSONAPI, register_api, signals, jsonify
+
+
+#creates a signal to be called when an event is made
+new_event_signal = signals.signal('new-event-signal')
 
 
 class EventAPI(BSONAPI):
     @property
     def collection_name(self):
         return 'events'
+
+    def post(self):
+        entity = request.form.to_dict()
+        self.collection.insert(entity)
+        #signals that a new event was made
+        new_event_signal.send(self, entity=entity, u_id=session['user'])
+        return jsonify(entity)
 
 register_api(EventAPI, 'event_api', 'events')
 
