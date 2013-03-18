@@ -1,4 +1,4 @@
-define ['static/scripts/vendor/text!static/scripts/templates/login_template.html'],
+define ['static/javascripts/vendor/text!static/templates/login_template.html'],
   (template) ->
     class LoginView extends Backbone.View
       events:
@@ -27,7 +27,7 @@ define ['static/scripts/vendor/text!static/scripts/templates/login_template.html
           data = $.parseJSON data
           if data._id
             @model.set data
-            window.router.navigate '', {trigger: true}  
+            window.router.navigate '', {trigger: true}
       render: ->
         @$el.html template
         return @

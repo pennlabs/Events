@@ -3,7 +3,8 @@ import subprocess
 import fabric
 
 
-SCRIPTS_DIR = "app/static/scripts"
+COFFEESCRIPTS_DIR = "app/static/coffeescripts"
+JAVASCRIPTS_DIR = "app/static/javascripts"
 SCSS_DIR = "app/static/styles/scss"
 CSS_DIR = "app/static/styles/css"
 
@@ -22,7 +23,7 @@ def _local(command, capture=False, shell=False, bg=False):
 
 def make_static(capture=True, bg=True):
     """Build static files and update on change."""
-    _local("coffee -cw %s" % SCRIPTS_DIR, capture=capture, bg=bg)
+    _local("coffee -o %s -cw %s" % (JAVASCRIPTS_DIR, COFFEESCRIPTS_DIR), capture=capture, bg=bg)
     _local("sass -w %s:%s" % (SCSS_DIR, CSS_DIR), capture=capture, bg=bg)
 
 

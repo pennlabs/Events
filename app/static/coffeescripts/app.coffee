@@ -4,13 +4,13 @@ requirejs.onError = (err) ->
   throw err
 
 require [
-  'static/scripts/ui',
-  'static/scripts/models/user',
-  'static/scripts/views/main_view',
-  'static/scripts/views/login_view',
-  'static/scripts/views/event_view',
-  'static/scripts/views/create_view',
-  'static/scripts/config'
+  "static/javascripts/ui"
+  "static/javascripts/models/user"
+  "static/javascripts/views/main_view"
+  "static/javascripts/views/login_view"
+  "static/javascripts/views/event_view"
+  "static/javascripts/views/create_view"
+  "static/javascripts/config"
   ],
   (
   UI,
