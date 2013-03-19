@@ -35,10 +35,19 @@ class TestUsersAPI(object):
 
     def subscribe(self, f_id):
         return self.app.post(self.ENDPOINT + f_id + '/subscriptions',
-            follow_redirects=True)
+                             follow_redirects=True)
+
+    def create_event(self, name, description):
+        return self.app.post('/api/events/', data=dict(
+            name=name,
+            description=description
+        ), follow_redirects=True)
 
     def logout(self):
         return self.app.get('/logout', follow_redirects=True)
+
+    def get_user(self, _id):
+        return self.app.get(self.ENDPOINT + _id)
 
     @property
     def users(self):
@@ -59,10 +68,31 @@ class TestUsersAPI(object):
         assert user['name'] == 'user1', user
 
     def test_subscriptions(self):
-        user1 = self.create("user1", "pw1", "email1")
+        self.create("user1", "pw1", "email1")
         user2 = self.create("user2", "pw2", "email2")
         u2 = json.loads(user2.data)
-        rv = self.login("email1", "pw1")
+        self.login("email1", "pw1")
         r = self.subscribe(u2["_id"])
         sub = json.loads(r.data)
         assert "success" in sub
+
+    def test_event_create(self):
+        user1 = self.create("user1", "pw1", "email1")
+        u1 = json.loads(user1.data)
+        user2 = self.create("user2", "pw2", "email2")
+        u2 = json.loads(user2.data)
+        # log first user in
+        self.login("email1", "pw1")
+        # have the first user subscribe to the second
+        self.subscribe(u2["_id"])
+        # log the first user out
+        self.logout()
+        # log in as the second user
+        self.login("email2", "pw2")
+        # create an event
+        rv = self.create_event("event1", "best event ever")
+        e = json.loads(rv.data)
+        assert e["name"] == "event1", e
+        new_user1 = self.get_user(u1["_id"])
+        new_u1 = json.loads(new_user1.data)
+        assert len(new_u1["event_queue"]) == 1
