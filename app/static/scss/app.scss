@@ -17,7 +17,6 @@ input[type="time"],
 input[type="url"],
 textarea {
   font-family: $textFont;
-  font-size: 16px;
 }
 
 ol {
@@ -38,11 +37,52 @@ h1, h2, h3, h4, h5, h6 {
 
 .top-bar {
   h1 {
-    font-family: "Lato", sans-serif;
+    font-family: $navFont;
   }
   
   .top-bar-section .dropdown li.title h5 {
-    font-family: "Lato", sans-serif;
+    font-family: $navFont;
     font-size: 14px;
+  }
+  
+  .icon {
+    margin-right: 5px;
+  }
+}
+
+#footer {
+  font-size: 0.875em;
+  color: white;
+  background-color: $primary-color;
+  text-align: center;
+  
+  margin-top: 30px;
+  padding-top: 15px;
+  min-height: 150px;
+  
+  #footer-nav {
+    
+    a, a:hover {
+      color: white;
+    }
+    
+    ul {
+      margin: 0px;
+      
+      li {
+        font-weight: bold;
+        display: inline;
+        margin-right: 10px;
+      }
+      
+      li:before {
+        content: "⋅";
+        color: darken($primary-color, 20%);
+        margin-right: 10px;
+      }
+      li:first-child:before {
+        content: "";
+      }
+    }
   }
 }
