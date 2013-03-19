@@ -31,5 +31,10 @@ def new_event_triggered(sender=None, **kwargs):
     """
     u_id = ObjectId(kwargs['u_id'])
     e_id = ObjectId(kwargs['entity']['_id'])
-    #insert the event into the creator's event list
+    # insert the event into the creator's event list
     g.db.users.update({'_id': u_id}, {'$push': {'events': e_id}}, upsert=True)
+    # insert e_id into followers' event queues
+    # TODO: write tests to ensure that all followers' event queues are updated
+    g.db.users.update({'following': u_id},
+                      {'$push': {'event_queue': e_id}},
+                      upsert=True, multi=True)
