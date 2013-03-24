@@ -6,6 +6,7 @@ requirejs.onError = (err) ->
 require [
   "static/javascripts/ui"
   "static/javascripts/models/user"
+  "static/javascripts/models/event"
   "static/javascripts/views/main_view"
   "static/javascripts/views/login_view"
   "static/javascripts/views/event_view"
@@ -16,6 +17,7 @@ require [
   (
   UI,
   User,
+  Event,
   MainView,
   LoginView,
   EventView,
@@ -25,7 +27,7 @@ require [
     class Router extends Backbone.Router
       initialize: ->
         @user = new User.model(Data.user)
-        @events = new Events.collection()
+        @events = new Event.collection()
 
       routes:
         ''          : 'index'
