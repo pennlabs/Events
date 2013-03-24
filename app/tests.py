@@ -96,3 +96,6 @@ class TestUsersAPI(object):
         new_user1 = self.get_user(u1["_id"])
         new_u1 = json.loads(new_user1.data)
         assert len(new_u1["event_queue"]) == 1
+        new_user2 = self.get_user(u2["_id"])
+        new_u2 = json.loads(new_user2.data)
+        assert len(new_u2["events"]) == 1
