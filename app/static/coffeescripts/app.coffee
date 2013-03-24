@@ -25,6 +25,7 @@ require [
     class Router extends Backbone.Router
       initialize: ->
         @user = new User.model(Data.user)
+        @events = new Events.collection()
 
       routes:
         ''          : 'index'
