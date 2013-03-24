@@ -14,3 +14,6 @@ sass -w app/static/stylesheets &
 mongod &
 python run.py &
 ```
+# New Feature
+
+Be able to "follow" specific events without following the creator of those events. As in, adding events to your own feed.
