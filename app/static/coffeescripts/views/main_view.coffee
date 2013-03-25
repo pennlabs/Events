@@ -2,13 +2,13 @@ define ['static/javascripts/vendor/text!static/templates/main_template.html'],
   (template) ->
     class MainView extends Backbone.View
       events:
-        'click a.home'      : 'index'
-        'click a.login'     : 'login'
-        'click a.logout'    : 'logout'
-        'click .card .title'  : 'event'
-        'click a.create'    : 'create'
-        'click a.user'      : 'user'
-        'click .card .subtitle a'      : 'user'
+        'click a.home'            : 'index'
+        'click a.login'           : 'login'
+        'click a.logout'          : 'logout'
+        'click .card .title'      : 'event'
+        'click a.create'          : 'create'
+        'click a.user'            : 'user'
+        'click .card .subtitle a' : 'user'
       index: (e) ->
         e.preventDefault()
         window.router.navigate '', {trigger: true}
@@ -34,7 +34,7 @@ define ['static/javascripts/vendor/text!static/templates/main_template.html'],
         
       user: (e) ->
         e.preventDefault()
-        window.router.navigate 'user', {trigger: true}
+        window.router.navigate "user/#{@model.get("_id")}", {trigger: true}
 
       render: ->
         compiled = _.template template, @model.toJSON()

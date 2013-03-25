@@ -6,22 +6,21 @@
           <img src="http://placehold.it/240x240&amp;text=img">
         </div>
         <div class="large-9 columns info">
-          <h4 class="title"><a href="#">Semi-Annual Pastrami Feast</a></h4>
-          <span class="subtitle">by <a href="#">M.E.A.T. Club</a></span>
+          <h4 class="title"><a href="#"><%= name %></a></h4>
+          <span class="subtitle">by <a href="#">M.E.A.T Club</a></span>
 
           <div class="detail-row">
             <div class="large-6 columns item">
-              <span class="icon icon-calendar"></span>Tuesday, January 29
+              <span class="icon icon-calendar"></span><%= date %>
             </div>
             <div class="large-6 columns item">
-              <span class="icon icon-clock"></span>8:00 - 9:00pm  
+              <span class="icon icon-clock"></span><%= time_start %> to <%= time_end %>
             </div>
             <div class="large-12 columns item">
-              <span class="icon icon-location"></span><a href="http://maps.google.com/?q=Kings Court English House"  target="_blank">Kings Court English House</a>
+              <span class="icon icon-location"></span><a href="http://maps.google.com/?q=Kings Court English House"  target="_blank"><%= location %></a>
             </div>
           </div>
-
-          <p>Bacon ipsum dolor sit amet nulla ham qui sint exercitation eiusmod commodo, chuck duis velit. Aute in reprehenderit, dolore aliqua non est magna in labore pig pork biltong.</p>
+          <p><%= description %></p>
         </div>
       </div>
     </div>
