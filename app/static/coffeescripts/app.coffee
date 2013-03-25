@@ -30,7 +30,6 @@ require [
       routes:
         ''                   : 'index'
         'login'              : 'login'
-        'event'              : 'event'
         'create'             : 'create'
         'user/:user_id'      : 'show_user'
 
@@ -44,15 +43,6 @@ require [
 
         login_view = new LoginView.view(model: @user)
         $('#container').html login_view.render().el
-
-      event: ->
-        app = new MainView.view(model: @user)
-        $('body').html app.render().el
-
-        @event = null
-
-        view = new EventView.view()
-        $('#container').html view.render().el
 
       create: ->
         app = new MainView.view(model: @user)
