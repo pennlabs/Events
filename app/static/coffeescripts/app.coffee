@@ -53,14 +53,14 @@ require [
 
         view = new EventView.view()
         $('#container').html view.render().el
-        
+
       create: ->
         app = new MainView.view(model: @user)
         $('body').html app.render().el
 
         create_view = new CreateView.view(model: @user)
         $('#container').html create_view.render().el
-      
+
       fetch_events: (user) ->
         event_ids = user.get("events")
         events = []
@@ -74,15 +74,15 @@ require [
             events.push event
         $.ajax(
           url: @events.url
-          data: {ids: missing_event_ids}
+          data: {'ids': missing_event_ids}
         ).done (new_events) =>
           @events.add new_events
           events = new Event.collection(events.concat new_events)
           console.log events
           events_view = new EventsView.view(collection: events)
           $('#container').html events_view.render().el
-          
-            
+
+
       show_user: (user_id) ->
         console.log(user_id)
         user = if @user.id == user_id then @user else @users.get(user_id)
@@ -104,6 +104,6 @@ require [
       window.router = new Router()
       # Route initial URL
       Backbone.history.start(pushState: true, root: Config.ROOT)
-      
+
       $(document).foundation()
       UI.initUI()
