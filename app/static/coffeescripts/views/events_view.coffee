@@ -1,4 +1,4 @@
-define ['static/javascripts/views/event_view'],
+define ['/static/javascripts/views/event_view.js'],
   (EventView) ->
     class EventsView extends Backbone.View
       render: ->

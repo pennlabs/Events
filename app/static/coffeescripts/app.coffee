@@ -1,14 +1,14 @@
 require [
-  "static/javascripts/ui"
-  "static/javascripts/models/user"
-  "static/javascripts/models/event"
-  "static/javascripts/views/main_view"
-  "static/javascripts/views/login_view"
-  "static/javascripts/views/event_view"
-  "static/javascripts/views/events_view"
-  "static/javascripts/views/create_view"
-  "static/javascripts/views/user_view"
-  "static/javascripts/config"
+  "/static/javascripts/ui.js"
+  "/static/javascripts/models/user.js"
+  "/static/javascripts/models/event.js"
+  "/static/javascripts/views/main_view.js"
+  "/static/javascripts/views/login_view.js"
+  "/static/javascripts/views/event_view.js"
+  "/static/javascripts/views/events_view.js"
+  "/static/javascripts/views/create_view.js"
+  "/static/javascripts/views/user_view.js"
+  "/static/javascripts/config.js"
   ],
   (
   UI,
@@ -61,7 +61,7 @@ require [
         create_view = new CreateView.view(model: @user)
         $('#container').html create_view.render().el
 
-      fetch_events: (user) ->
+      fetch_events: (user) =>
         event_ids = user.get("events")
         events = []
         missing_event_ids = []

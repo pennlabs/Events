@@ -1,4 +1,4 @@
-define ['static/javascripts/vendor/text!static/templates/login_template.html'],
+define ['/static/javascripts/vendor/text.js!/static/templates/login_template.html'],
   (template) ->
     class LoginView extends Backbone.View
       events:

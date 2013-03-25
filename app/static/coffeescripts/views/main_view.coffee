@@ -1,4 +1,4 @@
-define ['static/javascripts/vendor/text!static/templates/main_template.html'],
+define ['/static/javascripts/vendor/text.js!/static/templates/main_template.html'],
   (template) ->
     class MainView extends Backbone.View
       events:
@@ -31,7 +31,7 @@ define ['static/javascripts/vendor/text!static/templates/main_template.html'],
       event: (e) ->
         e.preventDefault()
         window.router.navigate 'event', {trigger: true}
-        
+
       user: (e) ->
         e.preventDefault()
         window.router.navigate "user/#{@model.get("_id")}", {trigger: true}

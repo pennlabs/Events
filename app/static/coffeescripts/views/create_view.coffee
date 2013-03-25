@@ -1,4 +1,4 @@
-define ['static/javascripts/vendor/text!static/templates/create_template.html'],
+define ['/static/javascripts/vendor/text.js!/static/templates/create_template.html'],
   (template) ->
     class CreateView extends Backbone.View
       events:

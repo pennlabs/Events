@@ -9,8 +9,9 @@ from app.views.helpers import jsonify
 
 @app.route('/login', methods=['GET'])
 @app.route('/create', methods=['GET'])
+@app.route('/user/<user>', methods=['GET'])
 @app.route('/')
-def index():
+def index(user=None):
     user_id = session.get('user', None)
     if user_id:
         user = g.db.users.find_one({'_id': ObjectId(user_id)})

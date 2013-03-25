@@ -1,4 +1,4 @@
-define ['static/javascripts/vendor/text!static/templates/event_template.html'],
+define ['/static/javascripts/vendor/text.js!/static/templates/event_template.html'],
   (template) ->
     class EventView extends Backbone.View
       render: ->
