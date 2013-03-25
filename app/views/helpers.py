@@ -58,13 +58,14 @@ class BSONAPI(MethodView):
         If `_id` is `None`, show data about the collection.
         """
         if _id is None:
-            ids = request.args.get('ids', None)
-            if ids:
-                rv = list(self.collection.find({"_id": {"$in": ids}}))
-            else:
+            ids = request.args.get('ids[]', None)
+            print ids
+            if ids is None:
                 limit = int(request.args.get('limit', 10))
                 offset = int(request.args.get('offset', 0))
                 rv = list(self.collection.find(skip=offset, limit=limit))
+            else:
+                rv = list(self.collection.find({"_id": {"$in": ids}}))
         else:
             rv = self.collection.find_one({"_id": ObjectId(_id)})
         return Response(jsonify(rv), mimetype='text/json')
