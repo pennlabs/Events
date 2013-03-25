@@ -78,15 +78,13 @@ require [
           # fetch current user's events
           user = new User.model("_id": user_id)
           @users.add user
+          # render_user and then render_events
           user.fetch(success: @fetch_events)
         else
           @fetch_events(user)
 
         app = new MainView.view(model: @user)
         $('body').html app.render().el
-
-        # user_view = new UserView.view(model: @user)
-        # $('#container').html user_view.render().el
 
     $ ->
       window.router = new Router()
