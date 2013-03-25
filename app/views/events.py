@@ -1,13 +1,19 @@
 from __future__ import absolute_import
 from flask import g, request, session
+from blinker import Namespace
 from bson.objectid import ObjectId
-from app.views.helpers import BSONAPI, register_api, signals, jsonify
+from conmongo.views import BSONAPI
 
+from app import app
+
+
+signals = Namespace()
 
 #creates a signal to be called when an event is made
 new_event_signal = signals.signal('new-event-signal')
 
 
+@app.resource('/api/events/')
 class EventAPI(BSONAPI):
     @property
     def collection_name(self):
@@ -18,9 +24,7 @@ class EventAPI(BSONAPI):
         self.collection.insert(entity)
         #signals that a new event was made
         new_event_signal.send(self, entity=entity, u_id=session['user'])
-        return jsonify(entity)
-
-register_api(EventAPI, 'event_api', 'events')
+        return entity
 
 
 @new_event_signal.connect

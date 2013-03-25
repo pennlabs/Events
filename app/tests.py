@@ -52,10 +52,10 @@ class TestUsersAPI(object):
     @property
     def users(self):
         rv = self.app.get(self.ENDPOINT)
-        return json.loads(rv.data)
+        return json.loads(rv.data)['results']
 
     def test_empty(self):
-        assert len(self.users) == 0, len(self.users)
+        assert len(self.users) == 0, self.users
 
     def test_create(self):
         self.create("user1", "pw1", 'email1')

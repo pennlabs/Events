@@ -2,10 +2,10 @@ from __future__ import absolute_import
 import json
 
 import bcrypt
+from conmongo.json import jsonify
 from flask import session, request, g
 
 from app import app
-from app.views.helpers import jsonify
 
 
 INCORRECT_EMAIL_PASSWORD = 'Incorrect email/password'
