@@ -1,8 +1,3 @@
-requirejs.onError = (err) ->
-  if err.requireType == 'scripterror'
-    alert "please copy static/scripts/config.coffee.default!"
-  throw err
-
 require [
   "static/javascripts/ui"
   "static/javascripts/models/user"
@@ -10,6 +5,7 @@ require [
   "static/javascripts/views/main_view"
   "static/javascripts/views/login_view"
   "static/javascripts/views/event_view"
+  "static/javascripts/views/events_view"
   "static/javascripts/views/create_view"
   "static/javascripts/views/user_view"
   "static/javascripts/config"
@@ -21,6 +17,7 @@ require [
   MainView,
   LoginView,
   EventView,
+  EventsView,
   CreateView,
   UserView,
   Config) ->
@@ -64,24 +61,44 @@ require [
         create_view = new CreateView.view(model: @user)
         $('#container').html create_view.render().el
       
+      fetch_events: (user) ->
+        event_ids = user.get("events")
+        events = []
+        missing_event_ids = []
+        for event_id in event_ids
+          event = @events.get(event_id)
+          # add event id to missing event ids
+          if not event?
+            missing_event_ids.push event_id
+          else
+            events.push event
+        $.ajax(
+          url: @events.url
+          data: {ids: missing_event_ids}
+        ).done (new_events) =>
+          @events.add new_events
+          events = new Event.collection(events.concat new_events)
+          console.log events
+          events_view = new EventsView.view(collection: events)
+          $('#container').html events_view.render().el
+          
+            
       show_user: (user_id) ->
         console.log(user_id)
         user = if @user.id == user_id then @user else @users.get(user_id)
-        show_events = (user) ->
-          console.log user
         if not user?
           # fetch current user's events
           user = new User.model("_id": user_id)
           @users.add user
-          user.fetch(success: show_events)
+          user.fetch(success: @fetch_events)
         else
-          show_events(user)
+          @fetch_events(user)
 
         app = new MainView.view(model: @user)
         $('body').html app.render().el
 
-        user_view = new UserView.view(model: @user)
-        $('#container').html user_view.render().el
+        # user_view = new UserView.view(model: @user)
+        # $('#container').html user_view.render().el
 
     $ ->
       window.router = new Router()
