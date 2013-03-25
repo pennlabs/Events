@@ -49,6 +49,11 @@ class TestUsersAPI(object):
     def get_user(self, _id):
         return self.app.get(self.ENDPOINT + _id)
 
+    def get_events(self, ids):
+        return self.app.get('/api/events/', data=dict(
+            ids=ids
+        ), follow_redirects=True)
+
     @property
     def users(self):
         rv = self.app.get(self.ENDPOINT)
@@ -99,3 +104,18 @@ class TestUsersAPI(object):
         new_user2 = self.get_user(u2["_id"])
         new_u2 = json.loads(new_user2.data)
         assert len(new_u2["events"]) == 1
+
+    def test_get_events(self):
+        self.create("user1", "pw1", "email1")
+        self.login("email1", "pw1")
+        # create an event
+        e1 = self.create_event("event1", "best event ever")
+        event1 = json.loads(e1.data)
+        e2 = self.create_event("event2", "second best")
+        event2 = json.loads(e2.data)
+        e3 = self.create_event("event3", "third best")
+        event3 = json.loads(e3.data)
+        ids = [event1["_id"], event2["_id"], event3["_id"]]
+        rv = self.get_events(ids)
+        rv = json.loads(rv.data)
+        assert len(rv) == 3
