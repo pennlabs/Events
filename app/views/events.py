@@ -14,6 +14,7 @@ class EventAPI(BSONAPI):
         return 'events'
 
     def post(self):
+        print "posting event works"
         entity = request.form.to_dict()
         self.collection.insert(entity)
         #signals that a new event was made
@@ -29,6 +30,7 @@ def new_event_triggered(sender=None, **kwargs):
     On the signalling of a new event, add the event to its creator's
     event list.
     """
+    print "event triggerd"
     u_id = ObjectId(kwargs['u_id'])
     e_id = ObjectId(kwargs['entity']['_id'])
     # insert the event into the creator's event list
