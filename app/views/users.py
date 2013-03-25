@@ -4,11 +4,9 @@ import json
 import bcrypt
 from flask import session, request, g
 from bson.objectid import ObjectId
+from conmongo.views import BSONAPI
 
 from app import app
-from app.views.helpers import BSONAPI, register_api, jsonify
-
-from bson.objectid import ObjectId
 
 
 PASSWORDS_DO_NOT_MATCH = 'Passwords do not match'
@@ -17,6 +15,7 @@ UNAUTHORIZED_REQUEST = 'User is not logged in'
 SUBSCRIBED_SUCCESSFULLY = 'User has subscribed successfully'
 
 
+@app.resource('/api/users/')
 class UserAPI(BSONAPI):
     @property
     def collection_name(self):
@@ -39,14 +38,11 @@ class UserAPI(BSONAPI):
                 del user['hashed_password']
                 user['logged_in'] = True
                 session['user'] = user_id
-                return jsonify(user)
+                return user
             else:
-                return json.dumps({'error': PASSWORDS_DO_NOT_MATCH})
+                return {'error': PASSWORDS_DO_NOT_MATCH}
         else:
-            return json.dumps({'error': NO_PASSWORD_PROVIDED})
-
-
-register_api(UserAPI, 'user_api', 'users')
+            return {'error': NO_PASSWORD_PROVIDED}
 
 
 @app.route('/api/users/<f_id>/subscriptions', methods=['POST', 'DELETE'])
