@@ -15,10 +15,10 @@ define ['/static/javascripts/vendor/text.js!/static/templates/create_template.ht
         $create = $('#create-form')
         @submit_form $create, (event) =>
           event = $.parseJSON event
-          window.router.events.add event
-          events = _.clone window.router.user.get('events')
+          @collection.add event
+          events = _.clone @model.get('events')
           events.push event._id
-          window.router.user.set("events", events)
+          @model.set("events", events)
           window.router.navigate '', {trigger: true}
       render: ->
         compiled = _.template template, {}

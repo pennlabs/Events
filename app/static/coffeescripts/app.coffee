@@ -48,7 +48,7 @@ require [
         app = new MainView.view(model: @user)
         $('body').html app.render().el
 
-        create_view = new CreateView.view(model: @user)
+        create_view = new CreateView.view(collection: @events, model: @user)
         $('#container').html create_view.render().el
 
       fetch_events: (user) =>
