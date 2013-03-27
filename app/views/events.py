@@ -14,10 +14,10 @@ class EventAPI(BSONAPI):
         return 'events'
 
     def post(self):
-        print "posting event works"
-        entity = request.form.to_dict()
+        # it might either be in form data or request data
+        entity = request.form.to_dict() or request.json
         self.collection.insert(entity)
-        #signals that a new event was made
+        # signals that a new event was made
         new_event_signal.send(self, entity=entity, u_id=session['user'])
         return jsonify(entity)
 
