@@ -7,6 +7,7 @@ from app import app
 from app.views.helpers import jsonify
 
 
+@app.route('/all', methods=['GET'])
 @app.route('/login', methods=['GET'])
 @app.route('/create', methods=['GET'])
 @app.route('/user/<user>', methods=['GET'])

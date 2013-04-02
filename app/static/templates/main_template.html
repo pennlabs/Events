@@ -26,7 +26,7 @@
         <% if (logged_in) { %>
         
         <li><a href="#" class="create"><span class="icon icon-plus"></span>Create Event</a></li>
-        <li class="has-dropdown"><a class="user" href="#"><%= name %></a>
+        <li class="has-dropdown"><a class="user" href="/user/<%= _id %>"><%= name %></a>
           <ul class="dropdown">
             <li><a href="#">dummy</a></li>
             <li class="divider"></li>
@@ -41,6 +41,8 @@
     </section>
   </nav>
 </div>
+
+<div id='user'></div>
 
 <div id="container">  
   

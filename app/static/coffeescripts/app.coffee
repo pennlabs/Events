@@ -44,17 +44,20 @@ require [
           if event.get('creator') == @user.id
             events = _.clone @user.get('events')
             events.push event.id
-            @user.set('events': events)
+            @user.set(events: events)
 
       routes:
         ''              : 'index'
         'login'         : 'login'
         'create'        : 'create'
+        'all'           : 'all'
         'user/:user_id' : 'show_user'
 
       index: ->
         app = new MainView.view(model: @user)
         $('body').html app.render().el
+
+        @fetch_events @user.get("event_queue") if @user.get("logged_in")
 
       login: ->
         app = new MainView.view(model: @user)
@@ -70,13 +73,24 @@ require [
         create_view = new CreateView.view(collection: @events, model: @user)
         $('#container').html create_view.render().el
 
+      all: ->
+        app = new MainView.view(model: @user)
+        $('body').html app.render().el
+
+        # need to add some sort of pagination here
+        $.ajax(
+          url: @events.url
+          data: {limit: 100000}
+        ).done (new_events) =>
+          @events.add new_events
+          @render_events new_events
+
       render_events: (events) ->
         events_collection = new Event.collection(events)
         events_view = new EventsView.view(collection: events_collection)
         $('#container').html events_view.render().el
 
-      fetch_events: (user) =>
-        event_ids = user.get("events")
+      fetch_events: (event_ids) =>
         events = []
         missing_event_ids = []
         for event_id in event_ids
@@ -96,19 +110,24 @@ require [
         else
           @render_events events
 
+      render_user: (user) ->
+        user_view = new UserView.view(model: user)
+        $('#user').html user_view.render().el
+
       show_user: (user_id) ->
         app = new MainView.view(model: @user)
         $('body').html app.render().el
 
         user = if @user.id == user_id then @user else @users.get(user_id)
         if not user?
-          # fetch current user's events
           user = new User.model(_id: user_id)
           @users.add user
-          # render_user and then render_events
-          user.fetch(success: @fetch_events)
+          user.fetch success: =>
+            @render_user user
+            @fetch_events user.get("events")
         else
-          @fetch_events user
+          @render_user user
+          @fetch_events user.get("events")
 
     $ ->
       window.router = new Router()

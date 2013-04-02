@@ -35,7 +35,7 @@ def login():
         return json.dumps({'error': INCORRECT_EMAIL_PASSWORD})
 
 
-@app.route('/logout', methods=['POST'])
+@app.route('/logout', methods=['POST', 'PUT'])
 def logout():
     user_id = session.pop('user', -1)
     return json.dumps(user_id)

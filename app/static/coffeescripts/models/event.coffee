@@ -7,6 +7,7 @@ define [], ->
       time_end: ''
       date: ''
       description: ''
+      creator: ''
 
   class Events extends Backbone.Collection
     model: Event

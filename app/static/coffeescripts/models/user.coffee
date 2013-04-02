@@ -2,15 +2,33 @@ define [], ->
   class User extends Backbone.Model
     idAttribute: "_id"
     defaults:
-      email: 'yefim323@gmail.com'
-      first_name: 'Geoffrey'
-      last_name: 'Vedernikoff'
+      description: ''
+      email: ''
+      name: ''
       logged_in: false
       events: []
+      event_queue: []
+      followers: []
+      following: []
 
     logout: ->
       @url = 'logout'
       @save(logged_in: false)
+
+    subscribe: (user) ->
+      $.ajax(
+        url: "/api/users/#{user.id}/subscriptions"
+        type: 'POST'
+      ).done (data) =>
+        # add user to list of users that this user is following
+        following = _.clone @get("following")
+        following.push user.id
+        @set(following: following)
+
+        # add this user to the followers of the other user
+        followers = _.clone user.get("followers")
+        followers.push @id
+        user.set(followers: followers)
 
   class Users extends Backbone.Collection
     model: Users

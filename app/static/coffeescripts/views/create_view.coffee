@@ -8,6 +8,7 @@ define ['/static/javascripts/vendor/text.js!/static/templates/create_template.ht
         e.preventDefault()
         event = $('#create-form').serializeObject()
         event.creator = @model.id
+        event.creator_name = @model.get("name")
         @collection.create event
         window.router.navigate '', {trigger: true}
 
