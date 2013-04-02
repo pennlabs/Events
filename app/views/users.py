@@ -8,8 +8,6 @@ from bson.objectid import ObjectId
 from app import app
 from app.views.helpers import BSONAPI, register_api, jsonify
 
-from bson.objectid import ObjectId
-
 
 PASSWORDS_DO_NOT_MATCH = 'Passwords do not match'
 NO_PASSWORD_PROVIDED = 'No password provided'
