@@ -3,7 +3,8 @@ define ['/static/javascripts/vendor/text.js!/static/templates/user_template.html
     class UserView extends Backbone.View
       events:
         'click a.subscribe' : 'subscribe'
-      subscribe: ->
+      subscribe: (e) ->
+        e.preventDefault()
         window.router.user.subscribe @model
         @render()
       render: ->

@@ -32,11 +32,14 @@ class UserAPI(BSONAPI):
                 del user['password']
                 del user['confirm']
                 # insert returns an ObjectId
-                user_id = str(g.db.users.insert(user))
+                user_id = g.db.users.insert(user)
+                # all users follow themselves
+                g.db.users.update({'_id': user_id},
+                                  {'$set': {'following': [user_id]}})
                 # abstract into pre-serialize user
                 del user['hashed_password']
                 user['logged_in'] = True
-                session['user'] = user_id
+                session['user'] = str(user_id)
                 return jsonify(user)
             else:
                 return json.dumps({'error': PASSWORDS_DO_NOT_MATCH})

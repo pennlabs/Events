@@ -41,10 +41,18 @@ require [
 
         # add event to user's events if the user is the creator
         @events.on 'sync', (event) =>
-          if event.get('creator') == @user.id
+          creator = event.get('creator')
+          event_id = event.id
+          if @user.get('following').indexOf(creator) > -1
+            event_queue = _.clone @user.get('event_queue')
+            event_queue.push event_id
+            @user.set(event_queue: event_queue)
+          if creator == @user.id
             events = _.clone @user.get('events')
-            events.push event.id
+            events.push event_id
             @user.set(events: events)
+          console.log @user.get("event_queue")
+          @navigate '', {trigger: true}
 
       routes:
         ''              : 'index'
@@ -57,6 +65,7 @@ require [
         app = new MainView.view(model: @user)
         $('body').html app.render().el
 
+        console.log @user.get("event_queue")
         @fetch_events @user.get("event_queue") if @user.get("logged_in")
 
       login: ->
