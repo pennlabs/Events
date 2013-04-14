@@ -9,8 +9,6 @@ define ['/static/javascripts/vendor/text.js!/static/templates/create_template.ht
         event = new @collection.model $('#create-form').serializeObject()
         event.set(creator: @model.id, creator_name: @model.get('name'))
         @collection.create event
-        @collection.trigger 'created', event
-        window.router.navigate '', {trigger: true}
 
       render: ->
         compiled = _.template template, {}
