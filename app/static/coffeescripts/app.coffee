@@ -55,11 +55,12 @@ require [
           @navigate '', {trigger: true}
 
       routes:
-        ''              : 'index'
-        'login'         : 'login'
-        'create'        : 'create'
-        'all'           : 'all'
-        'user/:user_id' : 'show_user'
+        ''                : 'index'
+        'login'           : 'login'
+        'create'          : 'create'
+        'all'             : 'all'
+        'user/:user_id'   : 'show_user'
+        'event/:event_id' : 'show_event'
 
       index: ->
         app = new MainView.view(model: @user)
@@ -122,6 +123,9 @@ require [
       render_user: (user) ->
         user_view = new UserView.view(model: user)
         $('#user').html user_view.render().el
+
+      show_event: (event_id) ->
+        console.log "this should show the event"
 
       show_user: (user_id) ->
         app = new MainView.view(model: @user)
