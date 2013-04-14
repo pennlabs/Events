@@ -40,10 +40,16 @@ require [
         @events = new Event.collection()
 
         # add event to user's events if the user is the creator
-        @events.on 'sync', (event) =>
-          if event.get('creator') == @user.id
+        @events.on 'created', (event) =>
+          creator = event.get('creator')
+          event_id = event.id
+          if @user.get('following').indexOf(creator) > -1
+            event_queue = _.clone @user.get('event_queue')
+            event_queue.push event_id
+            @user.set(event_queue: event_queue)
+          if creator == @user.id
             events = _.clone @user.get('events')
-            events.push event.id
+            events.push event_id
             @user.set(events: events)
 
       routes:
