@@ -6,15 +6,11 @@ app = Flask(__name__)
 app.config.from_object('config')
 app.config['DATABASE'] = 'events'
 
+db = getattr(MongoClient(), app.config['DATABASE'])
+
 
 @app.before_request
 def before_request():
-    g._connection = connection = MongoClient()
-    g.db = getattr(connection, app.config['DATABASE'])
-
-
-@app.teardown_request
-def teardown_request(exception):
-    g._connection.close()
+    g.db = db
 
 from app.views import auth, general, events, users
