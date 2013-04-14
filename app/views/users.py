@@ -63,8 +63,12 @@ def subscriptions(f_id):
             g.db.users.update({'_id': o_f_id},
                               {'$push': {'followers': o_u_id}},
                               upsert=True)
-            # TODO Get f_id's events and add them to u_id's event queue
-            return json.dumps({'success': SUBSCRIBED_SUCCESSFULLY})
+            # Get f_id's events and add them to u_id's event queue
+            f_events = g.db.users.find_one({'_id': o_f_id}).get('events', [])
+            g.db.users.update({'_id': o_u_id},
+                              {'$push': {'event_queue': {'$each': f_events}}},
+                              upsert=True)
+            return json.dumps([str(event_id) for event_id in f_events])
         else:
             # remove f_id from u_id's following
             # remove u_id from f_id's followers
