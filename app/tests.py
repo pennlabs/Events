@@ -79,13 +79,19 @@ class TestUsersAPI(object):
         self.login("email1", "pw1")
         r = self.subscribe(u2["_id"])
         sub = json.loads(r.data)
-        assert "success" in sub
+        assert sub == []
 
     def test_event_create(self):
         user1 = self.create("user1", "pw1", "email1")
         u1 = json.loads(user1.data)
         user2 = self.create("user2", "pw2", "email2")
         u2 = json.loads(user2.data)
+        # log the second user in
+        self.login("email2", "pw2")
+        # create an event
+        self.create_event("event1", "event1 description")
+        # log the second user out
+        self.logout()
         # log first user in
         self.login("email1", "pw1")
         # have the first user subscribe to the second
@@ -94,17 +100,20 @@ class TestUsersAPI(object):
         self.logout()
         # log in as the second user
         self.login("email2", "pw2")
-        # create an event
-        rv = self.create_event("event1", "best event ever")
+        # create another event
+        rv = self.create_event("event2", "event2 description")
         e = json.loads(rv.data)
-        assert e["name"] == "event1", e
+        # ensure that the event has the correct name
+        assert e["name"] == "event2", e
+        # ensure that both events are in the first user's event queue
         new_user1 = self.get_user(u1["_id"])
         new_u1 = json.loads(new_user1.data)
-        assert len(new_u1["event_queue"]) == 1
+        assert len(new_u1["event_queue"]) == 2
+        # ensure that both events are in the second user's events
         new_user2 = self.get_user(u2["_id"])
         new_u2 = json.loads(new_user2.data)
-        assert len(new_u2["events"]) == 1
-
+        assert len(new_u2["events"]) == 2
+    
     def test_get_events(self):
         self.create("user1", "pw1", "email1")
         self.login("email1", "pw1")
