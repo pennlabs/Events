@@ -6,7 +6,6 @@ define ['/static/javascripts/vendor/text.js!/static/templates/user_template.html
       subscribe: (e) ->
         e.preventDefault()
         window.router.user.subscribe @model
-        @render()
       render: ->
         compiled = _.template template, @model.toJSON()
         @$el.html compiled

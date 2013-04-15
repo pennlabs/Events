@@ -39,6 +39,14 @@ require [
         @users = new User.collection()
         @events = new Event.collection()
 
+        if not _.isEmpty(Data.user_to_render)
+          user_to_render = new User.model(Data.user_to_render)
+          @users.add user_to_render
+
+        if not _.isEmpty(Data.event_to_render)
+          event_to_render = new Event.model(Data.event_to_render)
+          @events.add event_to_render
+
         # add event to user's events if the user is the creator
         @events.on 'sync', (event) =>
           creator = event.get('creator')
@@ -121,6 +129,7 @@ require [
 
       render_user: (user) ->
         user_view = new UserView.view(model: user)
+        user_view.listenTo(@user, 'change:following', user_view.render)
         $('#user').html user_view.render().el
 
       show_event: (event_id) ->
