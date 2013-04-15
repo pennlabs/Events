@@ -59,8 +59,9 @@ require [
         'login'           : 'login'
         'create'          : 'create'
         'all'             : 'all'
-        'user/:user_id'   : 'show_user'
         'event/:event_id' : 'show_event'
+        'user/:user_id'   : 'show_user'
+
 
       index: ->
         app = new MainView.view(model: @user)
@@ -95,6 +96,10 @@ require [
           @events.add new_events
           @render_events new_events
 
+      render_event: (event) ->
+        event_view = new EventView.view(model: event)
+        $('#container').html event_view.render().el
+
       render_events: (events) ->
         events_collection = new Event.collection(events)
         events_view = new EventsView.view(collection: events_collection)
@@ -125,7 +130,18 @@ require [
         $('#user').html user_view.render().el
 
       show_event: (event_id) ->
-        console.log "this should show the event"
+        app = new MainView.view(model: @user)
+        $('body').html app.render().el
+
+        event = @events.get(event_id)
+        if not event?
+          event = new Event.model(_id: event_id)
+          @event.add event
+          event.fetch success: =>
+            @render_event event
+        else
+          @render_event event
+
 
       show_user: (user_id) ->
         app = new MainView.view(model: @user)
