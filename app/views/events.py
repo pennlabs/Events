@@ -1,8 +1,12 @@
 from __future__ import absolute_import
+
 from flask import g, request, session
 from bson.objectid import ObjectId
+
+from app import db
 from app.views.helpers import BSONAPI, register_api, signals, jsonify
 
+db.events.create_index([("description", "text"),])
 
 #creates a signal to be called when an event is made
 new_event_signal = signals.signal('new-event-signal')
@@ -12,6 +16,19 @@ class EventAPI(BSONAPI):
     @property
     def collection_name(self):
         return 'events'
+
+    def get(self, _id=None):
+        """
+        Either:
+        - Fetch a list of events (/events/)
+        - Fetch a single event (/events/<id>)
+        - Search all events for a keyword. (/events/?q=keyword)
+        """
+        if 'q' in request.args:
+            return jsonify(db.command("text", "events",
+                                      search=request.args['q']))
+        else:
+            return super(EventAPI, self).get(_id)
 
     def post(self):
         # it might either be in form data or request data
