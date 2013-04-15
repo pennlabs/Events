@@ -8,9 +8,15 @@
       <p><%= description %></p>
     </div>
     <div class="large-3 columns actions">
+      <% if (_.contains(window.router.user.get('following'), _id)) { %>
+      <a class="unsubscribe item" href="#">
+        <span class="icon icon-mail-2"></span>Unsubscribe
+      </a>
+      <% } else { %>
       <a class="subscribe item" href="#">
         <span class="icon icon-mail-2"></span>Subscribe
       </a>
+      <% } %>
       <a class="item" href="#">
         <span class="icon icon-facebook-2"></span>Facebook Page
       </a>
