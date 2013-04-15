@@ -9,7 +9,7 @@ define ['/static/javascripts/vendor/text.js!/static/templates/event_template.htm
         window.router.navigate "user/#{@model.get("creator")}", {trigger: true}
       show_event: (e) ->
         e.preventDefault()
-        window.router.navigate "event/#{@model.get("_id")}", {trigger: true}
+        window.router.navigate "event/#{@model.id}", {trigger: true}
       render: ->
         compiled = _.template template, @model.toJSON()
         @$el.html compiled
