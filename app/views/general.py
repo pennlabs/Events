@@ -11,6 +11,7 @@ from app.views.helpers import jsonify
 @app.route('/login', methods=['GET'])
 @app.route('/create', methods=['GET'])
 @app.route('/user/<user>', methods=['GET'])
+@app.route('/event/<user>', methods=['GET'])
 @app.route('/')
 def index(user=None):
     user_id = session.get('user', None)

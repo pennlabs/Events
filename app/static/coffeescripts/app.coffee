@@ -136,7 +136,7 @@ require [
         event = @events.get(event_id)
         if not event?
           event = new Event.model(_id: event_id)
-          @event.add event
+          @events.add event
           event.fetch success: =>
             @render_event event
         else
