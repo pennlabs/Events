@@ -15,6 +15,11 @@ define [], ->
       @url = 'logout'
       @save(logged_in: false)
 
+    add_to: (arr, el) ->
+      a = _.clone @get(arr)
+      a.push el
+      @set(arr, a)
+
     subscribe: (user) ->
       $.ajax(
         url: "/api/users/#{user.id}/subscriptions"
