@@ -24,7 +24,12 @@ define [], ->
       $.ajax(
         url: "/api/users/#{user.id}/subscriptions"
         type: 'POST'
-      ).done (data) =>
+      ).done (event_ids) =>
+        event_ids = $.parseJSON event_ids
+        event_queue = _.clone @get("event_queue")
+        event_queue = event_queue.concat event_ids
+        @set(event_queue: event_queue)
+
         # add user to list of users that this user is following
         following = _.clone @get("following")
         following.push user.id
