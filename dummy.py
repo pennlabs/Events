@@ -1,5 +1,4 @@
-"""
-Script to prepare dummy environment for local development.
+""" Script to prepare dummy environment for local development.
 """
 import sys
 from collections import namedtuple

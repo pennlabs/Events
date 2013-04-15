@@ -4,7 +4,6 @@ from pymongo import MongoClient
 
 app = Flask(__name__)
 app.config.from_object('config')
-app.config['DATABASE'] = 'events'
 
 db = getattr(MongoClient(), app.config['DATABASE'])
 
