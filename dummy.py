@@ -1,49 +1,48 @@
-""" Script to prepare dummy environment for local development.
+"""
+Script to prepare dummy environment for local development.
+
+Usage: python dummy.py [num_dummy_events]
+
 """
 import sys
-from collections import namedtuple
+
+from faker import Factory
 
 from app import db
 
-Event = namedtuple('Event', [
-    'name',
-    'by',
-    'date',
-    'start',
-    'end',
-    'location',
-    'description',
-])
-
-EVENTS = [
-    Event('Semi-Annual Pastrami Fest',
-          'MEAT Club',
-          'Tuesday, January 28',
-          '8:00pm',
-          '9:00pm',
-          'Kings Court English House',
-          'Bacon ipsum dolor sit amet nulla ham qui sint exercitation eiusmod commodo, chuck duis velit. Aute in reprehenderit, dolore aliqua non est magna in labore pig pork biltong.',
-          ),
-    Event('Semi-Annual Vegan Fest',
-          'VEG Club',
-          'Tuesday, January 28',
-          '8:00pm',
-          '9:00pm',
-          'Kings Court English House',
-          'ipsum dolor sit amet nulla ham qui sint exercitation eiusmod commodo, chuck duis velit. Aute in reprehenderit, dolore aliqua non est magna in labore.',
-          ),
-]
+fake = Factory.create()
 
 
-def main():
+def create_arbitrary_event():
+    """Create a dummy event."""
+    return {
+        'name': "".join(fake.words()).title(),
+        'creator_name': fake.company(),
+        'date': "%s %s" % (fake.monthName(), fake.dayOfMonth()),
+        'start': fake.time(),
+        'end': fake.time(),
+        'location': fake.address(),
+        'description': fake.text(),
+    }
+
+
+def create_arbitrary_events(n):
+    """Create a number of dummy events."""
+    for _ in xrange(n):
+        yield create_arbitrary_event()
+
+
+def main(n=None):
     """
     Populate the local database with dummies.
     """
+    if n is None:
+        n = 20
     db.events.drop()
-    for event in EVENTS:
-        db.events.insert(dict(event._asdict()))
+    for event in create_arbitrary_events(n):
+        db.events.insert(event)
     return 0
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    sys.exit(main(*sys.argv[1:]))
