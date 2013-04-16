@@ -46,8 +46,7 @@
   <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.3/underscore.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/backbone.js/1.0.0/backbone.js"></script>
   <script src="{{ url_for('static', filename='javascripts/vendor/custom.modernizr.js') }}"></script>
-  <script src="{{ url_for('static', filename='javascripts/vendor/require.js') }}"></script>
-  <script data-main="scripts/main" src="{{ url_for('static', filename='javascripts/app.js') }}"></script>
+  <script data-main="{{ url_for('static', filename='javascripts/app.js') }}"src="{{ url_for('static', filename='javascripts/vendor/require.js') }}"></script>
 
   <script src="{{ url_for('static', filename='javascripts/vendor/foundation/foundation.js') }}"></script>
   <script src="{{ url_for('static', filename='javascripts/vendor/foundation/foundation.topbar.js') }}"></script>
