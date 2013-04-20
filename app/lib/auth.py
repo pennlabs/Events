@@ -1,5 +1,7 @@
 import bcrypt
-from flask import session
+from flask import g, session
+
+from bson.objectid import ObjectId
 
 
 def hash_password(raw_password):
@@ -11,8 +13,15 @@ def authenticate(user, raw_password):
     return bcrypt.hashpw(raw_password, hashed_password) == hashed_password
 
 
+def get_current_user():
+    user_id = session.get('user', None)
+    if user_id:
+        return g.db.users.find_one({'_id': ObjectId(user_id)})
+    else:
+        return None
+
+
 def login_user(user):
-    user['logged_in'] = True
     session['user'] = str(user['_id'])
 
 

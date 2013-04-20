@@ -23,7 +23,9 @@ def login():
     if user:
         if authenticate(user, password):
             login_user(user)
+
             # abstract into pre-serialize user
+            user['logged_in'] = True
             del user['hashed_password']
             return jsonify(user)
         else:

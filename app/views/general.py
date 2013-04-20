@@ -1,9 +1,10 @@
 from __future__ import absolute_import
 
-from flask import render_template, session, g
+from flask import render_template, g
 from bson.objectid import ObjectId
 
 from app import app
+from app.lib.auth import get_current_user
 from app.lib.json import jsonify
 
 
@@ -12,11 +13,7 @@ from app.lib.json import jsonify
 @app.route('/create', methods=['GET'])
 @app.route('/')
 def index():
-    user_id = session.get('user', None)
-    if user_id:
-        user = g.db.users.find_one({'_id': ObjectId(user_id)})
-    else:
-        user = {}
+    user = get_current_user()
     if user:
         del user['hashed_password']
         user['logged_in'] = True
@@ -25,11 +22,7 @@ def index():
 
 @app.route('/event/<event_id>', methods=['GET'])
 def event(event_id):
-    current_id = session.get('user', None)
-    if current_id:
-        user = g.db.users.find_one({'_id': ObjectId(current_id)})
-    else:
-        user = {}
+    user = get_current_user()
     event_to_render = g.db.events.find_one({'_id': ObjectId(event_id)})
     return render_template('index.html',
                            user=jsonify(user),
@@ -38,11 +31,7 @@ def event(event_id):
 
 @app.route('/user/<user_id>', methods=['GET'])
 def user(user_id):
-    current_id = session.get('user', None)
-    if current_id:
-        user = g.db.users.find_one({'_id': ObjectId(current_id)})
-    else:
-        user = {}
+    user = get_current_user()
     if user:
         del user['hashed_password']
         user['logged_in'] = True
