@@ -3,7 +3,7 @@ from __future__ import absolute_import
 from flask import g, request, session
 from bson.objectid import ObjectId
 
-from app import db
+from app import app, db
 from app.lib.json import jsonify
 from app.lib.views import BSONAPI, register_api, signals
 
@@ -52,7 +52,7 @@ class EventAPI(BSONAPI):
         new_event_signal.send(self, event=event, u_id=session['user'])
         return jsonify(event)
 
-register_api(EventAPI, 'event_api', 'events')
+register_api(app, EventAPI, 'event_api', 'events')
 
 
 @new_event_signal.connect

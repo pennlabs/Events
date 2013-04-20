@@ -48,8 +48,7 @@ class UserAPI(BSONAPI):
             return json.dumps({'error': NO_PASSWORD_PROVIDED})
 
 
-register_api(UserAPI, 'user_api', 'users')
-
+register_api(app, UserAPI, 'user_api', 'users')
 
 @app.route('/api/users/<f_id>/subscriptions', methods=['POST', 'DELETE'])
 def subscriptions(f_id):

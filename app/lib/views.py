@@ -5,7 +5,6 @@ from flask.views import MethodView
 from bson.objectid import ObjectId
 from blinker import Namespace
 
-from app import app
 from .json import jsonify
 
 API_PREFIX = '/api/'
@@ -59,7 +58,7 @@ class BSONAPI(MethodView):
         return Response(jsonify(entity), mimetype='text/json')
 
 
-def register_api(view, endpoint, url, pk='_id', pk_type='string'):
+def register_api(app, view, endpoint, url, pk='_id', pk_type='string'):
     """
     Register a MethodView to the app.
 
