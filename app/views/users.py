@@ -5,6 +5,7 @@ from flask import request, g
 from bson.objectid import ObjectId
 
 from app import app
+from app.forms.user import UserForm
 from app.lib import auth
 from app.lib.json import jsonify
 from app.lib.views import BSONAPI, register_api
@@ -28,28 +29,20 @@ def create_user(name, email, password):
 
 
 class UserAPI(BSONAPI):
-    @property
-    def collection_name(self):
-        return 'users'
+    collection_name = 'users'
+    form = UserForm
 
-    def post(self):
-        password = request.form.get('password', None)
-        if password is not None:
-            if password == request.form.get('confirm', None):
-                user = create_user(
-                            request.form['name'],
-                            request.form['email'],
-                            password,
-                )
+    def new(self):
+        user = create_user(
+                    request.form['name'],
+                    request.form['email'],
+                    request.form['password'],
+        )
 
-                auth.login_user(user)
+        auth.login_user(user)
 
-                user['logged_in'] = True
-                return jsonify(user)
-            else:
-                return json.dumps({'error': PASSWORDS_DO_NOT_MATCH})
-        else:
-            return json.dumps({'error': NO_PASSWORD_PROVIDED})
+        user['logged_in'] = True
+        return jsonify(user)
 
 
 register_api(app, UserAPI, 'user_api', 'users')

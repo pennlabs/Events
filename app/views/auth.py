@@ -4,7 +4,7 @@ import json
 from flask import request, g
 
 from app import app
-from app.lib.validation import LoginForm
+from app.forms.login import LoginForm
 from app.lib.auth import authenticate, login_user, logout_user
 from app.lib.json import jsonify
 

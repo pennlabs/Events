@@ -29,4 +29,6 @@ def jsonify(entity):
         del entity[PASSWORD_FIELDNAME]
     except KeyError:
         pass
+    except TypeError:
+        pass
     return json.dumps(entity, cls=BSONEncoder)

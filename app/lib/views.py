@@ -13,7 +13,7 @@ API_PREFIX = '/api/'
 signals = Namespace()
 
 
-class BSONAPI(MethodView):
+class DocumentView(MethodView):
     """
     Convenience wrapper on MethodView for BSON entities.
 
@@ -21,9 +21,7 @@ class BSONAPI(MethodView):
 
     To use, override `collection_name` appropriately.
     """
-    @property
-    def collection_name(self):
-        raise NotImplementedError()
+    collection_name = None
 
     @property
     def collection(self):
@@ -49,13 +47,27 @@ class BSONAPI(MethodView):
             rv = self.collection.find_one({"_id": ObjectId(_id)})
         return Response(jsonify(rv), mimetype='text/json')
 
-    def post(self):
-        """
-        Create a new entity.
-        """
+    def new(self):
+        """Create a new entity."""
         entity = request.form.to_dict()
         self.collection.insert(entity)
         return Response(jsonify(entity), mimetype='text/json')
+
+    def post(self):
+        return self.new()
+
+
+class BSONAPI(DocumentView):
+    form = None
+
+    def post(self):
+        """Validate form data from a post request."""
+        if self.form is not None:
+            form = self.form(request.form)
+            if not form.validate():
+                return Response(jsonify({'error': form.errors}),
+                                mimetype='text/json')
+        return super(BSONAPI, self).post()
 
 
 def register_api(app, view, endpoint, url, pk='_id', pk_type='string'):
