@@ -1,13 +1,13 @@
 from __future__ import absolute_import
 import json
 
-import bcrypt
 from flask import session, request, g
 from bson.objectid import ObjectId
 
 from app import app
-from app.lib.views import BSONAPI, register_api
+from app.lib.auth import hash_password
 from app.lib.json import jsonify
+from app.lib.views import BSONAPI, register_api
 
 
 PASSWORDS_DO_NOT_MATCH = 'Passwords do not match'
@@ -28,7 +28,7 @@ class UserAPI(BSONAPI):
         confirm = request.form.get('confirm', None)
         if password:
             if password == confirm:
-                hashed_password = bcrypt.hashpw(password, bcrypt.gensalt())
+                hashed_password = hash_password(password)
                 user['hashed_password'] = hashed_password
                 del user['password']
                 del user['confirm']
