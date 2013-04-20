@@ -1,6 +1,6 @@
 from __future__ import absolute_import
 
-from flask import g, request, session
+from flask import g, request
 from bson.objectid import ObjectId
 
 from app import app, db
@@ -49,7 +49,7 @@ class EventAPI(BSONAPI):
         event = request.form.to_dict() or request.json
         self.collection.insert(event)
         # signals that a new event was made
-        new_event_signal.send(self, event=event, u_id=session['user'])
+        new_event_signal.send(self, event=event, u_id=g.current_user['_id'])
         return jsonify(event)
 
 register_api(app, EventAPI, 'event_api', 'events')

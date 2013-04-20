@@ -1,7 +1,7 @@
 from __future__ import absolute_import
 import json
 
-from flask import session, request, g
+from flask import request, g
 from bson.objectid import ObjectId
 
 from app import app
@@ -54,13 +54,15 @@ class UserAPI(BSONAPI):
 
 register_api(app, UserAPI, 'user_api', 'users')
 
+
 @app.route('/api/users/<f_id>/subscriptions', methods=['POST', 'DELETE'])
 def subscriptions(f_id):
-    u_id = session.get('user', None)
-    if u_id:
+    if g.current_user is None:
+        return json.dumps({'error': UNAUTHORIZED_REQUEST})
+    else:
         if request.method == 'POST':
             # TODO Merge the database requests (Supposedly no bulk upserts...)
-            o_u_id = ObjectId(u_id)
+            o_u_id = ObjectId(g.current_user['_id'])
             o_f_id = ObjectId(f_id)
             # add f_id to u_id's following
             g.db.users.update({'_id': o_u_id},
@@ -80,5 +82,3 @@ def subscriptions(f_id):
             # remove f_id from u_id's following
             # remove u_id from f_id's followers
             pass
-    else:
-        return json.dumps({'error': UNAUTHORIZED_REQUEST})
