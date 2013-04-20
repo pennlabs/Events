@@ -4,7 +4,7 @@ from flask import render_template, session, g
 from bson.objectid import ObjectId
 
 from app import app
-from app.views.helpers import jsonify
+from app.lib.json import jsonify
 
 
 @app.route('/all', methods=['GET'])

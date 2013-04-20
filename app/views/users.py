@@ -6,7 +6,8 @@ from flask import session, request, g
 from bson.objectid import ObjectId
 
 from app import app
-from app.views.helpers import BSONAPI, register_api, jsonify
+from app.lib.views import BSONAPI, register_api
+from app.lib.json import jsonify
 
 
 PASSWORDS_DO_NOT_MATCH = 'Passwords do not match'

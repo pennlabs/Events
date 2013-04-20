@@ -4,7 +4,8 @@ from flask import g, request, session
 from bson.objectid import ObjectId
 
 from app import db
-from app.views.helpers import BSONAPI, register_api, signals, jsonify
+from app.lib.json import jsonify
+from app.lib.views import BSONAPI, register_api, signals
 
 db.events.create_index([("description", "text"),])
 
