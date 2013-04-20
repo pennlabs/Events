@@ -13,7 +13,7 @@ API_PREFIX = '/api/'
 signals = Namespace()
 
 
-class DocumentView(MethodView):
+class CollectionView(MethodView):
     """
     Convenience wrapper on MethodView for BSON entities.
 
@@ -57,7 +57,7 @@ class DocumentView(MethodView):
         return self.new()
 
 
-class BSONAPI(DocumentView):
+class BSONAPI(CollectionView):
     form = None
 
     def post(self):

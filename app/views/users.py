@@ -6,7 +6,7 @@ from bson.objectid import ObjectId
 
 from app import app
 from app.forms.user import UserForm
-from app.lib import auth
+from app.lib.auth import create_user, login_user
 from app.lib.json import jsonify
 from app.lib.views import BSONAPI, register_api
 
@@ -17,29 +17,21 @@ UNAUTHORIZED_REQUEST = 'User is not logged in'
 SUBSCRIBED_SUCCESSFULLY = 'User has subscribed successfully'
 
 
-def create_user(name, email, password):
-    user = auth.create_user(request.form['email'], password)
-    user['name'] = request.form['name']
-    user_id = g.db.users.insert(user)
-
-    # all users follow themselves
-    g.db.users.update({'_id': user_id},
-                      {'$set': {'following': [user_id]}})
-    return user
-
-
 class UserAPI(BSONAPI):
     collection_name = 'users'
     form = UserForm
 
     def new(self):
-        user = create_user(
-                    request.form['name'],
-                    request.form['email'],
-                    request.form['password'],
-        )
+        user = create_user(request.form['email'], request.form['password'])
+        user['name'] = request.form['name']
 
-        auth.login_user(user)
+        user_id = g.db.users.insert(user)
+
+        # all users follow themselves
+        g.db.users.update({'_id': user_id},
+                          {'$set': {'following': [user_id]}})
+
+        login_user(user)
 
         user['logged_in'] = True
         return jsonify(user)
