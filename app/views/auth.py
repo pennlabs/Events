@@ -5,7 +5,7 @@ import bcrypt
 from flask import session, request, g
 
 from app import app
-from app.views.helpers import jsonify
+from app.lib.json import jsonify
 
 
 INCORRECT_EMAIL_PASSWORD = 'Incorrect email/password'
