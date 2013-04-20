@@ -1,2 +1,2 @@
 define [], ->
-  return {ROOT: '/events'}
+  return {ROOT: '/'}
