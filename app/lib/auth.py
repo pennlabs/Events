@@ -4,12 +4,19 @@ from flask import g, session
 from bson.objectid import ObjectId
 
 
-def hash_password(raw_password):
+PASSWORD_FIELDNAME = 'hashed_password'
+
+
+def _hash_password(raw_password):
     return bcrypt.hashpw(raw_password, bcrypt.gensalt())
 
 
+def create_user(email, password):
+    return {'email': email, PASSWORD_FIELDNAME: _hash_password(password)}
+
+
 def authenticate(user, raw_password):
-    hashed_password = user['hashed_password']
+    hashed_password = user[PASSWORD_FIELDNAME]
     return bcrypt.hashpw(raw_password, hashed_password) == hashed_password
 
 

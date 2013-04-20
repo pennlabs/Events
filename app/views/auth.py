@@ -8,6 +8,7 @@ from app.lib.auth import authenticate, login_user, logout_user
 from app.lib.json import jsonify
 
 
+UNKNOWN_EMAIL = 'Unknown email'
 INCORRECT_EMAIL_PASSWORD = 'Incorrect email/password'
 
 
@@ -20,18 +21,17 @@ def login():
 
     # grab user from database based on credentials
     user = g.db.users.find_one({'email': email})
-    if user:
+    if user is not None:
         if authenticate(user, password):
             login_user(user)
 
             # abstract into pre-serialize user
             user['logged_in'] = True
-            del user['hashed_password']
             return jsonify(user)
         else:
             return json.dumps({'error': INCORRECT_EMAIL_PASSWORD})
     else:
-        return json.dumps({'error': INCORRECT_EMAIL_PASSWORD})
+        return json.dumps({'error': UNKNOWN_EMAIL})
 
 
 @app.route('/logout', methods=['POST', 'PUT'])

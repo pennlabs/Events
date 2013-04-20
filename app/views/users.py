@@ -5,7 +5,7 @@ from flask import session, request, g
 from bson.objectid import ObjectId
 
 from app import app
-from app.lib.auth import hash_password
+from app.lib import auth
 from app.lib.json import jsonify
 from app.lib.views import BSONAPI, register_api
 
@@ -16,31 +16,35 @@ UNAUTHORIZED_REQUEST = 'User is not logged in'
 SUBSCRIBED_SUCCESSFULLY = 'User has subscribed successfully'
 
 
+def create_user(name, email, password):
+    user = auth.create_user(request.form['email'], password)
+    user['name'] = request.form['name']
+    user_id = g.db.users.insert(user)
+
+    # all users follow themselves
+    g.db.users.update({'_id': user_id},
+                      {'$set': {'following': [user_id]}})
+    return user
+
+
 class UserAPI(BSONAPI):
     @property
     def collection_name(self):
         return 'users'
 
     def post(self):
-        user = request.form.to_dict()
-        # get password and hash it
         password = request.form.get('password', None)
-        confirm = request.form.get('confirm', None)
-        if password:
-            if password == confirm:
-                hashed_password = hash_password(password)
-                user['hashed_password'] = hashed_password
-                del user['password']
-                del user['confirm']
-                # insert returns an ObjectId
-                user_id = g.db.users.insert(user)
-                # all users follow themselves
-                g.db.users.update({'_id': user_id},
-                                  {'$set': {'following': [user_id]}})
-                # abstract into pre-serialize user
-                del user['hashed_password']
+        if password is not None:
+            if password == request.form.get('confirm', None):
+                user = create_user(
+                            request.form['name'],
+                            request.form['email'],
+                            password,
+                )
+
+                auth.login_user(user)
+
                 user['logged_in'] = True
-                session['user'] = str(user_id)
                 return jsonify(user)
             else:
                 return json.dumps({'error': PASSWORDS_DO_NOT_MATCH})

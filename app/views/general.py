@@ -15,7 +15,6 @@ from app.lib.json import jsonify
 def index():
     user = get_current_user()
     if user:
-        del user['hashed_password']
         user['logged_in'] = True
     return render_template('index.html', user=jsonify(user))
 
@@ -33,10 +32,8 @@ def event(event_id):
 def user(user_id):
     user = get_current_user()
     if user:
-        del user['hashed_password']
         user['logged_in'] = True
     user_to_render = g.db.users.find_one({'_id': ObjectId(user_id)})
-    del user_to_render['hashed_password']
     return render_template('index.html',
                            user=jsonify(user),
                            user_to_render=jsonify(user_to_render))
