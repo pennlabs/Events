@@ -39,19 +39,22 @@ require [
         @users = new User.collection()
         @events = new Event.collection()
 
+        if not _.isEmpty(Data.user_to_render)
+          user_to_render = new User.model(Data.user_to_render)
+          @users.add user_to_render
+
+        if not _.isEmpty(Data.event_to_render)
+          event_to_render = new Event.model(Data.event_to_render)
+          @events.add event_to_render
+
         # add event to user's events if the user is the creator
         @events.on 'sync', (event) =>
           creator = event.get('creator')
           event_id = event.id
-          if @user.get('following').indexOf(creator) > -1
-            event_queue = _.clone @user.get('event_queue')
-            event_queue.push event_id
-            @user.set(event_queue: event_queue)
+          if _.contains @user.get('following'), creator
+            @user.add_to 'event_queue', event_id
           if creator == @user.id
-            events = _.clone @user.get('events')
-            events.push event_id
-            @user.set(events: events)
-          console.log @user.get("event_queue")
+            @user.add_to 'events', event_id
           @navigate '', {trigger: true}
 
       routes:
@@ -67,7 +70,6 @@ require [
         app = new MainView.view(model: @user)
         $('body').html app.render().el
 
-        console.log @user.get("event_queue")
         @fetch_events @user.get("event_queue") if @user.get("logged_in")
 
       login: ->
@@ -127,6 +129,7 @@ require [
 
       render_user: (user) ->
         user_view = new UserView.view(model: user)
+        user_view.listenTo(@user, 'change:following', user_view.render)
         $('#user').html user_view.render().el
 
       show_event: (event_id) ->

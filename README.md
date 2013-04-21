@@ -4,8 +4,13 @@ Event aggregate for Penn.
 
 # Development
 
+First create `app/static/coffeescripts/config.coffee` by copying `app/static/coffeescripts/config.coffee.default` and editing as needed.
 
-The quickest way to get started is just `foreman start`. This will run a few commands to automatically recompile static files on change, start a mongo database, and start the server.
+Next run `foreman start`. This will:
+
+- watch static files for changes and recompile them when any file is updated
+- start a mongo database
+- start a server
 
 # New Feature
 

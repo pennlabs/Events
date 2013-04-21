@@ -1,10 +1,11 @@
 from __future__ import absolute_import
 
-from flask import g, request, session
+from flask import g, request
 from bson.objectid import ObjectId
 
-from app import db
-from app.views.helpers import BSONAPI, register_api, signals, jsonify
+from app import app, db
+from app.lib.json import jsonify
+from app.lib.views import BSONAPI, register_api, signals
 
 db.events.create_index([("description", "text"),])
 
@@ -20,13 +21,26 @@ class EventAPI(BSONAPI):
     def get(self, _id=None):
         """
         Either:
-        - Fetch a list of events (/events/)
-        - Fetch a single event (/events/<id>)
-        - Search all events for a keyword. (/events/?q=keyword)
+        -   Fetch a list of events (/events/)
+        -   Fetch a single event (/events/<id>)
+        -   Search all events for a keyword. (/events/?q=keyword)
+            -   Results will limited to 10 unless 'limit' is specified
+            -   If 'creator_name' is given, results will be filtered to be only
+                those events created by 'creator_name'
         """
         if 'q' in request.args:
-            return jsonify(db.command("text", "events",
-                                      search=request.args['q']))
+            options = {
+                'search': request.args['q'],
+                'limit': (int(request.args['limit'])
+                          if 'limit' in request.args else 10),
+            }
+
+            if 'creator_name' in request.args:
+                options['filter'] = {
+                    'creator_name': request.args['creator_name'],
+                }
+
+            return jsonify(db.command("text", "events", **options))
         else:
             return super(EventAPI, self).get(_id)
 
@@ -35,10 +49,10 @@ class EventAPI(BSONAPI):
         event = request.form.to_dict() or request.json
         self.collection.insert(event)
         # signals that a new event was made
-        new_event_signal.send(self, event=event, u_id=session['user'])
+        new_event_signal.send(self, event=event, u_id=g.current_user['_id'])
         return jsonify(event)
 
-register_api(EventAPI, 'event_api', 'events')
+register_api(app, EventAPI, 'event_api', 'events')
 
 
 @new_event_signal.connect

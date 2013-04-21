@@ -1,5 +1,3 @@
-from __future__ import absolute_import
-import json
 import urlparse
 
 from flask import request, Response, g
@@ -7,7 +5,7 @@ from flask.views import MethodView
 from bson.objectid import ObjectId
 from blinker import Namespace
 
-from app import app
+from .json import jsonify
 
 API_PREFIX = '/api/'
 
@@ -15,27 +13,7 @@ API_PREFIX = '/api/'
 signals = Namespace()
 
 
-class BSONEncoder(json.JSONEncoder):
-    """
-    Custom encoder for BSON objects.
-
-    (ObjectID can't be serialized so we have our own encoder.)
-    """
-    # TODO: Strip hashed passwords
-    def default(self, obj):
-        if isinstance(obj, ObjectId):
-            return str(obj)
-        return json.JSONEncoder.default(self, obj)
-
-
-def jsonify(entity):
-    """
-    Convenience wrapper for turning BSON entities into JSON.
-    """
-    return json.dumps(entity, cls=BSONEncoder)
-
-
-class BSONAPI(MethodView):
+class CollectionView(MethodView):
     """
     Convenience wrapper on MethodView for BSON entities.
 
@@ -43,9 +21,7 @@ class BSONAPI(MethodView):
 
     To use, override `collection_name` appropriately.
     """
-    @property
-    def collection_name(self):
-        raise NotImplementedError()
+    collection_name = None
 
     @property
     def collection(self):
@@ -71,16 +47,30 @@ class BSONAPI(MethodView):
             rv = self.collection.find_one({"_id": ObjectId(_id)})
         return Response(jsonify(rv), mimetype='text/json')
 
-    def post(self):
-        """
-        Create a new entity.
-        """
+    def new(self):
+        """Create a new entity."""
         entity = request.form.to_dict()
         self.collection.insert(entity)
         return Response(jsonify(entity), mimetype='text/json')
 
+    def post(self):
+        return self.new()
 
-def register_api(view, endpoint, url, pk='_id', pk_type='string'):
+
+class BSONAPI(CollectionView):
+    form = None
+
+    def post(self):
+        """Validate form data from a post request."""
+        if self.form is not None:
+            form = self.form(request.form)
+            if not form.validate():
+                return Response(jsonify({'error': form.errors}),
+                                mimetype='text/json')
+        return super(BSONAPI, self).post()
+
+
+def register_api(app, view, endpoint, url, pk='_id', pk_type='string'):
     """
     Register a MethodView to the app.
 
