@@ -10,6 +10,7 @@ app.config.from_object('config')
 
 db = getattr(MongoClient(), app.config['DATABASE'])
 
+
 @app.before_request
 def before_request():
     g.db = db
@@ -19,4 +20,8 @@ def before_request():
         current_user['logged_in'] = True
     g.current_user = current_user
 
-from app.views import auth, general, events, users
+from app.views.auth import auth
+
+app.register_blueprint(auth)
+
+from app.views import general, events, users
