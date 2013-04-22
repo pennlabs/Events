@@ -1,9 +1,8 @@
 from __future__ import absolute_import
 import json
 
-from flask import request, g
+from flask import request, g, Blueprint
 
-from app import app
 from app.forms.login import LoginForm
 from app.lib.auth import authenticate, login_user, logout_user
 from app.lib.json import jsonify
@@ -12,8 +11,10 @@ from app.lib.json import jsonify
 UNKNOWN_EMAIL = 'Unknown email'
 INCORRECT_EMAIL_PASSWORD = 'Incorrect email/password'
 
+auth = Blueprint('auth', __name__)
 
-@app.route('/login', methods=['POST'])
+
+@auth.route('/login', methods=['POST'])
 def login():
     if LoginForm(request.form).validate():
         user = g.db.users.find_one({'email': request.form['email']})
@@ -32,7 +33,7 @@ def login():
         return json.dumps({'error': INCORRECT_EMAIL_PASSWORD})
 
 
-@app.route('/logout', methods=['POST', 'PUT'])
+@auth.route('/logout', methods=['POST', 'PUT'])
 def logout():
     user_id = logout_user()
     return json.dumps(user_id)

@@ -4,11 +4,10 @@ import json
 from flask import request, g
 from bson.objectid import ObjectId
 
-from app import app
 from app.forms.user import UserForm
 from app.lib.auth import create_user, login_user
 from app.lib.json import jsonify
-from app.lib.views import BSONAPI, register_api
+from app.lib.views import BSONAPI
 
 
 PASSWORDS_DO_NOT_MATCH = 'Passwords do not match'
@@ -37,10 +36,6 @@ class UserAPI(BSONAPI):
         return jsonify(user)
 
 
-register_api(app, UserAPI, 'user_api', 'users')
-
-
-@app.route('/api/users/<f_id>/subscriptions', methods=['POST', 'DELETE'])
 def subscriptions(f_id):
     if g.current_user is None:
         return json.dumps({'error': UNAUTHORIZED_REQUEST})

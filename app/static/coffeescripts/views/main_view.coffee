@@ -8,6 +8,8 @@ define ['/static/javascripts/vendor/text.js!/static/templates/main_template.html
         'click .card .title'      : 'event'
         'click a.create'          : 'create'
         'click a.user'            : 'user'
+        'click a#search'          : 'search'
+        'submit form.search'      : 'search'
       initialize: (options) ->
         @columns = options.columns or [12]
       index: (e) ->
@@ -41,5 +43,10 @@ define ['/static/javascripts/vendor/text.js!/static/templates/main_template.html
         compiled = _.template template, _.extend(@model.toJSON(), columns: @columns)
         @$el.html compiled
         return @
+
+      search: (e) ->
+        e.preventDefault()
+        q = $('#searchbox').val()
+        window.router.navigate "search?q=#{encodeURIComponent(q)}", {trigger: true}
 
     return {view: MainView}
