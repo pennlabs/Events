@@ -110,8 +110,13 @@ require [
           @render_events new_events
 
       search: (q) ->
-        app = new MainView.view(model: @user)
+        app = new MainView.view(model: @user, columns: [3, 9])
         $('body').html app.render().el
+
+        side_bar = new SideBarView.view()
+        $('.column-0').html side_bar.render().el
+
+        $('.column-1').attr('id', 'events')
 
         # need to add some sort of pagination here
         $.ajax(
