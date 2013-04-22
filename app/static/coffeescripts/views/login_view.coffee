@@ -14,8 +14,6 @@ define ['/static/javascripts/vendor/text.js!/static/templates/login_template.htm
         e.preventDefault()
         $register = $('#register-form')
         @submit_form $register, (data) =>
-          # fix this on the server side
-          data = $.parseJSON data
           if data._id
             @model.set data
             window.router.navigate '', {trigger: true}
@@ -23,8 +21,6 @@ define ['/static/javascripts/vendor/text.js!/static/templates/login_template.htm
         e.preventDefault()
         $login = $('#login-form')
         @submit_form $login, (data) =>
-          # fix this on the server side
-          data = $.parseJSON data
           if data._id
             @model.set data
             window.router.navigate '', {trigger: true}

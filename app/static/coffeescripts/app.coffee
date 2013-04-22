@@ -3,6 +3,7 @@ require [
   "/static/javascripts/models/user.js"
   "/static/javascripts/models/event.js"
   "/static/javascripts/views/main_view.js"
+  "/static/javascripts/views/side_bar_view.js"
   "/static/javascripts/views/login_view.js"
   "/static/javascripts/views/event_view.js"
   "/static/javascripts/views/events_view.js"
@@ -10,11 +11,11 @@ require [
   "/static/javascripts/views/user_view.js"
   "/static/javascripts/config.js"
   ],
-  (
-  UI,
+  (UI,
   User,
   Event,
   MainView,
+  SideBarView,
   LoginView,
   EventView,
   EventsView,
@@ -64,11 +65,16 @@ require [
         'all'             : 'all'
         'event/:event_id' : 'show_event'
         'user/:user_id'   : 'show_user'
-
+        'search?:q'       : 'search'
 
       index: ->
-        app = new MainView.view(model: @user)
+        app = new MainView.view(model: @user, columns: [3, 9])
         $('body').html app.render().el
+
+        side_bar = new SideBarView.view()
+        $('.column-0').html side_bar.render().el
+
+        $('.column-1').attr('id', 'events')
 
         @fetch_events @user.get("event_queue") if @user.get("logged_in")
 
@@ -77,24 +83,48 @@ require [
         $('body').html app.render().el
 
         login_view = new LoginView.view(model: @user)
-        $('#container').html login_view.render().el
+        $('.column-0').html login_view.render().el
 
       create: ->
         app = new MainView.view(model: @user)
         $('body').html app.render().el
 
         create_view = new CreateView.view(collection: @events, model: @user)
-        $('#container').html create_view.render().el
+        $('.column-0').html create_view.render().el
 
       all: ->
-        app = new MainView.view(model: @user)
+        app = new MainView.view(model: @user, columns: [3, 9])
         $('body').html app.render().el
+
+        side_bar = new SideBarView.view()
+        $('.column-0').html side_bar.render().el
+
+        $('.column-1').attr('id', 'events')
 
         # need to add some sort of pagination here
         $.ajax(
           url: @events.url
           data: {limit: 100000}
         ).done (new_events) =>
+          @events.add new_events
+          @render_events new_events
+
+      search: (q) ->
+        app = new MainView.view(model: @user, columns: [3, 9])
+        $('body').html app.render().el
+
+        side_bar = new SideBarView.view()
+        $('.column-0').html side_bar.render().el
+
+        $('.column-1').attr('id', 'events')
+
+        # need to add some sort of pagination here
+        $.ajax(
+          url: @events.url
+          data: {q: decodeURIComponent(q)}
+        ).done (data) =>
+          data = JSON.parse data
+          new_events = _.pluck data.results, 'obj'
           @events.add new_events
           @render_events new_events
 
@@ -105,7 +135,7 @@ require [
       render_events: (events) ->
         events_collection = new Event.collection(events)
         events_view = new EventsView.view(collection: events_collection)
-        $('#container').html events_view.render().el
+        $('#events').html events_view.render().el
 
       fetch_events: (event_ids) =>
         events = []
@@ -149,6 +179,8 @@ require [
       show_user: (user_id) ->
         app = new MainView.view(model: @user)
         $('body').html app.render().el
+
+        $('.column-0').attr('id', 'user')
 
         user = if @user.id == user_id then @user else @users.get(user_id)
         if not user?
