@@ -14,6 +14,12 @@ INCORRECT_EMAIL_PASSWORD = 'Incorrect email/password'
 auth = Blueprint('auth', __name__)
 
 
+@auth.after_request
+def after_request(response):
+    response.mimetype = 'text/json'
+    return response
+
+
 @auth.route('/login', methods=['POST'])
 def login():
     if LoginForm(request.form).validate():

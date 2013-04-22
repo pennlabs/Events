@@ -27,34 +27,38 @@ class CollectionView(MethodView):
     def collection(self):
         return getattr(g.db, self.collection_name)
 
+    def show(self, _id):
+        return jsonify(self.collection.find_one({"_id": ObjectId(_id)}))
+
+    def index(self):
+        ids = request.args.getlist('ids[]')
+        if len(ids) == 0:
+            limit = int(request.args.get('limit', 10))
+            offset = int(request.args.get('offset', 0))
+            rv = list(self.collection.find(skip=offset, limit=limit))
+        else:
+            rv = list(self.collection.find(
+                {"_id": {"$in": [ObjectId(id) for id in ids]}}
+            ))
+        return jsonify(rv)
+
+    def new(self):
+        """Create a new entity."""
+        entity = request.form.to_dict()
+        self.collection.insert(entity)
+        return jsonify(entity)
+
     def get(self, _id):
         """
         Show data about an entity.
 
         If `_id` is `None`, show data about the collection.
         """
-        if _id is None:
-            ids = request.args.getlist('ids[]')
-            if len(ids) == 0:
-                limit = int(request.args.get('limit', 10))
-                offset = int(request.args.get('offset', 0))
-                rv = list(self.collection.find(skip=offset, limit=limit))
-            else:
-                rv = list(self.collection.find(
-                    {"_id": {"$in": [ObjectId(id) for id in ids]}}
-                ))
-        else:
-            rv = self.collection.find_one({"_id": ObjectId(_id)})
-        return Response(jsonify(rv), mimetype='text/json')
-
-    def new(self):
-        """Create a new entity."""
-        entity = request.form.to_dict()
-        self.collection.insert(entity)
-        return Response(jsonify(entity), mimetype='text/json')
+        return Response(self.index() if _id is None else self.show(_id),
+                        mimetype='text/json')
 
     def post(self):
-        return self.new()
+        return Response(self.new(), mimetype='text/json')
 
 
 class BSONAPI(CollectionView):

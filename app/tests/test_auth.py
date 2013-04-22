@@ -7,6 +7,7 @@ class TestAuth(TestCase):
     def test_create_user(self):
         name, email, password = fake.name(), fake.email(), fake.password()
         rv = self.create_user(name, email, password)
+        assert rv.mimetype == 'text/json'
         user = json.loads(rv.data)
         assert 'name' in user, user
 
@@ -14,6 +15,7 @@ class TestAuth(TestCase):
         name, email, password = fake.name(), fake.email(), fake.password()
         self.create_user(name, email, password)
         rv = self.login(email, password)
+        assert rv.mimetype == 'text/json'
         user = json.loads(rv.data)
         assert 'name' in user, user
         assert user['name'] == name, user['name']
