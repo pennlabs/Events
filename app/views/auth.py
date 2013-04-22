@@ -1,5 +1,4 @@
 from __future__ import absolute_import
-import json
 
 from flask import request, g, Blueprint
 
@@ -32,14 +31,14 @@ def login():
                 user['logged_in'] = True
                 return jsonify(user)
             else:
-                return json.dumps({'error': INCORRECT_EMAIL_PASSWORD})
+                return jsonify({'error': INCORRECT_EMAIL_PASSWORD})
         else:
-            return json.dumps({'error': UNKNOWN_EMAIL})
+            return jsonify({'error': UNKNOWN_EMAIL})
     else:
-        return json.dumps({'error': INCORRECT_EMAIL_PASSWORD})
+        return jsonify({'error': INCORRECT_EMAIL_PASSWORD})
 
 
 @auth.route('/logout', methods=['POST', 'PUT'])
 def logout():
-    user_id = logout_user()
-    return json.dumps(user_id)
+    logout_user()
+    return jsonify({'success': 'Successfully logged out'})
