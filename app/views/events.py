@@ -3,20 +3,15 @@ from __future__ import absolute_import
 from flask import g, request
 from bson.objectid import ObjectId
 
-from app import app, db
 from app.lib.json import jsonify
 from app.lib.views import BSONAPI, register_api, signals
-
-db.events.create_index([("description", "text"),])
 
 #creates a signal to be called when an event is made
 new_event_signal = signals.signal('new-event-signal')
 
 
 class EventAPI(BSONAPI):
-    @property
-    def collection_name(self):
-        return 'events'
+    collection_name = 'events'
 
     def get(self, _id=None):
         """
@@ -40,7 +35,7 @@ class EventAPI(BSONAPI):
                     'creator_name': request.args['creator_name'],
                 }
 
-            return jsonify(db.command("text", "events", **options))
+            return jsonify(g.db.command("text", "events", **options))
         else:
             return super(EventAPI, self).get(_id)
 
@@ -52,8 +47,6 @@ class EventAPI(BSONAPI):
         new_event_signal.send(self, event=event, u_id=g.current_user['_id'])
         return jsonify(event)
 
-register_api(app, EventAPI, 'event_api', 'events')
-
 
 @new_event_signal.connect
 def new_event_triggered(sender=None, **kwargs):
@@ -62,8 +55,10 @@ def new_event_triggered(sender=None, **kwargs):
     """
     u_id = ObjectId(kwargs['u_id'])
     e_id = ObjectId(kwargs['event']['_id'])
+
     # insert the event into the creator's event list
     g.db.users.update({'_id': u_id}, {'$push': {'events': e_id}}, upsert=True)
+
     # insert e_id into followers' event queues
     g.db.users.update({'following': u_id},
                       {'$push': {'event_queue': e_id}},
