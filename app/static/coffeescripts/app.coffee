@@ -64,7 +64,7 @@ require [
         'all'             : 'all'
         'event/:event_id' : 'show_event'
         'user/:user_id'   : 'show_user'
-
+        'search?:q'       : 'search'
 
       index: ->
         app = new MainView.view(model: @user)
@@ -95,6 +95,20 @@ require [
           url: @events.url
           data: {limit: 100000}
         ).done (new_events) =>
+          @events.add new_events
+          @render_events new_events
+
+      search: (q) ->
+        app = new MainView.view(model: @user)
+        $('body').html app.render().el
+
+        # need to add some sort of pagination here
+        $.ajax(
+          url: @events.url
+          data: {q: decodeURIComponent(q)}
+        ).done (data) =>
+          data = JSON.parse data
+          new_events = _.pluck data.results, 'obj'
           @events.add new_events
           @render_events new_events
 

@@ -13,31 +13,48 @@
       </li>
       <li class="toggle-topbar menu-icon"><a href="#"><span>menu</span></a></li>
     </ul>
- 
+
+     <section class="top-bar-section">
+        <ul class="left">
+           <li class="has-form">
+        <form class="search">
+          <div class="row collapse">
+            <div class="small-10 columns">
+              <input id="searchbox" type="text" placeholder='Search'>
+            </div>
+            <div class="small-2 columns">
+              <a id="search" href="#" class="alert button"><span class="icon icon-search"></span></a>
+            </div>
+          </div>
+        </form>
+      </li>
+    </ul>
+     </section>
+
     <section class="top-bar-section">
       <!-- Right Nav Section -->
       <ul class="right">
-   <!-- <li><a href="#">FAQ</a></li>
-        <li><a href="#">Feedback</a></li>
+        <!-- <li><a href="#">FAQ</a></li>
+             <li><a href="#">Feedback</a></li>
         <li><a href="#">Contact</a></li> -->
         <li><a href="/all">All</a></li>
-        <li><a href="#">Groups</a></li>
+
         <li class="divider"></li>
-        
+
         <% if (logged_in) { %>
-        
+
         <li><a href="#" class="create"><span class="icon icon-plus"></span>Create Event</a></li>
         <li class="has-dropdown"><a class="user" href="/user/<%= _id %>"><%= name %></a>
           <ul class="dropdown">
             <li><a href="#">dummy</a></li>
             <li class="divider"></li>
-            <li><a href="#" class="logout">Logout</a><li>            
+            <li><a href="#" class="logout">Logout</a><li>
           </ul>
         </li>
-        
+
         <% } else { %>
         <li><a href="#" class='login'>Login</a><li>
-        <% } %>
+          <% } %>
       </ul>
     </section>
   </nav>
@@ -45,161 +62,161 @@
 
 <div id='user'></div>
 
-<div id="container">  
-  
-<div class="view-index">
+<div id="container">
 
-<div class="row">
-  
-  <!-- Sidebar Filters -->
-  
-  <div class="large-3 columns sidebar">
-    <div class="large-12 columns sidebar-content">
-      <form>
-        <h5>Groups</h5>
-        <input type="text" placeholder="Groups" />
-        <div>
-          <span class="radius label">upenn</span>
-          <span class="radius label">spec</span>
-          <span class="radius label">philo</span>
-          <span class="radius label">dp</span>
-          <span class="radius label">starred</span>
-        </div>
-        <hr/>
-        <h5>Type</h5>
-        <label for="checkbox1"><input type="checkbox" id="checkbox1">Lecture</label>
-        <label for="checkbox2"><input type="checkbox" id="checkbox2">Recitation</label>
-        <label for="checkbox3"><input type="checkbox" id="checkbox3">Studio</label>
-        <hr/>
-        <h5>Tags</h5>
-        <label for="checkbox4"><input type="checkbox" id="checkbox4">Recommended</label>
-        <label for="checkbox5"><input type="checkbox" id="checkbox5">18 & Above</label>
-        <label for="checkbox6"><input type="checkbox" id="checkbox6">University</label>
-      </form>
-    </div>
-    <div class="large-12 columns sidebar-fold">
-      <span class="arrow"></span>
-      <h5>Filters</h5>
-    </div>
-  </div>
-  
-  
-  <!-- Main Feed -->
-  
-  <div class="large-9 columns feed">
-    
-    <div class="row">
-      <div class="large-12 columns date">
-        <h4>Tuesday, January 29, 2013</h4>
-      </div>
-    </div>
-    
-    <div class="row"><div class="large-12 columns"><div class="card">
-      <div class="large-3 columns image">
-        <img src="http://placehold.it/240x240&amp;text=img">
-      </div>
-      <div class="large-9 columns info">
-        <h4 class="title"><a href="#">Semi-Annual Pastrami Feast</a></h4>
-        <span class="subtitle">by <a href="#">M.E.A.T. Club</a></span>
-        
-        <div class="detail-row">
-          <div class="large-6 columns item">
-            <span class="icon icon-calendar"></span>Tuesday, January 29
-          </div>
-          <div class="large-6 columns item">
-            <span class="icon icon-clock"></span>8:00 - 9:00pm  
-          </div>
-          <div class="large-12 columns item">
-            <span class="icon icon-location"></span><a href="http://maps.google.com/?q=Kings Court English House"  target="_blank">Kings Court English House</a>
-          </div>
-        </div>
-          
-        <p>Bacon ipsum dolor sit amet nulla ham qui sint exercitation eiusmod commodo, chuck duis velit. Aute in reprehenderit, dolore aliqua non est magna in labore pig pork biltong.</p>
-      </div>
-    </div></div></div>
-    
-    <div class="row">
-      <div class="large-12 columns date">
-        <h4>Wednesday, January 30, 2013</h4>
-      </div>
-    </div>
-    
-    <div class="row"><div class="large-12 columns"><div class="card">
-      <div class="large-3 columns image">
-        <img src="http://placehold.it/240x240&amp;text=img">
-      </div>
-      <div class="large-9 columns info">
-        <h4 class="title"><a href="#">Semi-Annual Pastrami Feast</a></h4>
-        <span class="subtitle">by <a href="#">M.E.A.T. Club</a></span>
-        
-        <div class="detail-row">
-          <div class="large-6 columns item">
-            <span class="icon icon-calendar"></span>Tuesday, January 29
-          </div>
-          <div class="large-6 columns item">
-            <span class="icon icon-clock"></span>8:00 - 9:00pm  
-          </div>
-          <div class="large-12 columns item">
-            <span class="icon icon-location"></span><a href="http://maps.google.com/?q=Kings Court English House"  target="_blank">Kings Court English House</a>
-          </div>
-        </div>
-          
-        <p>Bacon ipsum dolor sit amet nulla ham qui sint exercitation eiusmod commodo, chuck duis velit. Aute in reprehenderit, dolore aliqua non est magna in labore pig pork biltong.</p>
-      </div>
-    </div></div></div>
-    
-    <div class="row"><div class="large-12 columns"><div class="card">
-      <div class="large-3 columns image">
-        <img src="http://placehold.it/240x240&amp;text=img">
-      </div>
-      <div class="large-9 columns info">
-        <h4 class="title"><a href="#">Semi-Annual Pastrami Feast</a></h4>
-        <span class="subtitle">by <a href="#">M.E.A.T. Club</a></span>
-        
-        <div class="detail-row">
-          <div class="large-6 columns item">
-            <span class="icon icon-calendar"></span>Tuesday, January 29
-          </div>
-          <div class="large-6 columns item">
-            <span class="icon icon-clock"></span>8:00 - 9:00pm  
-          </div>
-          <div class="large-12 columns item">
-            <span class="icon icon-location"></span><a href="http://maps.google.com/?q=Kings Court English House"  target="_blank">Kings Court English House</a>
-          </div>
-        </div>
-          
-        <p>Bacon ipsum dolor sit amet nulla ham qui sint exercitation eiusmod commodo, chuck duis velit. Aute in reprehenderit, dolore aliqua non est magna in labore pig pork biltong.</p>
-      </div>
-    </div></div></div>
-    
-    <div class="row"><div class="large-12 columns"><div class="card">
-      <div class="large-3 columns image">
-        <img src="http://placehold.it/240x240&amp;text=img">
-      </div>
-      <div class="large-9 columns info">
-        <h4 class="title"><a href="#">Semi-Annual Pastrami Feast</a></h4>
-        <span class="subtitle">by <a href="#">M.E.A.T. Club</a></span>
-        
-        <div class="detail-row">
-          <div class="large-6 columns item">
-            <span class="icon icon-calendar"></span>Tuesday, January 29
-          </div>
-          <div class="large-6 columns item">
-            <span class="icon icon-clock"></span>8:00 - 9:00pm  
-          </div>
-          <div class="large-12 columns item">
-            <span class="icon icon-location"></span><a href="http://maps.google.com/?q=Kings Court English House"  target="_blank">Kings Court English House</a>
-          </div>
-        </div>
-          
-        <p>Bacon ipsum dolor sit amet nulla ham qui sint exercitation eiusmod commodo, chuck duis velit. Aute in reprehenderit, dolore aliqua non est magna in labore pig pork biltong.</p>
-      </div>
-    </div></div></div>
-    
-  </div>
-</div>
+  <div class="view-index">
 
-</div>
+    <div class="row">
+
+      <!-- Sidebar Filters -->
+
+      <div class="large-3 columns sidebar">
+        <div class="large-12 columns sidebar-content">
+          <form>
+            <h5>Groups</h5>
+            <input type="text" placeholder="Groups" />
+            <div>
+              <span class="radius label">upenn</span>
+              <span class="radius label">spec</span>
+              <span class="radius label">philo</span>
+              <span class="radius label">dp</span>
+              <span class="radius label">starred</span>
+            </div>
+            <hr/>
+            <h5>Type</h5>
+            <label for="checkbox1"><input type="checkbox" id="checkbox1">Lecture</label>
+            <label for="checkbox2"><input type="checkbox" id="checkbox2">Recitation</label>
+            <label for="checkbox3"><input type="checkbox" id="checkbox3">Studio</label>
+            <hr/>
+            <h5>Tags</h5>
+            <label for="checkbox4"><input type="checkbox" id="checkbox4">Recommended</label>
+            <label for="checkbox5"><input type="checkbox" id="checkbox5">18 & Above</label>
+            <label for="checkbox6"><input type="checkbox" id="checkbox6">University</label>
+          </form>
+        </div>
+        <div class="large-12 columns sidebar-fold">
+          <span class="arrow"></span>
+          <h5>Filters</h5>
+        </div>
+      </div>
+
+
+      <!-- Main Feed -->
+
+      <div class="large-9 columns feed">
+
+        <div class="row">
+          <div class="large-12 columns date">
+            <h4>Tuesday, January 29, 2013</h4>
+          </div>
+        </div>
+
+        <div class="row"><div class="large-12 columns"><div class="card">
+              <div class="large-3 columns image">
+                <img src="http://placehold.it/240x240&amp;text=img">
+              </div>
+              <div class="large-9 columns info">
+                <h4 class="title"><a href="#">Semi-Annual Pastrami Feast</a></h4>
+                <span class="subtitle">by <a href="#">M.E.A.T. Club</a></span>
+
+                <div class="detail-row">
+                  <div class="large-6 columns item">
+                    <span class="icon icon-calendar"></span>Tuesday, January 29
+                  </div>
+                  <div class="large-6 columns item">
+                    <span class="icon icon-clock"></span>8:00 - 9:00pm
+                  </div>
+                  <div class="large-12 columns item">
+                    <span class="icon icon-location"></span><a href="http://maps.google.com/?q=Kings Court English House"  target="_blank">Kings Court English House</a>
+                  </div>
+                </div>
+
+                <p>Bacon ipsum dolor sit amet nulla ham qui sint exercitation eiusmod commodo, chuck duis velit. Aute in reprehenderit, dolore aliqua non est magna in labore pig pork biltong.</p>
+              </div>
+        </div></div></div>
+
+        <div class="row">
+          <div class="large-12 columns date">
+            <h4>Wednesday, January 30, 2013</h4>
+          </div>
+        </div>
+
+        <div class="row"><div class="large-12 columns"><div class="card">
+              <div class="large-3 columns image">
+                <img src="http://placehold.it/240x240&amp;text=img">
+              </div>
+              <div class="large-9 columns info">
+                <h4 class="title"><a href="#">Semi-Annual Pastrami Feast</a></h4>
+                <span class="subtitle">by <a href="#">M.E.A.T. Club</a></span>
+
+                <div class="detail-row">
+                  <div class="large-6 columns item">
+                    <span class="icon icon-calendar"></span>Tuesday, January 29
+                  </div>
+                  <div class="large-6 columns item">
+                    <span class="icon icon-clock"></span>8:00 - 9:00pm
+                  </div>
+                  <div class="large-12 columns item">
+                    <span class="icon icon-location"></span><a href="http://maps.google.com/?q=Kings Court English House"  target="_blank">Kings Court English House</a>
+                  </div>
+                </div>
+
+                <p>Bacon ipsum dolor sit amet nulla ham qui sint exercitation eiusmod commodo, chuck duis velit. Aute in reprehenderit, dolore aliqua non est magna in labore pig pork biltong.</p>
+              </div>
+        </div></div></div>
+
+        <div class="row"><div class="large-12 columns"><div class="card">
+              <div class="large-3 columns image">
+                <img src="http://placehold.it/240x240&amp;text=img">
+              </div>
+              <div class="large-9 columns info">
+                <h4 class="title"><a href="#">Semi-Annual Pastrami Feast</a></h4>
+                <span class="subtitle">by <a href="#">M.E.A.T. Club</a></span>
+
+                <div class="detail-row">
+                  <div class="large-6 columns item">
+                    <span class="icon icon-calendar"></span>Tuesday, January 29
+                  </div>
+                  <div class="large-6 columns item">
+                    <span class="icon icon-clock"></span>8:00 - 9:00pm
+                  </div>
+                  <div class="large-12 columns item">
+                    <span class="icon icon-location"></span><a href="http://maps.google.com/?q=Kings Court English House"  target="_blank">Kings Court English House</a>
+                  </div>
+                </div>
+
+                <p>Bacon ipsum dolor sit amet nulla ham qui sint exercitation eiusmod commodo, chuck duis velit. Aute in reprehenderit, dolore aliqua non est magna in labore pig pork biltong.</p>
+              </div>
+        </div></div></div>
+
+        <div class="row"><div class="large-12 columns"><div class="card">
+              <div class="large-3 columns image">
+                <img src="http://placehold.it/240x240&amp;text=img">
+              </div>
+              <div class="large-9 columns info">
+                <h4 class="title"><a href="#">Semi-Annual Pastrami Feast</a></h4>
+                <span class="subtitle">by <a href="#">M.E.A.T. Club</a></span>
+
+                <div class="detail-row">
+                  <div class="large-6 columns item">
+                    <span class="icon icon-calendar"></span>Tuesday, January 29
+                  </div>
+                  <div class="large-6 columns item">
+                    <span class="icon icon-clock"></span>8:00 - 9:00pm
+                  </div>
+                  <div class="large-12 columns item">
+                    <span class="icon icon-location"></span><a href="http://maps.google.com/?q=Kings Court English House"  target="_blank">Kings Court English House</a>
+                  </div>
+                </div>
+
+                <p>Bacon ipsum dolor sit amet nulla ham qui sint exercitation eiusmod commodo, chuck duis velit. Aute in reprehenderit, dolore aliqua non est magna in labore pig pork biltong.</p>
+              </div>
+        </div></div></div>
+
+      </div>
+    </div>
+
+  </div>
 
 </div>
 
