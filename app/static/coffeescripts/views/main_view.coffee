@@ -8,6 +8,8 @@ define ['/static/javascripts/vendor/text.js!/static/templates/main_template.html
         'click .card .title'      : 'event'
         'click a.create'          : 'create'
         'click a.user'            : 'user'
+      initialize: (options) ->
+        @columns = options.columns or [12]
       index: (e) ->
         e.preventDefault()
         window.router.navigate '', {trigger: true}
@@ -33,10 +35,10 @@ define ['/static/javascripts/vendor/text.js!/static/templates/main_template.html
 
       user: (e) ->
         e.preventDefault()
-        window.router.navigate "user/#{@model.get("_id")}", {trigger: true}
+        window.router.navigate "user/#{@model.id}", {trigger: true}
 
       render: ->
-        compiled = _.template template, @model.toJSON()
+        compiled = _.template template, _.extend(@model.toJSON(), columns: @columns)
         @$el.html compiled
         return @
 
