@@ -123,7 +123,6 @@ require [
           url: @events.url
           data: {q: decodeURIComponent(q)}
         ).done (data) =>
-          data = JSON.parse data
           new_events = _.pluck data.results, 'obj'
           @events.add new_events
           @render_events new_events
