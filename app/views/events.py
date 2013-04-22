@@ -4,7 +4,7 @@ from flask import g, request
 from bson.objectid import ObjectId
 
 from app.lib.json import jsonify
-from app.lib.views import BSONAPI, register_api, signals
+from app.lib.views import BSONAPI, signals
 
 #creates a signal to be called when an event is made
 new_event_signal = signals.signal('new-event-signal')
@@ -13,11 +13,10 @@ new_event_signal = signals.signal('new-event-signal')
 class EventAPI(BSONAPI):
     collection_name = 'events'
 
-    def get(self, _id=None):
+    def index(self):
         """
         Either:
         -   Fetch a list of events (/events/)
-        -   Fetch a single event (/events/<id>)
         -   Search all events for a keyword. (/events/?q=keyword)
             -   Results will limited to 10 unless 'limit' is specified
             -   If 'creator_name' is given, results will be filtered to be only
@@ -37,9 +36,9 @@ class EventAPI(BSONAPI):
 
             return jsonify(g.db.command("text", "events", **options))
         else:
-            return super(EventAPI, self).get(_id)
+            return super(EventAPI, self).index()
 
-    def post(self):
+    def new(self):
         # it might either be in form data or request data
         event = request.form.to_dict() or request.json
         self.collection.insert(event)
