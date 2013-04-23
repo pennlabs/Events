@@ -32,13 +32,10 @@ class EventAPI(BSONAPI):
                     'date_start': {
                         '$gte':
                         datetime.strptime(request.args['date_start'],
-                                           '%m/%d/%Y %I:%M %p')
+                                          '%m/%d/%Y %I:%M %p')
                     }
                 }
             }
-
-            import sys
-            sys.stderr.write(str(options) + "\n")
 
             if 'creator_name' in request.args:
                 options['filter'] = {
