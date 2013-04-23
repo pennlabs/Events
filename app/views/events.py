@@ -2,6 +2,7 @@ from __future__ import absolute_import
 
 from flask import g, request
 from bson.objectid import ObjectId
+from datetime import datetime, timedelta
 
 from app.lib.json import jsonify
 from app.lib.views import BSONAPI, signals
@@ -27,7 +28,17 @@ class EventAPI(BSONAPI):
                 'search': request.args['q'],
                 'limit': (int(request.args['limit'])
                           if 'limit' in request.args else 10),
+                'filter': {
+                    'date_start': {
+                        '$gte':
+                        datetime.strptime(request.args['date_start'],
+                                           '%m/%d/%Y %I:%M %p')
+                    }
+                }
             }
+
+            import sys
+            sys.stderr.write(str(options) + "\n")
 
             if 'creator_name' in request.args:
                 options['filter'] = {
@@ -41,6 +52,44 @@ class EventAPI(BSONAPI):
     def new(self):
         # it might either be in form data or request data
         event = request.form.to_dict() or request.json
+        # validate date and time fields
+        # http://docs.pyth(on.org/2/library/datetime.html#strftime-strptime-behavior
+        # date pattern: "%m/%d/%Y", e.g. "12/31/2000"
+        #   %m: Month as a decimal number [01,12].
+        #   %d: Day of the month as a decimal number [01,31].
+        #   %Y: Year with century as a decimal number.
+        # time pattern: "%I:%M %p", e.g. "12:30 pm"
+        #   %I: Hour (12-hour clock) as a decimal number [01,12].
+        #   %M: Minute as a decimal number [00,59].
+        #   %p: Locale's equivalent of either AM or PM.
+        date_string = event['date'].strip()
+        time_start_string = event['time_start'].strip()
+        time_end_string = event['time_end'].strip()
+        try:
+            date = datetime.strptime(date_string, '%m/%d/%Y')
+            time_start = datetime.strptime(time_start_string, '%I:%M %p')
+            time_end = datetime.strptime(time_end_string, '%I:%M %p')
+        except ValueError:
+            return jsonify({'error': 'Invalid date or time.'})
+        # if the end time is before the start time, assume it is on the next day
+        if time_end < time_start:
+            time_end += timedelta(days=1)
+        # construct date_start and date_end datetime objects
+        date_start = datetime(year=date.year,
+                              month=date.month,
+                              day=date.day,
+                              hour=time_start.hour,
+                              minute=time_start.minute)
+        date_end = datetime(year=date.year,
+                            month=date.month,
+                            day=date.day,
+                            hour=time_end.hour,
+                            minute=time_end.minute)
+
+        event['date_start'] = date_start
+        event['date_end'] = date_end
+
+        # add event to events collection
         self.collection.insert(event)
         # signals that a new event was made
         new_event_signal.send(self, event=event, u_id=g.current_user['_id'])
