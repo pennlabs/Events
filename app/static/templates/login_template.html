@@ -20,7 +20,14 @@
       <form id="register-form" class="signup large-12" method="post" action="api/users/">
         <h3>Sign Up</h3>
         <label>Name</label>
-        <input name="name" type="text" placeholder="" />
+        <div class="row">
+          <div class="large-6 columns">
+            <input name="first_name" type="text" placeholder="First Name" />
+          </div>
+          <div class="large-6 columns">
+            <input name="last_name" type="text" placeholder="Last Name" />
+          </div>
+        </div>
         <label>UPenn Email</label>
         <input name="email" type="text" placeholder="" />
         <label>Password</label>

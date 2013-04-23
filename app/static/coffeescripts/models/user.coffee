@@ -1,15 +1,16 @@
 define [], ->
   class User extends Backbone.Model
     idAttribute: "_id"
-    defaults:
-      description: ''
-      email: ''
-      name: ''
-      logged_in: false
-      events: []
-      event_queue: []
-      followers: []
-      following: []
+    defaults: ->
+      return {
+        description: ''
+        email: ''
+        logged_in: false
+        events: []
+        event_queue: []
+        followers: []
+        following: []
+      }
 
     logout: ->
       @url = 'logout'

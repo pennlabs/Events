@@ -1,6 +1,7 @@
 define ['/static/javascripts/vendor/text.js!/static/templates/event_template.html'],
   (template) ->
     class EventView extends Backbone.View
+      className: 'card'
       events:
         'click a.creator': 'show_user'
         'click a.event'  : 'show_event'
