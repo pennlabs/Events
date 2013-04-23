@@ -13,7 +13,9 @@ class BSONEncoder(json.JSONEncoder):
     """
     # TODO: Strip hashed passwords
     def default(self, obj):
-        if isinstance(obj, ObjectId):
+        if hasattr(obj, 'isoformat'):
+            return obj.isoformat()
+        elif isinstance(obj, ObjectId):
             return str(obj)
         return super(BSONEncoder, self).default(self, obj)
 
