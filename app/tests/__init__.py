@@ -45,7 +45,7 @@ class TestCase(object):
         ), follow_redirects=True)
 
     def logout(self):
-        return self.app.get('/logout', follow_redirects=True)
+        return self.app.post('/logout', follow_redirects=True)
 
     def create_user(self, name, email, password, confirm=None):
         if confirm is None:
