@@ -34,12 +34,13 @@ class UserAPI(BSONAPI):
         user_id = g.db.users.insert(user)
 
         # TODO: find a cleaner way to hardcode the DP user_id
-        dp_user_id = ObjectId("5175d60a137a001de8c3fa6b")
-        dp_events = g.db.users.find_one({'_id': dp_user_id}).get('events', [])
+        # dp_user_id = ObjectId("5175d60a137a001de8c3fa6b")
+        # dp_events = g.db.users.find_one({'_id': dp_user_id}).get('events', [])
 
         # all users follow themselves and the DP
-        user['following'] = [dp_user_id, user_id]
-        user['event_queue'] = dp_events
+        user['following'] = [user_id]
+        # user['event_queue'] = dp_events
+        user['event_queue'] = []
 
         g.db.users.update({'_id': user_id},
                           {'$set': {'following': user['following'],
