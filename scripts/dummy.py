@@ -1,17 +1,15 @@
 """
 Script to prepare dummy environment for local development.
 
-Usage: python dummy.py [num_dummy_events]
+Usage: python dummy.py [database_name] [num_dummy_events]
 
 """
 import sys
 
 from faker import Factory
-
-from app import db
+from pymongo import MongoClient
 
 fake = Factory.create()
-
 
 def create_arbitrary_event():
     """Create a dummy event."""
@@ -32,12 +30,13 @@ def create_arbitrary_events(n):
         yield create_arbitrary_event()
 
 
-def main(n=None):
+def main(database, n=None):
     """
     Populate the local database with dummies.
     """
     if n is None:
         n = 20
+    db = getattr(MongoClient(), database)
     db.events.drop()
     for event in create_arbitrary_events(n):
         db.events.insert(event)

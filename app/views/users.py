@@ -4,10 +4,10 @@ import json
 from flask import request, g
 from bson.objectid import ObjectId
 
-from app.forms.user import UserForm
-from app.lib.auth import create_user, login_user
-from app.lib.json import jsonify
-from app.lib.views import BSONAPI
+from forms.user import UserForm
+from lib.auth import create_user, login_user
+from lib.json import jsonify
+from lib.views import BSONAPI
 
 
 PASSWORDS_DO_NOT_MATCH = 'Passwords do not match'

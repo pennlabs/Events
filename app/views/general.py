@@ -3,7 +3,7 @@ from __future__ import absolute_import
 from flask import render_template, g, Blueprint
 from bson.objectid import ObjectId
 
-from app.lib.json import jsonify
+from lib.json import jsonify
 
 
 general = Blueprint('general', __name__)
