@@ -2,16 +2,36 @@
 
 Event aggregate for Penn.
 
-# Development
+# Requirements
 
-First create `app/static/coffeescripts/config.coffee` by copying `app/static/coffeescripts/config.coffee.default` and editing as needed.
+Install [MongoDB](http://docs.mongodb.org/manual/tutorial/install-mongodb-on-os-x/).
 
-Next run `foreman start`. This will:
+Install CoffeeScript.
 
-- watch static files for changes and recompile them when any file is updated
-- start a mongo database
-- start a server
+```
+sudo npm install -g coffee-script
+```
 
-# New Feature
+Install Sass.
 
-Be able to "follow" specific events without following the creator of those events. As in, adding events to your own feed.
+```
+gem install sass
+```
+
+Install Python requirements:
+
+```
+pip install -r requirements.txt
+```
+
+# Setup
+
+Create `app/static/coffeescripts/config.coffee` by copying `app/static/coffeescripts/config.coffee.default` and edit as needed.
+
+# Usage
+
+To run, use `foreman start`. This will:
+
+- Monitor static files and recompile updated files.
+- Start a mongo database.
+- Start a server.
