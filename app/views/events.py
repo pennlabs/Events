@@ -4,8 +4,8 @@ from flask import g, request
 from bson.objectid import ObjectId
 from datetime import datetime, timedelta
 
-from lib.json import jsonify
-from lib.views import BSONAPI, signals
+from ..lib.json import jsonify
+from ..lib.views import BSONAPI, signals
 
 #creates a signal to be called when an event is made
 new_event_signal = signals.signal('new-event-signal')
@@ -87,7 +87,7 @@ class EventAPI(BSONAPI):
         event['date_end'] = date_end
 
         # add event to events collection
-        self.collection.insert(event)
+        event['_id'] = self.collection.insert(event)
         # signals that a new event was made
         new_event_signal.send(self, event=event, u_id=g.current_user['_id'])
         return jsonify(event)

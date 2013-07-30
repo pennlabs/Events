@@ -1,6 +1,6 @@
 import json
 
-from app.tests import TestCase, fake
+from helpers import TestCase, fake
 
 
 class TestAuth(TestCase):

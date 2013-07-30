@@ -2,9 +2,9 @@ from __future__ import absolute_import
 
 from flask import request, g, Blueprint
 
-from forms.login import LoginForm
-from lib.auth import authenticate, login_user, logout_user
-from lib.json import jsonify
+from ..forms.login import LoginForm
+from ..lib.auth import authenticate, login_user, logout_user
+from ..lib.json import jsonify
 
 
 UNKNOWN_EMAIL = 'Unknown email'

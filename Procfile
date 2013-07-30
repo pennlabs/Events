@@ -1,4 +1,4 @@
-web: python app
+web: python run.py
 db: mongod --setParameter textSearchEnabled=true
 javascripts: coffee -o app/static/javascripts -cw app/static/coffeescripts
 css: sass --scss --watch app/static/scss/:app/static/css
