@@ -32,6 +32,7 @@
   <script type='text/javascript'>
     var Data = {};
     Data.user = {{ (user or {}) | safe }};
+    Data.event_queue = {{ (event_queue or []) | safe }};
     Data.user_to_render = {{ (user_to_render or {}) | safe }};
     Data.event_to_render = {{ (event_to_render or {}) | safe }};
   </script>

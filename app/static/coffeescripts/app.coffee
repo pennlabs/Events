@@ -121,7 +121,7 @@ require [
         # need to add some sort of pagination here
         $.ajax(
           url: @events.url
-          data: {q: decodeURIComponent(q)}
+          data: decodeURIComponent(q)
         ).done (data) =>
           new_events = _.pluck data.results, 'obj'
           @events.add new_events
