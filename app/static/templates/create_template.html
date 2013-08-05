@@ -18,24 +18,24 @@
       <form id="create-form" class="left box large-12 small-12" method="post" action="/api/events/">
         <label>Name</label>
         <input name="name" type="text" placeholder="Event Name" />
-        <label>When?</label>
         <div class="row">
           <div class="large-6 columns">
-            <input name="date" type="text" placeholder="Date" />
+            <label>Date</label>
+            <input name="date" type="text" placeholder="mm/dd/yyyy" />
           </div>
           <div class="large-3 small-6 columns">
-            <input name="time_start" type="text" placeholder="Start" />
+            <label>Start Time</label>
+            <input name="time_start" type="text" placeholder="hh:mm" />
           </div>
           <div class="large-3 small-6 columns">
-            <input name="time_end" type="text" placeholder="End" />
+            <label>End Time</label>
+            <input name="time_end" type="text" placeholder="hh:mm" />
           </div>
         </div>
         <label>Location</label>
         <input name="location" type="text" placeholder="Location" />
         <label>Description</label>
-        <textarea name="description" placeholder=""></textarea>
-        <label>Upload Image</label>
-        <input name="image" type="text" placeholder="Browse..." />
+        <textarea name="description" placeholder="Describe your event to make it more easily searchable"></textarea>
 
         <input class="button" type="submit" id="submit-button" value="Submit">
       </form>

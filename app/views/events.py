@@ -3,6 +3,7 @@ from __future__ import absolute_import
 from flask import g, request
 from bson.objectid import ObjectId
 from datetime import datetime, timedelta
+from dateutil import parser
 
 from app.lib.json import jsonify
 from app.lib.views import BSONAPI, signals
@@ -50,7 +51,7 @@ class EventAPI(BSONAPI):
         # it might either be in form data or request data
         event = request.form.to_dict() or request.json
         # validate date and time fields
-        # http://docs.pyth(on.org/2/library/datetime.html#strftime-strptime-behavior
+        # docs.python.org/2/library/datetime.html#strftime-strptime-behavior
         # date pattern: "%m/%d/%Y", e.g. "12/31/2000"
         #   %m: Month as a decimal number [01,12].
         #   %d: Day of the month as a decimal number [01,31].
@@ -63,12 +64,12 @@ class EventAPI(BSONAPI):
         time_start_string = event['time_start'].strip()
         time_end_string = event['time_end'].strip()
         try:
-            date = datetime.strptime(date_string, '%m/%d/%Y')
-            time_start = datetime.strptime(time_start_string, '%I:%M %p')
-            time_end = datetime.strptime(time_end_string, '%I:%M %p')
+            date = parser.parse(date_string).date()
+            time_start = parser.parse(time_start_string).time()
+            time_end = parser.parse(time_end_string).time()
         except ValueError:
             return jsonify({'error': 'Invalid date or time.'})
-        # if the end time is before the start time, assume it is on the next day
+        # if the end time is before the start time assume it is on the next day
         if time_end < time_start:
             time_end += timedelta(days=1)
         # construct date_start and date_end datetime objects
